@@ -11,7 +11,7 @@ const getters = {
   videos: (state) => state.videos,
   video: (state) => state.video,
   error: (state) => {
-    if (state.error && state.error.error) {
+    if (state.error.error) {
       /** Parse the error returned from google API */
       return {
         code: state.error.error.code,
