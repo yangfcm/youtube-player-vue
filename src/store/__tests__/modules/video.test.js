@@ -1,8 +1,11 @@
 import videoStore from "../../modules/video";
 import axios from "../../../settings";
 import { FETCH_VIDEOS, CATCH_ERROR, FETCH_VIDEO } from "../../types";
-import { popularVideosResponse, videoResponse } from "../fixtures/video";
-import { errorResponse } from "../fixtures/error";
+import {
+  popularVideosResponse,
+  videoResponse,
+  videoErrorResponse,
+} from "../fixtures/video";
 
 describe("Test store for video module", () => {
   const { getters, mutations, actions } = videoStore;
@@ -20,11 +23,11 @@ describe("Test store for video module", () => {
   });
 
   it("error getter should parse standard error response returned from API", () => {
-    const state = { videoError: errorResponse };
+    const state = { videoError: videoErrorResponse };
     const result = getters.videoError(state);
     expect(result).toEqual({
-      code: errorResponse.response.data.error.code,
-      message: errorResponse.response.data.error.message,
+      code: videoErrorResponse.response.data.error.code,
+      message: videoErrorResponse.response.data.error.message,
     });
   });
 
@@ -73,12 +76,15 @@ describe("Test store for video module", () => {
   });
 
   it("fetchVideos can handle error", async () => {
-    axios.get.mockRejectedValue(errorResponse);
+    axios.get.mockRejectedValue(videoErrorResponse);
     const context = {
       commit: jest.fn(),
     };
     await actions.fetchVideos(context);
-    expect(context.commit).toHaveBeenCalledWith(CATCH_ERROR, errorResponse);
+    expect(context.commit).toHaveBeenCalledWith(
+      CATCH_ERROR,
+      videoErrorResponse
+    );
   });
 
   it("mutations for fetchVideos action can work", () => {
@@ -96,8 +102,8 @@ describe("Test store for video module", () => {
       videos: null,
       videoError: null,
     };
-    mutations.CATCH_ERROR(state, errorResponse.response.data);
-    expect(state.videoError).toEqual(errorResponse.response.data);
+    mutations.CATCH_ERROR(state, videoErrorResponse);
+    expect(state.videoError).toEqual(videoErrorResponse);
   });
 
   it("fetchVideo action can fetch video by id and do commit", async () => {
@@ -118,12 +124,15 @@ describe("Test store for video module", () => {
   });
 
   it("fetchVideo action can handle error", async () => {
-    axios.get.mockRejectedValue(errorResponse);
+    axios.get.mockRejectedValue(videoErrorResponse);
     const context = {
       commit: jest.fn(),
     };
     await actions.fetchVideo(context, "123");
-    expect(context.commit).toHaveBeenCalledWith(CATCH_ERROR, errorResponse);
+    expect(context.commit).toHaveBeenCalledWith(
+      CATCH_ERROR,
+      videoErrorResponse
+    );
   });
 
   it("mutations for fetchVideo action can work", () => {
