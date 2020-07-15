@@ -119,4 +119,13 @@ export const popularVideosResponse = {
   items: [videoItem1, videoItem2, videoItem3],
 };
 
+export const videoResponse = {
+  kind: "youtube#videoListResponse",
+  pageInfo: {
+    totalResults: 1,
+    resultsPerPage: 1,
+  },
+  items: [videoItem1],
+};
+
 test.skip("no need to test fixtures", () => {});

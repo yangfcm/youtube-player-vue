@@ -1,7 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    test
+    <h1>{{ msg }}</h1>test
   </div>
 </template>
 
@@ -10,19 +9,20 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "HelloWorld",
   props: {
-    msg: String,
+    msg: String
   },
   computed: {
-    ...mapGetters(["videos", "error", "video"]),
+    ...mapGetters(["videos", "error", "video"])
   },
   methods: {
     ...mapActions({
       fetchVideos: "fetchVideos",
-    }),
+      fetchVideo: "fetchVideo"
+    })
   },
   async created() {
-    await this.fetchVideos({ chart: "mostPopular" });
-  },
+    await this.fetchVideo("CacIlFaXph0");
+  }
 };
 </script>
 

@@ -1,5 +1,5 @@
 import axios from "../../settings";
-import { FETCH_VIDEOS, CATCH_ERROR } from "../types";
+import { FETCH_VIDEOS, CATCH_ERROR, FETCH_VIDEO } from "../types";
 
 const state = {
   videos: null,
@@ -25,14 +25,11 @@ const getters = {
 
 const mutations = {
   FETCH_VIDEOS: (state, payload) => {
-    // if (state.videos.items && state.videos.items.length > 0) {
-    //   state.videos = {
-    //     ...state.videos,
-    //     items: state.videos.items.concat(payload.items),
-    //     nextPageToken: payload.nextPageToken,
-    //   };
-    // }
     state.videos = payload;
+    state.error = null;
+  },
+  FETCH_VIDEO: (state, payload) => {
+    state.video = payload;
     state.error = null;
   },
   CATCH_ERROR: (state, payload) => {
@@ -41,6 +38,7 @@ const mutations = {
 };
 
 const actions = {
+  /** Fetch a list of videos by filter */
   fetchVideos: async (context, filter, pageToken) => {
     try {
       const response = await axios.get("/videos", {
@@ -54,7 +52,24 @@ const actions = {
       });
       context.commit(FETCH_VIDEOS, response.data);
     } catch (e) {
-      console.log(e);
+      context.commit(CATCH_ERROR, e.response.data);
+    }
+  },
+
+  /** Fetch a video by id */
+  fetchVideo: async (context, videoId) => {
+    try {
+      const response = await axios.get("/videos", {
+        params: {
+          ...axios.defaults.params,
+          part: "snippet,statistics",
+          id: videoId,
+        },
+      });
+      // console.log(response);
+      context.commit(FETCH_VIDEO, response.data);
+    } catch (e) {
+      // console.log("error-==================", e);
       context.commit(CATCH_ERROR, e.response.data);
     }
   },
