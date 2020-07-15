@@ -12,7 +12,7 @@ export default {
     msg: String
   },
   computed: {
-    ...mapGetters(["videos", "error", "video"])
+    ...mapGetters(["videos", "videoError", "video"])
   },
   methods: {
     ...mapActions({

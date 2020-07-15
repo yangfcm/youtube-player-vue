@@ -19,20 +19,34 @@ describe("Test store for video module", () => {
     expect(result).toEqual(state.video);
   });
 
-  it("error getter should parse standard error response", () => {
-    const state = { error: errorResponse.response.data };
-    const result = getters.error(state);
+  it("error getter should parse standard error response returned from API", () => {
+    const state = { videoError: errorResponse };
+    const result = getters.videoError(state);
     expect(result).toEqual({
       code: errorResponse.response.data.error.code,
       message: errorResponse.response.data.error.message,
     });
   });
 
-  it("error getter should return default error", () => {
+  it("error getter should parse standard JS error object", () => {
     const errorMsg = "mock error message";
-    const state = { error: errorMsg };
-    const result = getters.error(state);
-    expect(result).toEqual(errorMsg);
+    const state = { videoError: { message: errorMsg } };
+    const result = getters.videoError(state);
+    expect(result).toEqual({ message: errorMsg });
+  });
+
+  it("error getter should parse any other error", () => {
+    const state = { videoError: "error" };
+    const result = getters.videoError(state);
+    expect(result).toEqual({
+      message: "Failed to fetch video",
+    });
+  });
+
+  it("error getter returns null if no error", () => {
+    const state = { videoError: null };
+    const result = getters.videoError(state);
+    expect(result).toBeFalsy();
   });
 
   it("fetchVideos action can fetch popular videos and do commit", async () => {
@@ -64,10 +78,7 @@ describe("Test store for video module", () => {
       commit: jest.fn(),
     };
     await actions.fetchVideos(context);
-    expect(context.commit).toHaveBeenCalledWith(
-      CATCH_ERROR,
-      errorResponse.response.data
-    );
+    expect(context.commit).toHaveBeenCalledWith(CATCH_ERROR, errorResponse);
   });
 
   it("mutations for fetchVideos action can work", () => {
@@ -77,16 +88,16 @@ describe("Test store for video module", () => {
     };
     mutations.FETCH_VIDEOS(state, popularVideosResponse);
     expect(state.videos).toEqual(popularVideosResponse);
-    expect(state.error).toBeFalsy();
+    expect(state.videoError).toBeFalsy();
   });
 
   it("mutations for catchError action can work", () => {
     const state = {
       videos: null,
-      error: null,
+      videoError: null,
     };
     mutations.CATCH_ERROR(state, errorResponse.response.data);
-    expect(state.error).toEqual(errorResponse.response.data);
+    expect(state.videoError).toEqual(errorResponse.response.data);
   });
 
   it("fetchVideo action can fetch video by id and do commit", async () => {
@@ -112,19 +123,16 @@ describe("Test store for video module", () => {
       commit: jest.fn(),
     };
     await actions.fetchVideo(context, "123");
-    expect(context.commit).toHaveBeenCalledWith(
-      CATCH_ERROR,
-      errorResponse.response.data
-    );
+    expect(context.commit).toHaveBeenCalledWith(CATCH_ERROR, errorResponse);
   });
 
   it("mutations for fetchVideo action can work", () => {
     const state = {
       video: null,
-      error: "some error",
+      videoError: "some error",
     };
     mutations.FETCH_VIDEO(state, videoResponse);
     expect(state.video).toEqual(videoResponse);
-    expect(state.error).toBeFalsy();
+    expect(state.videoError).toBeFalsy();
   });
 });

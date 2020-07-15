@@ -1,39 +1,51 @@
 import axios from "../../settings";
 import { FETCH_VIDEOS, CATCH_ERROR, FETCH_VIDEO } from "../types";
 
+const parseError = (error) => {
+  if (!error) {
+    return null;
+  }
+  if (error.response && error.response.data) {
+    return {
+      code: error.response.data.error.code,
+      message: error.response.data.error.message,
+    };
+  } else if (error.message) {
+    return {
+      message: error.message,
+    };
+  } else {
+    return {
+      message: "Failed to fetch video",
+    };
+  }
+};
+
 const state = {
   videos: null,
   video: null,
-  error: null,
+  videoError: null,
 };
 
 const getters = {
   videos: (state) => state.videos,
   video: (state) => state.video,
-  error: (state) => {
-    if (state.error.error) {
-      /** Parse the error returned from google API */
-      return {
-        code: state.error.error.code,
-        message: state.error.error.message,
-      };
-    } else {
-      return state.error;
-    }
+  videoError: (state) => {
+    return parseError(state.videoError);
   },
 };
 
 const mutations = {
   FETCH_VIDEOS: (state, payload) => {
     state.videos = payload;
-    state.error = null;
+    state.videoError = null;
   },
   FETCH_VIDEO: (state, payload) => {
     state.video = payload;
-    state.error = null;
+    state.videoError = null;
   },
   CATCH_ERROR: (state, payload) => {
-    state.error = payload;
+    state.videoError = payload;
   },
 };
 
@@ -51,8 +63,8 @@ const actions = {
         },
       });
       context.commit(FETCH_VIDEOS, response.data);
-    } catch (e) {
-      context.commit(CATCH_ERROR, e.response.data);
+    } catch (err) {
+      context.commit(CATCH_ERROR, err);
     }
   },
 
@@ -68,9 +80,9 @@ const actions = {
       });
       // console.log(response);
       context.commit(FETCH_VIDEO, response.data);
-    } catch (e) {
+    } catch (err) {
       // console.log("error-==================", e);
-      context.commit(CATCH_ERROR, e.response.data);
+      context.commit(CATCH_ERROR, err);
     }
   },
 };
