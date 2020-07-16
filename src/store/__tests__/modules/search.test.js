@@ -6,7 +6,6 @@ import {
   searchResultResponse,
   searchErrorResponse,
 } from "../fixtures/search";
-import search from "../../modules/search";
 
 describe("Test store for search module", () => {
   const { getters, mutations, actions } = searchStore;
