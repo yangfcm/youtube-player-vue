@@ -1,5 +1,5 @@
 import axios from "../../settings";
-import { FETCH_VIDEOS, CATCH_ERROR, FETCH_VIDEO } from "../types";
+import { FETCH_VIDEOS, CATCH_VIDEO_ERROR, FETCH_VIDEO } from "../types";
 import parseError from "../helpers/parseError";
 
 const state = {
@@ -9,9 +9,7 @@ const state = {
 };
 
 const getters = {
-  videos: (state) => state.videos,
-  video: (state) => state.video,
-  videoError: (state) => {
+  videoErrorMessage: (state) => {
     return parseError(state.videoError, "Failed to fetch video");
   },
 };
@@ -25,7 +23,7 @@ const mutations = {
     state.video = payload;
     state.videoError = null;
   },
-  CATCH_ERROR: (state, payload) => {
+  CATCH_VIDEO_ERROR: (state, payload) => {
     state.videoError = payload;
   },
 };
@@ -45,7 +43,7 @@ const actions = {
       });
       context.commit(FETCH_VIDEOS, response.data);
     } catch (err) {
-      context.commit(CATCH_ERROR, err);
+      context.commit(CATCH_VIDEO_ERROR, err);
     }
   },
 
@@ -63,7 +61,7 @@ const actions = {
       context.commit(FETCH_VIDEO, response.data);
     } catch (err) {
       // console.log("error-==================", e);
-      context.commit(CATCH_ERROR, err);
+      context.commit(CATCH_VIDEO_ERROR, err);
     }
   },
 };

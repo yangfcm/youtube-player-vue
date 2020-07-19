@@ -1,6 +1,6 @@
 import videoStore from "../../modules/video";
 import axios from "../../../settings";
-import { FETCH_VIDEOS, CATCH_ERROR, FETCH_VIDEO } from "../../types";
+import { FETCH_VIDEOS, CATCH_VIDEO_ERROR, FETCH_VIDEO } from "../../types";
 import {
   popularVideosResponse,
   videoResponse,
@@ -10,46 +10,29 @@ import {
 describe("Test store for video module", () => {
   const { getters, mutations, actions } = videoStore;
 
-  it("videos getter should return videos state", () => {
-    const state = { videos: popularVideosResponse };
-    const result = getters.videos(state);
-    expect(result).toEqual(state.videos);
-  });
-
-  it("video getter should return video state", () => {
-    const state = { video: videoResponse };
-    const result = getters.video(state);
-    expect(result).toEqual(state.video);
-  });
-
-  it("error getter should parse standard error response returned from API", () => {
+  it("videoErrorMessage getter should parse standard error response returned from API", () => {
     const state = { videoError: videoErrorResponse };
-    const result = getters.videoError(state);
-    expect(result).toEqual({
-      code: videoErrorResponse.response.data.error.code,
-      message: videoErrorResponse.response.data.error.message,
-    });
+    const result = getters.videoErrorMessage(state);
+    expect(result).toBe(videoErrorResponse.response.data.error.message);
   });
 
-  it("error getter should parse standard JS error object", () => {
+  it("videoErrorMessage getter should parse standard JS error object", () => {
     const errorMsg = "mock error message";
     const state = { videoError: { message: errorMsg } };
-    const result = getters.videoError(state);
-    expect(result).toEqual({ message: errorMsg });
+    const result = getters.videoErrorMessage(state);
+    expect(result).toBe(errorMsg);
   });
 
-  it("error getter should parse any other error", () => {
+  it("videoErrorMessage getter should parse any other error", () => {
     const state = { videoError: "error" };
-    const result = getters.videoError(state);
-    expect(result).toEqual({
-      message: "Failed to fetch video",
-    });
+    const result = getters.videoErrorMessage(state);
+    expect(result).toBe("Failed to fetch video");
   });
 
-  it("error getter returns null if no error", () => {
+  it("videoErrorMessage getter returns null if no error", () => {
     const state = { videoError: null };
-    const result = getters.videoError(state);
-    expect(result).toBeFalsy();
+    const result = getters.videoErrorMessage(state);
+    expect(result).toBe("");
   });
 
   it("fetchVideos action can fetch popular videos and do commit", async () => {
@@ -82,7 +65,7 @@ describe("Test store for video module", () => {
     };
     await actions.fetchVideos(context);
     expect(context.commit).toHaveBeenCalledWith(
-      CATCH_ERROR,
+      CATCH_VIDEO_ERROR,
       videoErrorResponse
     );
   });
@@ -102,7 +85,7 @@ describe("Test store for video module", () => {
       videos: null,
       videoError: null,
     };
-    mutations.CATCH_ERROR(state, videoErrorResponse);
+    mutations.CATCH_VIDEO_ERROR(state, videoErrorResponse);
     expect(state.videoError).toEqual(videoErrorResponse);
   });
 
@@ -130,7 +113,7 @@ describe("Test store for video module", () => {
     };
     await actions.fetchVideo(context, "123");
     expect(context.commit).toHaveBeenCalledWith(
-      CATCH_ERROR,
+      CATCH_VIDEO_ERROR,
       videoErrorResponse
     );
   });

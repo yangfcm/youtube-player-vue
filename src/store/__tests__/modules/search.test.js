@@ -1,6 +1,6 @@
 import searchStore from "../../modules/search";
 import axios from "../../../settings";
-import { SEARCH, CATCH_ERROR } from "../../types";
+import { SEARCH, CATCH_SEARCH_ERROR } from "../../types";
 import {
   keyword,
   searchResultResponse,
@@ -10,40 +10,29 @@ import {
 describe("Test store for search module", () => {
   const { getters, mutations, actions } = searchStore;
 
-  it("error getter should parse standard error response returned from API", () => {
+  it("searchErrorMessage getter should parse standard error response returned from API", () => {
     const state = { searchError: searchErrorResponse };
-    const result = getters.searchError(state);
-    expect(result).toEqual({
-      code: searchErrorResponse.response.data.error.code,
-      message: searchErrorResponse.response.data.error.message,
-    });
+    const result = getters.searchErrorMessage(state);
+    expect(result).toBe(searchErrorResponse.response.data.error.message);
   });
 
-  it("error getter should parse standard JS error object", () => {
+  it("searchErrorMessage getter should parse standard JS error object", () => {
     const errorMsg = "mock error message";
     const state = { searchError: { message: errorMsg } };
-    const result = getters.searchError(state);
-    expect(result).toEqual({ message: errorMsg });
+    const result = getters.searchErrorMessage(state);
+    expect(result).toBe(errorMsg);
   });
 
-  it("error getter should parse any other error", () => {
+  it("searchErrorMessage getter should parse any other error", () => {
     const state = { searchError: "error" };
-    const result = getters.searchError(state);
-    expect(result).toEqual({
-      message: "Failed to proceed searching",
-    });
+    const result = getters.searchErrorMessage(state);
+    expect(result).toBe("Failed to proceed searching");
   });
 
-  it("error getter returns null if no error", () => {
+  it("searchErrorMessage getter returns null if no error", () => {
     const state = { searchError: null };
-    const result = getters.searchError(state);
-    expect(result).toBeFalsy();
-  });
-
-  it("searchResults getter should return searchResults state", () => {
-    const state = { searchResults: searchResultResponse };
-    const result = getters.searchResults(state);
-    expect(result).toEqual(searchResultResponse);
+    const result = getters.searchErrorMessage(state);
+    expect(result).toBe("");
   });
 
   it("search action can search results and commit", async () => {
@@ -73,7 +62,7 @@ describe("Test store for search module", () => {
     axios.get.mockRejectedValue(searchErrorResponse);
     await actions.search(context, keyword, null);
     expect(context.commit).toHaveBeenCalledWith(
-      CATCH_ERROR,
+      CATCH_SEARCH_ERROR,
       searchErrorResponse
     );
   });
@@ -93,7 +82,7 @@ describe("Test store for search module", () => {
       searchResults: null,
       searchError: null,
     };
-    mutations.CATCH_ERROR(state, searchErrorResponse);
+    mutations.CATCH_SEARCH_ERROR(state, searchErrorResponse);
     expect(state.searchError).toEqual(searchErrorResponse);
   });
 });

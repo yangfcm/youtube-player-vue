@@ -1,11 +1,10 @@
 import playlistStore from "../../modules/playlist";
 import axios from "../../../settings";
 import {
-  FETCH_MY_PLAYLIST,
   FETCH_PLAY_LIST_DETAIL,
   FETCH_PLAY_LIST,
   FETCH_MY_PLAY_LIST,
-  CATCH_ERROR,
+  CATCH_PLAYLIST_ERROR,
 } from "../../types";
 import {
   myPlaylistResponse,
@@ -32,48 +31,29 @@ describe("Test store for playlist module", () => {
     });
   });
 
-  it("playlist getter should return playlist state", () => {
-    const state = {
-      myPlaylist: myPlaylistResponse,
-      playlist: playlistResponse,
-      playlistDetail: playlistDetailResponse,
-    };
-    const myPlaylistResult = getters.myPlaylist(state);
-    const playlistResult = getters.playlist(state);
-    const playlistDetailResult = getters.playlistDetail(state);
-    expect(myPlaylistResult).toEqual(state.myPlaylist);
-    expect(playlistResult).toEqual(state.playlist);
-    expect(playlistDetailResult).toEqual(state.playlistDetail);
-  });
-
-  it("error getter should parse standard error response returned from API", () => {
+  it("playlistErrorMessage getter should parse standard error response returned from API", () => {
     const state = { playlistError: playlistErrorResponse };
-    const result = getters.playlistError(state);
-    expect(result).toEqual({
-      code: state.playlistError.response.data.error.code,
-      message: state.playlistError.response.data.error.message,
-    });
+    const result = getters.playlistErrorMessage(state);
+    expect(result).toBe(state.playlistError.response.data.error.message);
   });
 
-  it("error getter should parse standard JS error object", () => {
+  it("playlistErrorMessage getter should parse standard JS error object", () => {
     const errorMsg = "mock error message";
     const state = { playlistError: { message: errorMsg } };
-    const result = getters.playlistError(state);
-    expect(result).toEqual({ message: errorMsg });
+    const result = getters.playlistErrorMessage(state);
+    expect(result).toBe(errorMsg);
   });
 
-  it("error getter should parse any other error", () => {
+  it("playlistErrorMessage getter should parse any other error", () => {
     const state = { playlistError: "error" };
-    const result = getters.playlistError(state);
-    expect(result).toEqual({
-      message: "Failed to fetch playlist videos",
-    });
+    const result = getters.playlistErrorMessage(state);
+    expect(result).toBe("Failed to fetch playlist videos");
   });
 
-  it("error getter returns null if no error", () => {
+  it("playlistErrorMessage getter returns null if no error", () => {
     const state = { playlistError: null };
-    const result = getters.playlistError(state);
-    expect(result).toBeFalsy();
+    const result = getters.playlistErrorMessage(state);
+    expect(result).toBe("");
   });
 
   it("fetchMyPlaylist action can fetch playlist of authed user and do commit", async () => {
@@ -109,7 +89,7 @@ describe("Test store for playlist module", () => {
     };
     await actions.fetchMyPlaylist(context);
     expect(context.commit).toHaveBeenCalledWith(
-      CATCH_ERROR,
+      CATCH_PLAYLIST_ERROR,
       playlistErrorResponse
     );
   });
@@ -142,7 +122,7 @@ describe("Test store for playlist module", () => {
     };
     await actions.fetchPlaylist(context);
     expect(context.commit).toHaveBeenCalledWith(
-      CATCH_ERROR,
+      CATCH_PLAYLIST_ERROR,
       playlistErrorResponse
     );
   });
@@ -175,8 +155,43 @@ describe("Test store for playlist module", () => {
     };
     await actions.fetchPlaylistDetail(context);
     expect(context.commit).toHaveBeenCalledWith(
-      CATCH_ERROR,
+      CATCH_PLAYLIST_ERROR,
       playlistErrorResponse
     );
+  });
+
+  it("mutations for fetchMyPlaylist can change state", () => {
+    const state = {
+      myPlaylist: null,
+      playlistError: "any error",
+    };
+    mutations.FETCH_MY_PLAY_LIST(state, myPlaylistResponse);
+    expect(state.myPlaylist).toEqual(myPlaylistResponse);
+    expect(state.playlistError).toBe(null);
+  });
+  it("mutations for fetchPlaylist can change state", () => {
+    const state = {
+      playlist: null,
+      playlistError: "any error",
+    };
+    mutations.FETCH_PLAY_LIST(state, playlistResponse);
+    expect(state.playlist).toEqual(playlistResponse);
+    expect(state.playlistError).toBe(null);
+  });
+  it("mutations for fetchPlaylistDetail can change state", () => {
+    const state = {
+      playlistDetail: null,
+      playlistError: "any error",
+    };
+    mutations.FETCH_PLAY_LIST_DETAIL(state, playlistDetailResponse);
+    expect(state.playlistDetail).toEqual(playlistDetailResponse);
+    expect(state.playlistError).toBe(null);
+  });
+  it("mutations for catchError action can change state", () => {
+    const state = {
+      playlistError: null,
+    };
+    mutations.CATCH_PLAYLIST_ERROR(state, playlistErrorResponse);
+    expect(state.playlistError).toEqual(playlistErrorResponse);
   });
 });

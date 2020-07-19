@@ -1,20 +1,16 @@
+/** Parse the error object and return error message to display */
 const parseError = (error, defaultErrorMessage = "") => {
   if (!error) {
-    return null;
+    return "";
   }
   if (error.response && error.response.data) {
-    return {
-      code: error.response.data.error.code,
-      message: error.response.data.error.message,
-    };
+    return error.response.data.error
+      ? error.response.data.error.message
+      : error.response.data;
   } else if (error.message) {
-    return {
-      message: error.message,
-    };
+    return error.message;
   } else {
-    return {
-      message: defaultErrorMessage,
-    };
+    return defaultErrorMessage;
   }
 };
 

@@ -2,23 +2,20 @@ import axios from "../../settings";
 import {
   FETCH_PLAY_LIST,
   FETCH_PLAY_LIST_DETAIL,
-  CATCH_ERROR,
+  CATCH_PLAYLIST_ERROR,
   FETCH_MY_PLAY_LIST,
 } from "../types";
 import parseError from "../helpers/parseError";
 
 const state = {
-  playlist: null,
-  myPlaylist: null,
+  playlist: null, // playlist of a particular channel
+  myPlaylist: null, // playlist owned by authed user
   playlistDetail: null,
   playlistError: null,
 };
 
 const getters = {
-  playlist: (state) => state.playlist,
-  myPlaylist: (state) => state.myPlaylist,
-  playlistDetail: (state) => state.playlistDetail,
-  playlistError: (state) =>
+  playlistErrorMessage: (state) =>
     parseError(state.playlistError, "Failed to fetch playlist videos"),
 };
 
@@ -35,7 +32,7 @@ const mutations = {
     state.playlistDetail = payload;
     state.playlistError = null;
   },
-  CATCH_ERROR: (state, payload) => {
+  CATCH_PLAYLIST_ERROR: (state, payload) => {
     state.playlistError = payload;
   },
 };
@@ -58,7 +55,7 @@ const actions = {
       });
       context.commit(FETCH_MY_PLAY_LIST, response.data);
     } catch (err) {
-      context.commit(CATCH_ERROR, err);
+      context.commit(CATCH_PLAYLIST_ERROR, err);
     }
   },
 
@@ -76,7 +73,7 @@ const actions = {
       });
       context.commit(FETCH_PLAY_LIST, response.data);
     } catch (err) {
-      context.commit(CATCH_ERROR, err);
+      context.commit(CATCH_PLAYLIST_ERROR, err);
     }
   },
 
@@ -94,7 +91,7 @@ const actions = {
       });
       context.commit(FETCH_PLAY_LIST_DETAIL, response.data);
     } catch (err) {
-      context.commit(CATCH_ERROR, err);
+      context.commit(CATCH_PLAYLIST_ERROR, err);
     }
   },
 };

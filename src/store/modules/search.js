@@ -1,5 +1,5 @@
 import axios from "../../settings";
-import { SEARCH, CATCH_ERROR } from "../types";
+import { SEARCH, CATCH_SEARCH_ERROR } from "../types";
 import parseError from "../helpers/parseError";
 
 const state = {
@@ -8,8 +8,7 @@ const state = {
 };
 
 const getters = {
-  searchResults: (state) => state.searchResults,
-  searchError: (state) => {
+  searchErrorMessage: (state) => {
     return parseError(state.searchError, "Failed to proceed searching");
   },
 };
@@ -19,7 +18,7 @@ const mutations = {
     state.searchResults = payload;
     state.searchError = null;
   },
-  CATCH_ERROR: (state, payload) => {
+  CATCH_SEARCH_ERROR: (state, payload) => {
     state.searchError = payload;
   },
 };
@@ -38,7 +37,7 @@ const actions = {
       });
       context.commit(SEARCH, response.data);
     } catch (err) {
-      context.commit(CATCH_ERROR, err);
+      context.commit(CATCH_SEARCH_ERROR, err);
     }
   },
 };

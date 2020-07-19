@@ -5,23 +5,27 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   name: "HelloWorld",
   props: {
     msg: String
   },
   computed: {
-    ...mapGetters(["videos", "videoError", "video"])
+    ...mapState(["video", "channel"]),
+    ...mapGetters(["videoErrorMessage", "channelErrorMessage"])
   },
   methods: {
     ...mapActions({
       fetchVideos: "fetchVideos",
-      fetchVideo: "fetchVideo"
+      fetchVideo: "fetchVideo",
+      fetchMyChannels: "fetchMyChannels"
     })
   },
   async created() {
-    await this.fetchVideo("CacIlFaXph0");
+    await this.fetchVideo("CacIlFaXph");
+    await this.fetchMyChannels();
+    console.log(this.video.video);
   }
 };
 </script>
