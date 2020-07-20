@@ -50,7 +50,7 @@ describe("Test store for playlist module", () => {
     expect(result).toBe("Failed to fetch playlist videos");
   });
 
-  it("playlistErrorMessage getter returns null if no error", () => {
+  it("playlistErrorMessage getter returns empty string if no error", () => {
     const state = { playlistError: null };
     const result = getters.playlistErrorMessage(state);
     expect(result).toBe("");

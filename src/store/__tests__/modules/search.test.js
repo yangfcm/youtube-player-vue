@@ -29,7 +29,7 @@ describe("Test store for search module", () => {
     expect(result).toBe("Failed to proceed searching");
   });
 
-  it("searchErrorMessage getter returns null if no error", () => {
+  it("searchErrorMessage getter returns empty string if no error", () => {
     const state = { searchError: null };
     const result = getters.searchErrorMessage(state);
     expect(result).toBe("");

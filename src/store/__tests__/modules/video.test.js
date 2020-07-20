@@ -29,7 +29,7 @@ describe("Test store for video module", () => {
     expect(result).toBe("Failed to fetch video");
   });
 
-  it("videoErrorMessage getter returns null if no error", () => {
+  it("videoErrorMessage getter returns empty string if no error", () => {
     const state = { videoError: null };
     const result = getters.videoErrorMessage(state);
     expect(result).toBe("");

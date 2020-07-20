@@ -55,7 +55,7 @@ const actions = {
           ...axios.defaults.params,
           part: "snippet",
           videoId,
-          maxResults,
+          maxResults: 12,
           pageToken,
           order: order === "relevance" ? "relevance" : "time",
         },
@@ -108,7 +108,7 @@ const actions = {
           ...axios.defaults.params,
           part: "snippet",
           parentId: commentId,
-          maxResults,
+          maxResults: 12,
           pageToken,
         },
       });
