@@ -10,13 +10,49 @@
           <input type="text" />
           <i class="search icon link"></i>
         </div>
+        <div v-if="signedIn === true" class="app-dropdown-container">
+          <img
+            :src="user.picture"
+            :alt="user.name"
+            class="ui tiny image circular"
+            style="cursor: pointer; max-height: 60px; width: auto;"
+          />
+        </div>
+        <div v-if="signedIn === false">
+          <button
+            class="ui youtube button"
+            style="margin-left: 1rem; width: 110px;"
+            @click="handleSignin"
+          >
+            <i class="youtube icon"></i>
+            Sign In
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapState, mapGetters } from "vuex";
+import googleAuth from "../../mixins/googleAuth";
+export default {
+  mixins: [googleAuth],
+  computed: {
+    ...mapGetters(["user", "signedIn"])
+  }
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+.app-dropdown-container {
+  position: relative;
+  margin-left: 1rem;
+}
+.app-dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 105%;
+  z-index: 10;
+}
+</style>
