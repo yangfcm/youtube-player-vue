@@ -16,7 +16,9 @@
             :alt="user.name"
             class="ui tiny image circular"
             style="cursor: pointer; max-height: 60px; width: auto;"
+            @click.stop="toggleShowDropdown"
           />
+          <app-dropdown class="app-dropdown-menu" v-if="showDropdown"></app-dropdown>
         </div>
         <div v-if="signedIn === false">
           <button
@@ -36,11 +38,31 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import googleAuth from "../../mixins/googleAuth";
+import Dropdown from "../common/Dropdown";
+
 export default {
-  mixins: [googleAuth],
+  data: function() {
+    return {
+      showDropdown: false
+    };
+  },
+  components: {
+    appDropdown: Dropdown
+  },
   computed: {
     ...mapGetters(["user", "signedIn"])
-  }
+  },
+  methods: {
+    toggleShowDropdown() {
+      this.showDropdown = !this.showDropdown;
+    }
+  },
+  mounted() {
+    window.addEventListener("click", () => {
+      this.showDropdown = false;
+    });
+  },
+  mixins: [googleAuth]
 };
 </script>
 
