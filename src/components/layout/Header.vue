@@ -1,8 +1,17 @@
 <template>
-  <div>
-    <div>header</div>
-    <router-link to="/subscription">Subscription</router-link>
-    <router-link to="/playlist">Playlist</router-link>
+  <div class="ui menu stackable">
+    <router-link to="/" class="header item ui">
+      <i class="video icon red"></i>
+      FanTube
+    </router-link>
+    <div class="right menu">
+      <div class="item">
+        <div class="ui icon input" style="min-width: 10px;">
+          <input type="text" />
+          <i class="search icon link"></i>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
