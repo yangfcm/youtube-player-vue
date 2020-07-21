@@ -28,7 +28,6 @@ const mutations = {
   },
   FETCH_CHANNEL_SUBSCRIPTION: (state, payload) => {
     state.subscriptionId = payload;
-    state.channelError = null;
   },
   FETCH_CHANNEL_INTRO: (state, payload) => {
     state.channelIntro = payload;
@@ -36,11 +35,9 @@ const mutations = {
   },
   SUBSCRIBE_CHANNEL: (state, payload) => {
     state.subscriptionId = payload; // If a channel is subscribed successfully, save its subscription id
-    state.channelError = null;
   },
   UNSUBSCRIBE_CHANNEL: (state) => {
     state.subscriptionId = ""; // If a subscribed channel is unsubscribed, set its subscriptionId as empty string
-    state.channelError = null;
   },
   CATCH_CHANNEL_ERROR: (state, payload) => {
     state.channelError = payload;
@@ -52,7 +49,7 @@ const actions = {
   fetchMyChannels: async (context, pageToken) => {
     try {
       const accessToken = localStorage.getItem("access_token");
-      const response = await axios.get("/subscriptons", {
+      const response = await axios.get("/subscriptions", {
         headers: {
           Authorization: accessToken,
         },
