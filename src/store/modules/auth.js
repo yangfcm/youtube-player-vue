@@ -3,7 +3,6 @@ import { SIGN_IN, SIGN_OUT, CATCH_AUTH_ERROR } from "../types";
 
 const state = {
   user: null,
-  authed: false,
 };
 
 const getters = {
@@ -30,7 +29,7 @@ const mutations = {
   SIGN_OUT: (state) => {
     state.user = {};
   },
-  CATCH_AUTH_ERR: (state) => {
+  CATCH_AUTH_ERROR: (state) => {
     state.user = {};
   },
 };
@@ -53,7 +52,7 @@ const actions = {
       context.commit(CATCH_AUTH_ERROR);
     }
   },
-  signOut: async (context) => {
+  signOut: (context) => {
     localStorage.removeItem("access_token");
     context.commit(SIGN_OUT);
   },

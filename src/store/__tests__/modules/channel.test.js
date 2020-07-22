@@ -17,7 +17,6 @@ import {
   channelNotSubscriptionResponse,
   channelSubscribeSuccessResponse,
 } from "../fixtures/channel";
-import channel from "../../modules/channel";
 
 describe("Test store for channel module", () => {
   let accessToken, context;
@@ -42,7 +41,7 @@ describe("Test store for channel module", () => {
     const result = getters.channelErrorMessage(state);
     expect(result).toBe(state.channelError.response.data.error.message);
   });
-  it("channelErrorMessage get should parse standard JS error object", () => {
+  it("channelErrorMessage getter should parse standard JS error object", () => {
     const errorMsg = "mock channel error message";
     const state = { channelError: { message: errorMsg } };
     const result = getters.channelErrorMessage(state);
