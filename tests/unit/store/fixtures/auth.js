@@ -1,5 +1,3 @@
-test.skip("no need to test fixtures", () => {});
-
 export const userResponse = {
   id: "12345",
   email: "test@gmail.com",

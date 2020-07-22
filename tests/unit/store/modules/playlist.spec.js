@@ -1,11 +1,11 @@
-import playlistStore from "../../modules/playlist";
-import axios from "../../../settings";
+import playlistStore from "@/store/modules/playlist";
+import axios from "@/settings";
 import {
   FETCH_PLAY_LIST_DETAIL,
   FETCH_PLAY_LIST,
   FETCH_MY_PLAY_LIST,
   CATCH_PLAYLIST_ERROR,
-} from "../../types";
+} from "@/store/types";
 import {
   myPlaylistResponse,
   playlistResponse,

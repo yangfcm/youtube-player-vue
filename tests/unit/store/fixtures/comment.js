@@ -1,5 +1,3 @@
-test.skip("no need to test fixtures", () => {});
-
 export const videoId = "-uR-iqh1x1Q";
 export const commentId = "UgyQOgj_e7mQTILEmpV4AaABAg";
 export const channelId = "UCAuUUnT6oDeKwE6v1NGQxug";

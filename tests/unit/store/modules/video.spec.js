@@ -1,6 +1,6 @@
-import videoStore from "../../modules/video";
-import axios from "../../../settings";
-import { FETCH_VIDEOS, CATCH_VIDEO_ERROR, FETCH_VIDEO } from "../../types";
+import videoStore from "@/store/modules/video";
+import axios from "@/settings";
+import { FETCH_VIDEOS, CATCH_VIDEO_ERROR, FETCH_VIDEO } from "@/store/types";
 import {
   popularVideosResponse,
   videoResponse,

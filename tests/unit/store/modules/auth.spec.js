@@ -1,6 +1,6 @@
-import authStore from "../../modules/auth";
-import axios from "../../../settings";
-import { SIGN_IN, SIGN_OUT, CATCH_AUTH_ERROR } from "../../types";
+import authStore from "@/store/modules/auth";
+import axios from "@/settings";
+import { SIGN_IN, SIGN_OUT, CATCH_AUTH_ERROR } from "@/store/types";
 import { userResponse, mockGoogleUser } from "../fixtures/auth";
 
 describe("Test store for auth module", () => {

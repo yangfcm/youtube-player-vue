@@ -1,12 +1,12 @@
-import commentStore from "../../modules/comment";
-import axios from "../../../settings";
+import commentStore from "@/store/modules/comment";
+import axios from "@/settings";
 import {
   ADD_COMMENT,
   FETCH_COMMENTS,
   FETCH_REPLIES,
   FETCH_COMMENTS_DISABLED,
   CATCH_COMMENT_ERROR,
-} from "../../types";
+} from "@/store/types";
 import {
   videoId,
   commentId,

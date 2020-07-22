@@ -1,5 +1,3 @@
-test.skip("no need to test fixtures", () => {});
-
 export const channelId = "UCHaHD477h-FeBbVh9Sh7syA";
 
 export const channelIntroResponse = {

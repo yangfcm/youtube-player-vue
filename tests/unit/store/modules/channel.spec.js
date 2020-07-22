@@ -1,5 +1,5 @@
-import channelStore from "../../modules/channel";
-import axios from "../../../settings";
+import channelStore from "@/store/modules/channel";
+import axios from "@/settings";
 import {
   FETCH_MY_CHANNELS,
   FETCH_CHANNEL_SUBSCRIPTION,
@@ -7,7 +7,7 @@ import {
   SUBSCRIBE_CHANNEL,
   UNSUBSCRIBE_CHANNEL,
   CATCH_CHANNEL_ERROR,
-} from "../../types";
+} from "@/store/types";
 import {
   channelId,
   myChannelsResponse,

@@ -149,5 +149,3 @@ export const videoErrorResponse = {
     },
   },
 };
-
-test.skip("no need to test fixtures", () => {});

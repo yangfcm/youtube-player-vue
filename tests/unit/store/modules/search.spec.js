@@ -1,6 +1,6 @@
-import searchStore from "../../modules/search";
-import axios from "../../../settings";
-import { SEARCH, CATCH_SEARCH_ERROR } from "../../types";
+import searchStore from "@/store/modules/search";
+import axios from "@/settings";
+import { SEARCH, CATCH_SEARCH_ERROR } from "@/store/types";
 import {
   keyword,
   searchResultResponse,

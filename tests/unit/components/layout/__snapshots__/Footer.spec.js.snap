@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test footer 1`] = `
+<div class="ui footer segment">
+  <div class="ui center aligned container">
+    My Youtube player developed by Fan Y.
+  </div>
+  <div class="ui center aligned container">
+    Powered by <a href="https://vuejs.org/index.html" target="__blank">Vue</a></div>
+</div>
+`;
