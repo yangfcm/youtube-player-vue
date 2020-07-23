@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Dropdown component Dropdown component matches snapshot 1`] = `<div class="ui vertical menu"><a class="item">Recommend</a> <a class="item">Subscriptions</a> <a class="item">Play list</a> <a class="item app-signout-btn">Sign out</a></div>`;
