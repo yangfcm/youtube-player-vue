@@ -6,7 +6,7 @@
         <router-view></router-view>
       </div>
     </div>
-    <div class="ui divider hidden"></div>
+    <app-blank></app-blank>
     <app-footer></app-footer>
   </div>
 </template>
@@ -14,6 +14,7 @@
 <script>
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+import Blank from "./components/common/Blank.vue";
 import "semantic-ui-css/semantic.min.css";
 
 export default {
@@ -21,6 +22,7 @@ export default {
   components: {
     appHeader: Header,
     appFooter: Footer,
+    appBlank: Blank,
   },
 };
 </script>
@@ -34,6 +36,7 @@ export default {
 .app-inner-container {
   max-width: 90%;
   margin: 0 auto;
+  height: 100%;
 }
 .app-body {
   flex-grow: 1;
