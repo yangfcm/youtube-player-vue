@@ -1,4 +1,5 @@
-import { mount, RouterLinkStub } from "@vue/test-utils";
+import { mount, RouterLinkStub, createLocalVue } from "@vue/test-utils";
+import VueRouter from "vue-router";
 import Header from "@/components/layout/Header.vue";
 import Dropdown from "@/components/common/Dropdown.vue";
 import { userResponse as user } from "../../store/fixtures/auth";
@@ -8,6 +9,9 @@ jest.mock("@/mixins/googleAuth");
 
 describe("Test Header component", () => {
   let headerWrapper, authedHeaderWrapper;
+  const localVue = createLocalVue();
+  localVue.use(VueRouter);
+  const router = new VueRouter();
 
   beforeEach(() => {
     headerWrapper = mount(Header, {
@@ -22,6 +26,8 @@ describe("Test Header component", () => {
       stubs: {
         RouterLink: RouterLinkStub,
       },
+      localVue,
+      router,
     });
 
     authedHeaderWrapper = mount(Header, {
@@ -92,5 +98,12 @@ describe("Test Header component", () => {
   it("User input can change keyword", () => {
     headerWrapper.find("input").setValue("popular movie");
     expect(headerWrapper.vm.searchKeyword).toBe("popular movie");
+  });
+
+  it("Can navigate to search result page when user is searching", async () => {
+    headerWrapper.find("input").setValue("舌尖上的中国");
+    const spy = jest.spyOn(headerWrapper.vm.$router, "push");
+    await headerWrapper.find("i.search").trigger("click");
+    expect(spy).toHaveBeenCalledWith("/search/舌尖上的中国");
   });
 });
