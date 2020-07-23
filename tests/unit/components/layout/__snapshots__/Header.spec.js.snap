@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Header component should render Header component correctly 1`] = `
+<div class="ui menu stackable"><a class="header item ui"><i class="video icon red"></i>
+    FanTube
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui icon input" style="min-width: 10px;"><input type="text"> <i class="search icon link"></i></div>
+      <!---->
+      <div><button class="ui youtube button" style="margin-left: 1rem; width: 110px;"><i class="youtube icon"></i>
+          Sign In
+        </button></div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Test Header component should render Header component correctly 2`] = `
+<div class="ui menu stackable"><a class="header item ui"><i class="video icon red"></i>
+    FanTube
+  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui icon input" style="min-width: 10px;"><input type="text"> <i class="search icon link"></i></div>
+      <div class="app-dropdown-container"><img src="https://lh5.googleusercontent.com/-MuN5BmJ3lFM/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmzrAOkewOEoGUPasQOSYSk3Gl9nA/photo.jpg" alt="sam test" class="ui tiny image circular" style="cursor: pointer; max-height: 60px; width: auto;">
+        <!---->
+      </div>
+      <!---->
+    </div>
+  </div>
+</div>
+`;

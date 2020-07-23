@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test footer 1`] = `
+exports[`Footer component matches snapshot 1`] = `
 <div class="ui footer segment">
   <div class="ui center aligned container">
     My Youtube player developed by Fan Y.

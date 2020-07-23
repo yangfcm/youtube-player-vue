@@ -29,11 +29,11 @@ const googleAuth = {
         this.signOut(); // signOut action
       }
     },
-    handleSignout() {
-      this.auth.signOut(); // signIn provided by Google Auth API
+    handleGoogleSignout() {
+      this.auth.signOut(); // signOut provided by Google Auth API
     },
-    handleSignin() {
-      this.auth.signIn(); // signOut provided by Google Auth API
+    handleGoogleSignin() {
+      this.auth.signIn(); // signIn provided by Google Auth API
     },
   },
 };

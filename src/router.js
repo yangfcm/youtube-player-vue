@@ -35,7 +35,7 @@ const routes = [
       },
     ],
   },
-  { path: "/result", component: SearchResult },
+  { path: "/search/:keyword", component: SearchResult },
   { path: "*", component: NotFound },
 ];
 

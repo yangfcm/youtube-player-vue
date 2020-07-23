@@ -7,8 +7,8 @@
     <div class="right menu">
       <div class="item">
         <div class="ui icon input" style="min-width: 10px;">
-          <input type="text" />
-          <i class="search icon link"></i>
+          <input type="text" v-model="searchKeyword" />
+          <i class="search icon link" @click="handleSearch"></i>
         </div>
         <div v-if="signedIn === true" class="app-dropdown-container">
           <img
@@ -43,7 +43,8 @@ import Dropdown from "../common/Dropdown";
 export default {
   data: function() {
     return {
-      showDropdown: false
+      showDropdown: false,
+      searchKeyword: ""
     };
   },
   components: {
@@ -55,11 +56,21 @@ export default {
   methods: {
     toggleShowDropdown() {
       this.showDropdown = !this.showDropdown;
+    },
+    handleSignin() {
+      this.handleGoogleSignin();
+    },
+    handleSearch() {
+      if (this.searchKeyword.trim() === "") return;
+      this.$router.push(`/search/${this.searchKeyword.trim()}`);
+      this.searchKeyword = "";
     }
   },
   mounted() {
     window.addEventListener("click", () => {
-      this.showDropdown = false;
+      if (this.showDropdown) {
+        this.showDropdown = false;
+      }
     });
   },
   mixins: [googleAuth]
