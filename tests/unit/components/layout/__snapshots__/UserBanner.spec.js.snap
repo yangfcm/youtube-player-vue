@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Userbanner component can render correctly when user logged in 1`] = `
+<div class="app-banner-container">
+  <div class="app-banner-image">
+    <!----> <img src="https://lh5.googleusercontent.com/-MuN5BmJ3lFM/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucmzrAOkewOEoGUPasQOSYSk3Gl9nA/photo.jpg" alt="sam test" class="ui tiny image circular"></div>
+  <div class="app-banner-title">
+    <h2 class="ui header app-banner-title-text"><span style="margin-right: 3px;">Welcome
+         back, sam test
+      </span></h2>
+  </div>
+</div>
+`;
+
+exports[`Userbanner component can render correctly when user not logged in 1`] = `
+<div class="app-banner-container">
+  <div class="app-banner-image"><i class="user secret icon huge"></i>
+    <!---->
+  </div>
+  <div class="app-banner-title">
+    <h2 class="ui header app-banner-title-text"><span style="margin-right: 3px;">Welcome
+        
+      </span></h2>
+  </div>
+</div>
+`;

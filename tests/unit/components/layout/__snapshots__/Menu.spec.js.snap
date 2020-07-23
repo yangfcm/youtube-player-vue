@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu component can render correctly 1`] = `
+<div class="ui three item menu red stackable"><a class="item"><i class="thumbs up outline icon"></i> Recommend
+  </a> <a class="item"><i class="user plus icon"></i> Subscription
+  </a> <a class="item"><i class="list icon"></i> Playlist</a></div>
+`;
