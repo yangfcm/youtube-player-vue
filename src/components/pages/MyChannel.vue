@@ -1,10 +1,20 @@
 <template>
   <!-- MyChannel page - Channels subscribed by authed user -->
-  <div>My channel</div>
+  <div>
+    <app-user-banner></app-user-banner>
+    <app-menu></app-menu>
+  </div>
 </template>
 
 <script>
-export default {};
+import UserBanner from "../layout/UserBanner";
+import Menu from "../layout/Menu";
+export default {
+  components: {
+    appMenu: Menu,
+    appUserBanner: UserBanner,
+  },
+};
 </script>
 
 <style scoped></style>

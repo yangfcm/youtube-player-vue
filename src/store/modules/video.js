@@ -30,7 +30,7 @@ const mutations = {
 
 const actions = {
   /** Fetch a list of videos by filter */
-  fetchVideos: async (context, filter, pageToken) => {
+  fetchVideos: async (context, filter, pageToken = null) => {
     try {
       const response = await axios.get("/videos", {
         params: {

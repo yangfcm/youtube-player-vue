@@ -1,8 +1,10 @@
 <template>
   <div id="app" class="app-container">
-    <app-header></app-header>
-    <div class="ui app-inner-container">
-      <router-view></router-view>
+    <div class="app-body">
+      <app-header></app-header>
+      <div class="ui app-inner-container">
+        <router-view></router-view>
+      </div>
     </div>
     <div class="ui divider hidden"></div>
     <app-footer></app-footer>
