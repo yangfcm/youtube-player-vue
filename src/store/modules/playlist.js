@@ -60,7 +60,7 @@ const actions = {
   },
 
   /** Fetch the playlist that belongs to a channel */
-  fetchPlaylist: async (context, channelId, pageToken = null) => {
+  fetchPlaylist: async (context, [channelId, pageToken = null]) => {
     try {
       const response = await axios.get("/playlists", {
         params: {
@@ -78,7 +78,7 @@ const actions = {
   },
 
   /** Fetch the videos in a playlist */
-  fetchPlaylistDetail: async (context, playlistId, pageToken = null) => {
+  fetchPlaylistDetail: async (context, [playlistId, pageToken = null]) => {
     try {
       const response = await axios.get("/playlistItems", {
         params: {

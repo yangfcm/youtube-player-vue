@@ -99,7 +99,7 @@ describe("Test store for playlist module", () => {
       commit: jest.fn(),
     };
     axios.get.mockResolvedValue({ data: playlistResponse });
-    await actions.fetchPlaylist(context, channelId);
+    await actions.fetchPlaylist(context, [channelId]);
     expect(axios.get).toHaveBeenCalledWith("/playlists", {
       params: {
         ...axios.defaults.params,
@@ -120,7 +120,7 @@ describe("Test store for playlist module", () => {
     const context = {
       commit: jest.fn(),
     };
-    await actions.fetchPlaylist(context);
+    await actions.fetchPlaylist(context, []);
     expect(context.commit).toHaveBeenCalledWith(
       CATCH_PLAYLIST_ERROR,
       playlistErrorResponse
@@ -132,7 +132,7 @@ describe("Test store for playlist module", () => {
       commit: jest.fn(),
     };
     axios.get.mockResolvedValue({ data: playlistDetailResponse });
-    await actions.fetchPlaylistDetail(context, playlistId);
+    await actions.fetchPlaylistDetail(context, [playlistId]);
     expect(axios.get).toHaveBeenCalledWith("/playlistItems", {
       params: {
         ...axios.defaults.params,
@@ -153,7 +153,7 @@ describe("Test store for playlist module", () => {
     const context = {
       commit: jest.fn(),
     };
-    await actions.fetchPlaylistDetail(context);
+    await actions.fetchPlaylistDetail(context, []);
     expect(context.commit).toHaveBeenCalledWith(
       CATCH_PLAYLIST_ERROR,
       playlistErrorResponse

@@ -1,9 +1,65 @@
 <template>
-  <div>my channel content</div>
+  <div>
+    <app-loader v-if="!channels && !error"></app-loader>
+    <app-error-message v-if="error">{{ error }}</app-error-message>
+    <div v-if="channels && !error">
+      <app-page-title>My Subscriptions</app-page-title>
+      <app-channel-grid :channels="channels.items"></app-channel-grid>
+      <app-blank></app-blank>
+      <app-more-button
+        :nextPageToken="channels.nextPageToken"
+        :isLoadingMore="isLoadingMore"
+        @onClickMore="handleMore($event)"
+      >More channels</app-more-button>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {};
+import { mapState, mapActions, mapGetters } from "vuex";
+import Loader from "../common/Loader";
+import ErrorMessage from "../common/ErrorMessage";
+import PageTitle from "../common/PageTitle";
+import MoreButton from "../modules/MoreButton";
+import ChannelGrid from "../modules/ChannelGrid";
+import Blank from "../common/Blank";
+
+export default {
+  components: {
+    appLoader: Loader,
+    appErrorMessage: ErrorMessage,
+    appPageTitle: PageTitle,
+    appMoreButton: MoreButton,
+    appChannelGrid: ChannelGrid,
+    appBlank: Blank,
+  },
+  data: function () {
+    return {
+      channels: null,
+      error: "",
+      isLoadingMore: false,
+    };
+  },
+  computed: {
+    ...mapState(["channel"]),
+    ...mapGetters(["channelErrorMessage"]),
+  },
+  methods: {
+    ...mapActions(["fetchMyChannels"]),
+    handleMore($event) {
+      console.log("handle more");
+    },
+  },
+  async created() {
+    await this.fetchMyChannels();
+    if (this.channel.channelError) {
+      this.error = this.channelErrorMessage;
+    } else if (this.channel.myChannels) {
+      this.channels = this.channel.myChannels;
+      this.error = "";
+    }
+  },
+};
 </script>
 
 <style scoped>
