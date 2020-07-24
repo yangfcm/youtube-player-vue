@@ -46,6 +46,9 @@ export default {
 
 <style scoped>
 .app-video-card {
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 .app-video-title {
   line-height: 23px;

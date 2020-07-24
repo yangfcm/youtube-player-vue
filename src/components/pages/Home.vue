@@ -11,6 +11,7 @@
       <app-blank></app-blank>
       <app-more-button
         :nextPageToken="videos.nextPageToken"
+        :isLoadingMore="isLoadingMore"
         @onClickMore="handleMore($event)"
       >More videos</app-more-button>
     </div>
@@ -43,6 +44,7 @@ export default {
     return {
       videos: null,
       error: null,
+      isLoadingMore: false,
     };
   },
   computed: {
@@ -52,18 +54,31 @@ export default {
   methods: {
     ...mapActions(["fetchVideos"]),
 
-    handleMore($event) {
-      console.log("ok", $event);
+    async handleMore($event) {
+      if (this.isLoadingMore) return;
+      this.isLoadingMore = true;
+      const nextPageToken = $event;
+      await this.fetchVideos([{ chart: "mostPopular" }, nextPageToken]);
+      if (this.video.videoError) {
+        this.error = this.videoErrorMessage;
+      } else if (this.video.videos) {
+        this.videos = {
+          ...this.videos,
+          items: this.videos.items.concat(this.video.videos.items),
+          nextPageToken: this.video.videos.nextPageToken,
+        };
+        this.error = "";
+      }
+      this.isLoadingMore = false;
     },
   },
   async created() {
-    await this.fetchVideos({ chart: "mostPopular" });
+    await this.fetchVideos([{ chart: "mostPopular" }]);
     if (this.video.videoError) {
       this.error = this.videoErrorMessage;
-      return;
-    }
-    if (this.video.videos) {
+    } else if (this.video.videos) {
       this.videos = this.video.videos;
+      this.error = "";
     }
   },
 };
