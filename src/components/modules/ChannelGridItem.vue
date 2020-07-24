@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <div>channel item</div>
+</template>
 
 <script>
 export default {
