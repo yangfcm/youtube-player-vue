@@ -41,7 +41,7 @@ describe("Test store for video module", () => {
       commit: jest.fn(),
     };
     axios.get.mockResolvedValue({ data: popularVideosResponse });
-    await actions.fetchVideos(context, filter, null);
+    await actions.fetchVideos(context, [filter, null]);
     expect(axios.get).toHaveBeenCalledWith("/videos", {
       params: {
         ...axios.defaults.params,
@@ -63,7 +63,7 @@ describe("Test store for video module", () => {
     const context = {
       commit: jest.fn(),
     };
-    await actions.fetchVideos(context);
+    await actions.fetchVideos(context, [{}, null]);
     expect(context.commit).toHaveBeenCalledWith(
       CATCH_VIDEO_ERROR,
       videoErrorResponse
