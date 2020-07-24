@@ -43,7 +43,7 @@ export default {
   data: function () {
     return {
       videos: null,
-      error: null,
+      error: "",
       isLoadingMore: false,
     };
   },
