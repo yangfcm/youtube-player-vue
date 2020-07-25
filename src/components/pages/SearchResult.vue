@@ -65,31 +65,31 @@ export default {
   },
   methods: {
     ...mapActions(["searchVideos"]),
+
     async handleMore($event) {
       if (this.isLoadingMore) return;
       this.isLoadingMore = true;
       const nextPageToken = $event;
       await this.handleSearchVideos(this.keyword, nextPageToken);
-      if (this.search.searchError) {
-        this.error = this.searchErrorMessage;
-      } else if (this.search.searchResults) {
-        this.searchResults = {
-          ...this.searchResults,
-          items: this.searchResults.items.concat(
-            this.search.searchResults.items
-          ),
-          nextPageToken: this.search.searchResults.nextPageToken,
-        };
-        this.error = "";
-      }
       this.isLoadingMore = false;
     },
+
     async handleSearchVideos(keyword, pageToken = null) {
       await this.searchVideos([{ q: keyword }, pageToken]);
       if (this.search.searchError) {
         this.error = this.searchErrorMessage;
       } else if (this.search.searchResults) {
-        this.searchResults = this.search.searchResults;
+        if (!nextPageToken) {
+          this.searchResults = this.search.searchResults;
+        } else {
+          this.searchResults = {
+            ...this.searchResults,
+            items: this.searchResults.items.concat(
+              this.search.searchResults.items
+            ),
+            nextPageToken: this.search.searchResults.nextPageToken,
+          };
+        }
         this.error = "";
       }
     },
