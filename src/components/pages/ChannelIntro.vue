@@ -37,13 +37,11 @@
 import { mapState, mapGetters, mapActions } from "vuex";
 import ErrorMessage from "../common/ErrorMessage";
 import Loader from "../common/Loader";
-import Blank from "../common/Blank";
 
 export default {
   components: {
     appLoader: Loader,
     appErrorMessage: ErrorMessage,
-    appBlank: Blank,
   },
   data: function () {
     return {

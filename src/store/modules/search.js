@@ -24,12 +24,12 @@ const mutations = {
 };
 
 const actions = {
-  search: async (context, keyword, pageToken) => {
+  searchVideos: async (context, [filter, pageToken = null]) => {
     try {
       const response = await axios.get("/search", {
         params: {
           ...axios.defaults.params,
-          q: keyword,
+          ...filter,
           part: "snippet",
           maxResults: 15,
           pageToken,

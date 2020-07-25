@@ -42,7 +42,7 @@ describe("Test store for search module", () => {
     axios.get.mockResolvedValue({
       data: searchResultResponse,
     });
-    await actions.search(context, keyword, null);
+    await actions.searchVideos(context, [{ q: keyword }, null]);
     expect(axios.get).toHaveBeenCalledWith("/search", {
       params: {
         ...axios.defaults.params,
@@ -60,7 +60,7 @@ describe("Test store for search module", () => {
       commit: jest.fn(),
     };
     axios.get.mockRejectedValue(searchErrorResponse);
-    await actions.search(context, keyword, null);
+    await actions.searchVideos(context, [{ q: keyword }, null]);
     expect(context.commit).toHaveBeenCalledWith(
       CATCH_SEARCH_ERROR,
       searchErrorResponse
