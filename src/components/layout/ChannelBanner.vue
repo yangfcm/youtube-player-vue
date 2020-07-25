@@ -12,17 +12,19 @@
         <h2 class="ui header app-banner-title-text">{{ channelIntro.snippet.title }}</h2>
       </div>
     </div>
-    <!-- <div>
-        <app-subscribe-button-auth
-          [channelId]="channelIntro.id"
-        ></app-subscribe-button-auth>
-    </div>-->
+    <div>
+      <app-subscribe-button :channelId="channelIntro.id"></app-subscribe-button>
+    </div>
   </div>
 </template>
 
 <script>
+import SubscribeButton from "../common/SubscribeButton";
 export default {
   props: ["channelIntro"],
+  components: {
+    appSubscribeButton: SubscribeButton,
+  },
 };
 </script>
 

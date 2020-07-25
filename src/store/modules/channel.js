@@ -139,10 +139,10 @@ const actions = {
   },
 
   /** Unsubscribe a channel */
-  unsubscribeChannel: async (context) => {
+  unsubscribeChannel: async (context, subscriptionId) => {
     try {
       const accessToken = localStorage.getItem("access_token");
-      const { subscriptionId } = context.state;
+      // const { subscriptionId } = context.state;
       await axios.delete("/subscriptions", {
         headers: {
           Authorization: accessToken,

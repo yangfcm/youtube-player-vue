@@ -197,7 +197,7 @@ describe("Test store for channel module", () => {
         subscriptionId,
       },
     };
-    await actions.unsubscribeChannel(context);
+    await actions.unsubscribeChannel(context, subscriptionId);
     expect(axios.delete).toHaveBeenCalledWith("/subscriptions", {
       headers: {
         Authorization: accessToken,
