@@ -46,8 +46,22 @@ export default {
   },
   methods: {
     ...mapActions(["fetchMyChannels"]),
-    handleMore($event) {
-      console.log("handle more");
+    async handleMore($event) {
+      if (this.isLoadingMore) return;
+      this.isLoadingMore = true;
+      const nextPageToken = $event;
+      await this.fetchMyChannels(nextPageToken);
+      if (this.channel.channelError) {
+        this.error = this.channelErrorMessage;
+      } else if (this.channel.myChannels) {
+        this.channels = {
+          ...this.channels,
+          items: this.channels.items.concat(this.channel.myChannels.items),
+          nextPageToken: this.channel.myChannels.nextPageToken,
+        };
+        this.error = "";
+      }
+      this.isLoadingMore = false;
     },
   },
   async created() {

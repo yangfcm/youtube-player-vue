@@ -6,11 +6,11 @@
       <app-page-title>My Playlist</app-page-title>
       <app-playlist-grid :playlists="playlists.items"></app-playlist-grid>
       <app-blank></app-blank>
-      <app-more-button>
+      <app-more-button
         :nextPageToken="playlists.nextPageToken"
-        :isLoadingMore = "isLoadingMore"
-        @onClickMore = 'handleMore($event)'
-      </app-more-button>
+        :isLoadingMore="isLoadingMore"
+        @onClickMore="handleMore($event)"
+      >More playlist</app-more-button>
     </div>
   </div>
 </template>
@@ -46,8 +46,22 @@ export default {
   },
   methods: {
     ...mapActions(["fetchMyPlaylist"]),
-    handleMore($event) {
-      console.log("handle more");
+    async handleMore($event) {
+      if (this.isLoadingMore) return;
+      this.isLoadingMore = true;
+      const nextPageToken = $event;
+      await this.fetchMyPlaylist(nextPageToken);
+      if (this.playlist.playlistError) {
+        this.error = this.playlistErrorMessage;
+      } else {
+        this.playlists = {
+          ...this.playlists,
+          items: this.playlists.items.concat(this.playlist.myPlaylist.items),
+          nextPageToken: this.playlist.myPlaylist.nextPageToken,
+        };
+        this.error = "";
+      }
+      this.isLoadingMore = false;
     },
   },
   async created() {

@@ -25,6 +25,6 @@ export default {
 .app-channel-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  gap: 0.5rem;
+  gap: 1rem;
 }
 </style>
