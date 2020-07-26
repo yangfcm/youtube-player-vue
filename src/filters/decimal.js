@@ -3,7 +3,7 @@
  * e.g. 12345678 => 12,345,678
  */
 export default (num) => {
-  if (typeof Number(num) !== "number") return 0;
+  if (isNaN(Number(num))) return "";
   let strNum = String(num);
   let arrNum = strNum.split("");
   let arr = [];

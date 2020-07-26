@@ -3,6 +3,7 @@
  */
 export default (date) => {
   const dateObj = new Date(date);
+  if (dateObj == "Invalid Date") return "";
   const day = dateObj.getDate();
   const month = new Intl.DateTimeFormat("en-US", {
     month: "short",
