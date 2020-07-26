@@ -1,5 +1,5 @@
 <template>
-  <div class="ui horizontal divider"></div>
+  <div class="ui divider"></div>
 </template>
 
 <script>

@@ -79,7 +79,7 @@ export default {
       if (this.search.searchError) {
         this.error = this.searchErrorMessage;
       } else if (this.search.searchResults) {
-        if (!nextPageToken) {
+        if (!pageToken) {
           this.searchResults = this.search.searchResults;
         } else {
           this.searchResults = {
@@ -94,8 +94,8 @@ export default {
       }
     },
   },
-  created() {
-    this.handleSearchVideos(this.keyword);
+  async created() {
+    await this.handleSearchVideos(this.keyword);
   },
 };
 </script>
