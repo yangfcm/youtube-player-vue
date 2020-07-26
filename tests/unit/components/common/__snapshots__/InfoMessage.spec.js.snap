@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InfoMessage component can render correctly 1`] = `
+<div class="ui segment basic">
+  <h3 class="ui center aligned header"><i class="info circle icon"></i> Some infomation</h3>
+</div>
+`;
