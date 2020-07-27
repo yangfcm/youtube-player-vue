@@ -108,7 +108,7 @@ const actions = {
   },
 
   /** Fetch replies under a particular comment */
-  fetchReplies: async (context, [commentId, pageToken]) => {
+  fetchReplies: async (context, [commentId, pageToken = null]) => {
     try {
       const response = await axios.get("/comments", {
         params: {

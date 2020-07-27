@@ -12,7 +12,6 @@
         <div v-html="item.textDisplay" class="text" style="width: 100%; overflow: auto;"></div>
       </div>
     </div>
-    <app-breakline></app-breakline>
   </div>
 </template>
 

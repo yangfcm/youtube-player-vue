@@ -16,6 +16,10 @@
       <app-info-message v-if="comments.items.length === 0">No comment in the video</app-info-message>
       <div v-for="(comment, index) in comments.items" :key="index">
         <app-comment-item :comment="comment"></app-comment-item>
+        <div style="padding-left: 5%;">
+          <app-comment-replies :commentItem="comment"></app-comment-replies>
+        </div>
+        <app-breakline></app-breakline>
       </div>
       <app-more-button
         :nextPageToken="comments.nextPageToken"
