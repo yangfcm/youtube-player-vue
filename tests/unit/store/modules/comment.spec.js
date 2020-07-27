@@ -64,7 +64,7 @@ describe("Test store for comment module", () => {
     axios.get.mockResolvedValue({
       data: commentsResponse,
     });
-    await actions.fetchComments(context, videoId, null);
+    await actions.fetchComments(context, [videoId, null]);
     expect(axios.get).toHaveBeenCalledWith("/commentThreads", {
       headers: {
         Authorization: accessToken,
@@ -85,7 +85,7 @@ describe("Test store for comment module", () => {
   });
   it("fetchComments can handle error", async () => {
     axios.get.mockRejectedValue(commentErrorResponse);
-    await actions.fetchComments(context, videoId, null);
+    await actions.fetchComments(context, [videoId, null]);
     expect(context.commit).toHaveBeenCalledWith(
       CATCH_COMMENT_ERROR,
       commentErrorResponse
@@ -93,7 +93,7 @@ describe("Test store for comment module", () => {
   });
   it("fetchComments can handle commentsDisabled error", async () => {
     axios.get.mockRejectedValue(commentDisabledErrorResponse);
-    await actions.fetchComments(context, videoId, null);
+    await actions.fetchComments(context, [videoId, null]);
     expect(context.commit).toHaveBeenCalledWith(FETCH_COMMENTS_DISABLED);
   });
 
@@ -111,7 +111,7 @@ describe("Test store for comment module", () => {
       },
     };
     axios.post.mockResolvedValue({ data: addedCommentResponse });
-    await actions.addComment(context, channelId, videoId, commentText);
+    await actions.addComment(context, [channelId, videoId, commentText]);
     expect(axios.post).toHaveBeenCalledWith("/commentThreads", requestBody, {
       headers: {
         Authorization: accessToken,
@@ -129,7 +129,7 @@ describe("Test store for comment module", () => {
   it("addComment action can handle error", async () => {
     const commentText = "good talk!";
     axios.post.mockRejectedValue(commentErrorResponse);
-    await actions.addComment(context, channelId, videoId, commentText);
+    await actions.addComment(context, [channelId, videoId, commentText]);
     expect(context.commit).toHaveBeenCalledWith(
       CATCH_COMMENT_ERROR,
       commentErrorResponse
@@ -140,7 +140,7 @@ describe("Test store for comment module", () => {
     axios.get.mockResolvedValue({
       data: repliesResponse,
     });
-    await actions.fetchReplies(context, commentId, null);
+    await actions.fetchReplies(context, [commentId, null]);
     expect(axios.get).toHaveBeenCalledWith("/comments", {
       params: {
         ...axios.defaults.params,
@@ -154,7 +154,7 @@ describe("Test store for comment module", () => {
   });
   it("fetchReplies action can handle error", async () => {
     axios.get.mockRejectedValue(commentErrorResponse);
-    await actions.fetchReplies(context, commentId, null);
+    await actions.fetchReplies(context, [commentId, null]);
     expect(context.commit).toHaveBeenCalledWith(
       CATCH_COMMENT_ERROR,
       commentErrorResponse
@@ -179,10 +179,10 @@ describe("Test store for comment module", () => {
   });
   it("mutations for addComment action can change state", () => {
     const state = {
-      myComments: [],
+      addedComment: null,
     };
     mutations.ADD_COMMENT(state, addedCommentResponse);
-    expect(state.myComments).toEqual([addedCommentResponse]);
+    expect(state.addedComment).toEqual(addedCommentResponse);
   });
   it("mutations for fetchReplies action can change state", () => {
     const state = {
