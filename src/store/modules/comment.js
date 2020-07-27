@@ -44,7 +44,10 @@ const mutations = {
 
 const actions = {
   /** Fetch the comments under a particular video */
-  fetchComments: async (context, videoId, pageToken, order = "relevance") => {
+  fetchComments: async (
+    context,
+    [videoId, pageToken = null, order = "relevance"]
+  ) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.get("/commentThreads", {
@@ -71,7 +74,7 @@ const actions = {
   },
 
   /** Add a comment */
-  addComment: async (context, channelId, videoId, commentText) => {
+  addComment: async (context, [channelId, videoId, commentText]) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const requestBody = {
@@ -101,7 +104,7 @@ const actions = {
   },
 
   /** Fetch replies under a particular comment */
-  fetchReplies: async (context, commentId, pageToken) => {
+  fetchReplies: async (context, [commentId, pageToken]) => {
     try {
       const response = await axios.get("/comments", {
         params: {

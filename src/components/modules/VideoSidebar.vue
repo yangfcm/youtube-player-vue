@@ -44,6 +44,13 @@ export default {
     ...mapState(["search", "playlist"]),
     ...mapGetters(["searchErrorMessage", "playlistErrorMessage"]),
   },
+  watch: {
+    videoId() {
+      if (!this.playlistId) {
+        this.fetchSidebarVideos();
+      }
+    },
+  },
   methods: {
     ...mapActions(["searchVideos", "fetchPlaylistDetail"]),
     fetchSidebarVideos(pageToken = null) {
