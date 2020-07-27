@@ -12,7 +12,8 @@
         <router-link
           :to="`/video/${videoId}`"
           :title="video.snippet.title"
-        >{{ video.snippet.title }}</router-link>
+          v-html="video.snippet.title"
+        ></router-link>
       </div>
       <div class="meta">
         <router-link :to="`/channel/${video.snippet.channelId}`">{{ video.snippet.channelTitle }}</router-link>

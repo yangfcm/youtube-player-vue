@@ -12,6 +12,7 @@
       <div v-if="replies && !error">
         <app-comment-item v-for="(reply, index) in replies.items" :key="index" :reply="reply"></app-comment-item>
       </div>
+      <app-blank></app-blank>
       <app-more-button
         :nextPageToken="replies && replies.nextPageToken"
         :isLoadingMore="isLoadingMore"
@@ -27,6 +28,7 @@ import MoreButton from "./MoreButton";
 import Loader from "../common/Loader";
 import ErrorMessage from "../common/ErrorMessage";
 import CommentItem from "./CommentItem";
+import Blank from "../common/Blank";
 
 export default {
   components: {
@@ -34,6 +36,7 @@ export default {
     appErrorMessage: ErrorMessage,
     appMoreButton: MoreButton,
     appCommentItem: CommentItem,
+    appBlank: Blank,
   },
   data: function () {
     return {

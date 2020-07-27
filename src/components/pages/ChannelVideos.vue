@@ -57,7 +57,7 @@ export default {
       this.isLoadingMore = true;
       const nextPageToken = $event;
       await this.searchVideos([
-        { channelId: this.channelId, order: "date" },
+        { channelId: this.channelId, order: "date", type: "video" },
         nextPageToken,
       ]);
       if (this.search.searchError) {
@@ -74,7 +74,9 @@ export default {
     },
   },
   async created() {
-    await this.searchVideos([{ channelId: this.channelId, order: "date" }]);
+    await this.searchVideos([
+      { channelId: this.channelId, order: "date", type: "video" },
+    ]);
     if (this.search.searchError) {
       this.error = this.searchErrorMessage;
     } else if (this.search.searchResults) {

@@ -1,6 +1,7 @@
 <template>
   <div class="ui card app-list-card">
     <router-link
+      class="app-card-image-container"
       :to="
         video.snippet.playlistId
           ? `/video/${videoId}?playlistId=${video.snippet.playlistId}`
@@ -21,11 +22,12 @@
             : `/video/${videoId}`
         "
         class="header app-list-card-title"
-        >{{ video.snippet.title }}</router-link
-      >
-      <router-link :to="`/channel/${video.snippet.channelId}`">{{
+      >{{ video.snippet.title }}</router-link>
+      <router-link :to="`/channel/${video.snippet.channelId}`">
+        {{
         video.snippet.channelTitle
-      }}</router-link>
+        }}
+      </router-link>
       <div class="meta">
         <i class="calendar icon"></i>
         {{ video.snippet.publishedAt | date }}

@@ -19,6 +19,7 @@
         <div style="padding-left: 5%;">
           <app-comment-replies :commentItem="comment"></app-comment-replies>
         </div>
+        <app-blank></app-blank>
         <app-breakline></app-breakline>
       </div>
       <app-more-button

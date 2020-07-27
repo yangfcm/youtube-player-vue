@@ -41,4 +41,9 @@ export default {
 .app-body {
   flex-grow: 1;
 }
+@media only screen and (max-width: 576px) {
+  .app-inner-container {
+    max-width: 95%;
+  }
+}
 </style>

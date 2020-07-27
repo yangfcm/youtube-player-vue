@@ -10,10 +10,7 @@
         <app-comments :videoId="videoId" :channelId="channelId"></app-comments>
       </div>
       <div class="sixteen wide tablet six wide computer column">
-        <app-video-sidebar
-          :videoId="videoId"
-          :playlistId="playlistId"
-        ></app-video-sidebar>
+        <app-video-sidebar :videoId="videoId" :playlistId="playlistId"></app-video-sidebar>
       </div>
     </div>
   </div>
@@ -39,11 +36,16 @@ export default {
     appComments: Comments,
     appVideoSidebar: VideoSidebar,
   },
-  data: function() {
+  data: function () {
     return {
       videoDetail: null,
       error: "",
     };
+  },
+  watch: {
+    videoId() {
+      this.fetchVideoDetail();
+    },
   },
   computed: {
     ...mapState(["video"]),
@@ -63,18 +65,22 @@ export default {
   },
   methods: {
     ...mapActions(["fetchVideo"]),
+    async fetchVideoDetail() {
+      await this.fetchVideo(this.videoId);
+      if (this.video.videoError) {
+        this.error = this.videoErrorMessage;
+      } else if (this.video.video && !this.video.video.items[0]) {
+        this.$router.push("/not-found");
+      } else if (this.video.video && this.video.video.items[0]) {
+        this.videoDetail = this.video.video.items[0];
+        this.error = "";
+      }
+    },
   },
-  async created() {
-    await this.fetchVideo(this.videoId);
-    if (this.video.videoError) {
-      this.error = this.videoErrorMessage;
-    } else if (this.video.video && !this.video.video.items[0]) {
-      this.$router.push("/not-found");
-    } else if (this.video.video && this.video.video.items[0]) {
-      this.videoDetail = this.video.video.items[0];
-      this.error = "";
-    }
+  created() {
+    this.fetchVideoDetail();
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+</style>

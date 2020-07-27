@@ -1,10 +1,15 @@
 <template>
-  <div class="ui two column centered grid" v-if="nextPageToken">
-    <div class="column">
-      <button class="fluid ui button" @click="handleClick" :disabled="isLoadingMore">
-        <div class="ui active centered inline loader mini" v-if="isLoadingMore"></div>
-        <slot v-else></slot>
-      </button>
+  <div class="ui grid">
+    <div
+      class="ui sixteen wide mobile ten wide tablet eight wide computer column centered"
+      v-if="nextPageToken"
+    >
+      <div class="column">
+        <button class="fluid ui button" @click="handleClick" :disabled="isLoadingMore">
+          <div class="ui active centered inline loader mini" v-if="isLoadingMore"></div>
+          <slot v-else></slot>
+        </button>
+      </div>
     </div>
   </div>
 </template>
