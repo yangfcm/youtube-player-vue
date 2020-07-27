@@ -7,15 +7,9 @@
       <div class="content">
         <div class="summary">
           <a>{{ item.authorDisplayName }}</a>
-          <div class="date">
-            {{ item.publishedAt | date }}
-          </div>
+          <div class="date">{{ item.publishedAt | date }}</div>
         </div>
-        <div
-          v-html="item.textDisplay"
-          class="extra text"
-          style="width: auto; overflow: auto;"
-        ></div>
+        <div v-html="item.textDisplay" class="text" style="width: 100%; overflow: auto;"></div>
       </div>
     </div>
     <app-breakline></app-breakline>

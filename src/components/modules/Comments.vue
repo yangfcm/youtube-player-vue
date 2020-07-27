@@ -1,22 +1,19 @@
 <template>
   <div>
-    <app-loader
-      v-if="!error && !comments && !comment.commentsDisabled"
-    ></app-loader>
+    <app-loader v-if="!error && !comments && !comment.commentsDisabled"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-    <app-info-message v-if="comment.commentsDisabled && !error">
-      Comment is disabled
-    </app-info-message>
+    <app-info-message v-if="comment.commentsDisabled && !error">Comment is disabled</app-info-message>
     <div v-if="comments && !error">
       <h3 class="ui header">
         <i class="comments icon"></i>
-        <div class="content">
-          Comments
-        </div>
+        <div class="content">Comments</div>
       </h3>
-      <app-info-message v-if="comments.items.length === 0">
-        No comment in the video
-      </app-info-message>
+      <app-comment-form
+        :videoId="videoId"
+        :channelId="channelId"
+        @commentAdded="handleCommentAdded($event)"
+      ></app-comment-form>
+      <app-info-message v-if="comments.items.length === 0">No comment in the video</app-info-message>
       <div v-for="(comment, index) in comments.items" :key="index">
         <app-comment-item :comment="comment"></app-comment-item>
       </div>
@@ -24,8 +21,7 @@
         :nextPageToken="comments.nextPageToken"
         :isLoadingMore="isLoadingMore"
         @onClickMore="handleMore($event)"
-        >More comments</app-more-button
-      >
+      >More comments</app-more-button>
     </div>
   </div>
 </template>
@@ -40,6 +36,7 @@ import CommentItem from "./CommentItem";
 import MoreButton from "./MoreButton";
 import Breakline from "../common/Breakline";
 import CommentReplies from "./CommentReplies";
+import CommentForm from "./CommentForm";
 
 export default {
   components: {
@@ -51,8 +48,9 @@ export default {
     appMoreButton: MoreButton,
     appBreakline: Breakline,
     appCommentReplies: CommentReplies,
+    appCommentForm: CommentForm,
   },
-  data: function() {
+  data: function () {
     return {
       comments: null,
       error: "",
@@ -94,6 +92,14 @@ export default {
         this.error = "";
         this.isLoadingMore = false;
       }
+    },
+    handleCommentAdded($event) {
+      const addedComment = $event;
+      console.log(addedComment);
+      this.comments = {
+        ...this.comments,
+        items: [addedComment, ...this.comments.items],
+      };
     },
   },
   created() {

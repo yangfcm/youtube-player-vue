@@ -12,7 +12,7 @@ const state = {
   commentsDisabled: false, // If comment is disabled under the video
   comments: null, // The comments under the video
   replies: null, // The replies under a comment thread
-  myComments: [], // The comments published by authsed user
+  addedComment: null, // The comments published by authsed user
   commentError: null,
 };
 
@@ -38,7 +38,8 @@ const mutations = {
     state.comments = null;
   },
   ADD_COMMENT: (state, payload) => {
-    state.myComments = [...state.myComments, payload];
+    state.addedComment = payload;
+    state.commentError = "";
   },
   CATCH_COMMENT_ERROR: (state, payload) => {
     state.commentError = payload;
