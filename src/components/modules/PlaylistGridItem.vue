@@ -1,5 +1,5 @@
 <template>
-  <div class="ui card centered" style="margin: 0;">
+  <div class="ui card centered" style="width: 100%; height: 100%; margin: 0;">
     <router-link :to="`/playlist/${playlist.id}`" class="image">
       <img :src="playlist.snippet.thumbnails.medium.url" :alt="playlist.snippet.title" />
     </router-link>
