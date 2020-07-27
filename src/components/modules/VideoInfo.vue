@@ -29,9 +29,11 @@
             </span>
           </div>
           <app-breakline></app-breakline>
-          <div class="description" style="overflow: auto;">
-            {{ videoDetail.snippet.description }}
-          </div>
+          <div
+            class="description"
+            style="overflow: auto;"
+            v-html="videoDetail.snippet.description"
+          ></div>
         </div>
       </div>
     </div>

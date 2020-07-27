@@ -25,14 +25,17 @@ const mutations = {
   FETCH_COMMENTS: (state, payload) => {
     state.comments = payload;
     state.commentError = null;
+    state.commentsDisabled = false;
   },
   FETCH_REPLIES: (state, payload) => {
     state.replies = payload;
     state.commentError = null;
+    state.commentsDisabled = false;
   },
   FETCH_COMMENTS_DISABLED: (state) => {
     state.commentsDisabled = true;
     state.commentsError = null;
+    state.comments = null;
   },
   ADD_COMMENT: (state, payload) => {
     state.myComments = [...state.myComments, payload];

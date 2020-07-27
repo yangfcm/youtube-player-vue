@@ -1,8 +1,12 @@
 <template>
   <div>
-    <app-loader v-if="!error && !comments"></app-loader>
+    <app-loader
+      v-if="!error && !comments && !comment.commentsDisabled"
+    ></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-
+    <app-info-message v-if="comment.commentsDisabled && !error">
+      Comment is disabled
+    </app-info-message>
     <div v-if="comments && !error">
       <h3 class="ui header">
         <i class="comments icon"></i>
@@ -10,9 +14,6 @@
           Comments
         </div>
       </h3>
-      <app-info-message v-if="comment.commentsDisabled">
-        Comment is disabled
-      </app-info-message>
       <app-info-message v-if="comments.items.length === 0">
         No comment in the video
       </app-info-message>
@@ -65,6 +66,7 @@ export default {
   },
   watch: {
     videoId(value) {
+      this.comments = null;
       this.fetchVideoComments();
     },
   },
