@@ -160,6 +160,16 @@ export const channelErrorResponse = {
   },
 };
 
+export const myChannelsEmptyResponse = {
+  kind: "youtube#SubscriptionListResponse",
+  etag: "dZ5Kbz4Gitf45a0o5-cG47zit3s",
+  pageInfo: {
+    totalResults: 0,
+    resultsPerPage: 50,
+  },
+  items: [],
+};
+
 export const myChannelsResponse = {
   kind: "youtube#SubscriptionListResponse",
   etag: "VrZIGEdyR3s6GpX6dgljmDBB3yw",

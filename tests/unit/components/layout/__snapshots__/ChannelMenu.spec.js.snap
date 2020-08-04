@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test ChannelMenu component ChannelMenu component matches snapshot 1`] = `
+<div class="ui three item menu red stackable"><a class="item"><i class="video icon"></i> Videos
+  </a> <a class="item"><i class="list icon"></i>Playlist
+  </a> <a class="item"><i class="info circle icon"></i>Intro
+  </a></div>
+`;
