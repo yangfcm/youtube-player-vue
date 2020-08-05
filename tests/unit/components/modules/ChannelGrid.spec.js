@@ -15,6 +15,9 @@ describe("Test ChannelGrid component", () => {
       },
     });
     expect(wrapper.findComponent(InfoMessage).exists()).toBe(true);
+    expect(wrapper.findComponent(InfoMessage).text()).toContain(
+      "You haven't subscribed any channels"
+    );
     expect(wrapper.findComponent(ChannelGridItem).exists()).toBe(false);
     wrapper.destroy();
   });

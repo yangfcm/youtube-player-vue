@@ -351,6 +351,16 @@ export const myPlaylistResponse = {
   ],
 };
 
+export const playlistEmptyResponse = {
+  kind: "youtube#playlistListResponse",
+  etag: "1vx-9oMSqKFLj4GUsmmry-LZggM",
+  pageInfo: {
+    totalResults: 0,
+    resultsPerPage: 12,
+  },
+  items: [],
+};
+
 export const playlistResponse = {
   kind: "youtube#playlistListResponse",
   etag: "0v5Q5umwZDPkAUxgKxh80nYxNeM",
