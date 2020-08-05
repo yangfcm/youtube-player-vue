@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test PlaylistResultItem component should match snapshot 1`] = `
+<div class="ui items">
+  <div class="item"><a class="ui small image" style="position: relative;"><img src="https://i.ytimg.com/vi/IDZyZMYn3H0/mqdefault.jpg">
+      <div class="app-image-cover">
+        <p><i class="list icon"></i>
+          Play List
+        </p>
+      </div>
+    </a>
+    <div class="content"><a class="header">How to Become a Google Developer Expert (GDE)</a>
+      <div class="meta"><a>Fireship</a>
+        <div class="ui right floated"><i class="calendar plus icon"></i>
+          24 May, 2019
+        </div>
+      </div>
+      <div class="description" style="overflow: auto;">What does it take to become a Google Developer Expert? Learn about my own experience becoming a GDE with practical advice for working towards this goal.</div>
+    </div>
+  </div>
+</div>
+`;

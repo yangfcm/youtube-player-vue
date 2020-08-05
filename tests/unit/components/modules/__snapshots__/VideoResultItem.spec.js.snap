@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test VideoResultItem component should match snapshot 1`] = `
+<div class="ui items">
+  <div class="item"><a class="ui small image"><img src="https://i.ytimg.com/vi/H89hKw06iWs/mqdefault.jpg"></a>
+    <div class="content"><a class="header">
+        web.dev LIVE 2020: Day One
+      </a>
+      <div class="meta"><a>Google Chrome Developers</a>
+        <div class="ui right floated"><i class="calendar plus icon"></i>
+          1 Jul, 2020
+        </div>
+      </div>
+      <div class="description" style="overflow: auto;">Join us for day 1 of web.dev LIVE as we head to the Americas timezone to provide helpful content on Performance and Discovery through Search. Enjoy the ...</div>
+    </div>
+  </div>
+</div>
+`;

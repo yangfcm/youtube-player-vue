@@ -77,8 +77,8 @@ export const searchResultResponse = {
       kind: "youtube#searchResult",
       etag: "gnr-mSrcXXuX3s59GvE0ArOWaUg",
       id: {
-        kind: "youtube#video",
-        videoId: "IDZyZMYn3H0",
+        kind: "youtube#playlist",
+        playlistId: "IDZyZMYn3H0",
       },
       snippet: {
         publishedAt: "2019-05-23T21:06:17Z",
