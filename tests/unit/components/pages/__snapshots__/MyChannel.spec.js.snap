@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test MyChannel page should show MyChannelContent component if user logs in 1`] = `
+<div>
+  <app-user-banner-stub></app-user-banner-stub>
+  <app-menu-stub></app-menu-stub>
+  <app-my-channel-content-stub></app-my-channel-content-stub>
+  <!---->
+</div>
+`;
+
+exports[`Test MyChannel page should show RequireAuth component if user does not log in 1`] = `
+<div>
+  <app-user-banner-stub></app-user-banner-stub>
+  <app-menu-stub></app-menu-stub>
+  <!---->
+  <app-require-auth-stub></app-require-auth-stub>
+</div>
+`;

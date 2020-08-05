@@ -2,7 +2,7 @@
   <div>
     <app-loader v-if="!channels && !error"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-    <div v-if="channels && !error">
+    <div v-if="channels && !error" id="my-channel-content">
       <app-page-title>My Subscriptions</app-page-title>
       <app-channel-grid :channels="channels.items"></app-channel-grid>
       <app-blank></app-blank>
