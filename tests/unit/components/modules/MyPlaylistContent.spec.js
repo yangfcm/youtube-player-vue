@@ -6,7 +6,6 @@ import ErrorMessage from "@/components/common/ErrorMessage";
 import PageTitle from "@/components/common/PageTitle";
 import MoreButton from "@/components/modules/MoreButton";
 import PlaylistGrid from "@/components/modules/PlaylistGrid";
-import axios from "@/settings";
 import { myPlaylistResponse } from "../../store/fixtures/playlist";
 
 describe("Test MyPlaylistContent component", () => {

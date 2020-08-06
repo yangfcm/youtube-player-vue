@@ -2,7 +2,7 @@
   <div>
     <app-loader v-if="!channelIntro && !error"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-    <div v-if="channelIntro && !error" class="ui segments">
+    <div v-if="channelIntro && !error" class="ui segments" id="app-channel-intro">
       <div class="ui segment">
         <p>
           <i class="calendar plus icon"></i>
@@ -62,11 +62,15 @@ export default {
     if (this.channel.channelError) {
       this.error = this.channelErrorMessage;
     } else if (this.channel.channelIntro) {
-      if (!this.channel.channelIntro.items) {
-        this.$router.push("/not-found");
-      }
       this.channelIntro = this.channel.channelIntro.items[0];
       this.error = "";
+      console.log(this.channelIntro);
+      if (!this.channelIntro) {
+        console.log("not found");
+        this.$router.push("/not-found").catch(() => {
+          console.log("error");
+        });
+      }
     }
   },
 };

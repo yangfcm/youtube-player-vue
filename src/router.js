@@ -13,7 +13,7 @@ const ChannelPlaylist = () => import("./components/pages/ChannelPlaylist.vue");
 const ChannelIntro = () => import("./components/pages/ChannelIntro.vue");
 const NotFound = () => import("./components/pages/NotFound.vue");
 
-const routes = [
+export const routes = [
   { path: "/", component: Home },
   { path: "/subscription", component: MyChannel },
   { path: "/playlist", component: MyPlaylist },
@@ -24,13 +24,15 @@ const routes = [
     component: Channel,
     children: [
       { path: "", redirect: "/channel/:id/videos" },
-      { path: "videos", component: ChannelVideos },
+      { path: "videos", name: "channelVideos", component: ChannelVideos },
       {
         path: "playlist",
+        name: "channelPlaylist",
         component: ChannelPlaylist,
       },
       {
         path: "intro",
+        name: "channelIntro",
         component: ChannelIntro,
       },
     ],

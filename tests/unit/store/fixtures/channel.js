@@ -1,5 +1,15 @@
 export const channelId = "UCHaHD477h-FeBbVh9Sh7syA";
 
+export const channelIntroEmptyResponse = {
+  kind: "youtube#channelListResponse",
+  etag: "UhDoiidc5IUJwfsbGIduoykvsH4",
+  pageInfo: {
+    totalResults: 0,
+    resultsPerPage: 1,
+  },
+  items: [],
+};
+
 export const channelIntroResponse = {
   kind: "youtube#channelListResponse",
   etag: "UhDoiidc5IUJwfsbGIduoykvsH4",
