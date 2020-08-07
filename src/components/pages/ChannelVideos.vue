@@ -1,8 +1,9 @@
 <template>
   <div>
+    <div>hello</div>
     <app-loader v-if="!videos && !error"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-    <div v-if="videos && !error">
+    <div v-if="videos && !error" id="app-channel-videos">
       <app-page-title>Videos in Channel</app-page-title>
       <app-video-grid :videos="videos.items"></app-video-grid>
       <app-blank></app-blank>

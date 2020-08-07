@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "./components/pages/Home";
+//  import MyChannel from "./components/pages/MyChannel.vue";
 
 const MyChannel = () => import("./components/pages/MyChannel.vue");
 const MyPlaylist = () => import("./components/pages/MyPlaylist.vue");
@@ -23,7 +24,7 @@ export const routes = [
     path: "/channel/:id",
     component: Channel,
     children: [
-      { path: "", redirect: "/channel/:id/videos" },
+      { path: "", name: "channelRoot", redirect: "/channel/:id/videos" },
       { path: "videos", name: "channelVideos", component: ChannelVideos },
       {
         path: "playlist",

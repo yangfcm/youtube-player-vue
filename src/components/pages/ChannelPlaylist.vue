@@ -2,7 +2,7 @@
   <div>
     <app-loader v-if="!playlists && !error"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-    <div v-if="playlists && !error">
+    <div v-if="playlists && !error" id="app-channel-playlist">
       <app-page-title>Playlist in Channel</app-page-title>
       <app-playlist-grid :playlists="playlists.items"></app-playlist-grid>
       <app-blank></app-blank>

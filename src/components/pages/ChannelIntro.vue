@@ -64,13 +64,6 @@ export default {
     } else if (this.channel.channelIntro) {
       this.channelIntro = this.channel.channelIntro.items[0];
       this.error = "";
-      console.log(this.channelIntro);
-      if (!this.channelIntro) {
-        console.log("not found");
-        this.$router.push("/not-found").catch(() => {
-          console.log("error");
-        });
-      }
     }
   },
 };

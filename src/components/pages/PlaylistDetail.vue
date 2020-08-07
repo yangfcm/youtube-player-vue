@@ -11,7 +11,8 @@
         :nextPageToken="playlistDetail.nextPageToken"
         :isLoadingMore="isLoadingMore"
         @onClickMore="handleMore($event)"
-      >More videos</app-more-button>
+        >More videos</app-more-button
+      >
     </div>
   </div>
 </template>
@@ -32,7 +33,7 @@ export default {
     appVideoList: VideoList,
     appMoreButton: MoreButton,
   },
-  data: function () {
+  data: function() {
     return {
       playlistDetail: null,
       error: "",
@@ -70,7 +71,7 @@ export default {
   },
   async created() {
     await this.fetchPlaylistDetail([this.playlistId]);
-    if (this.playlist.playlistError) {
+    if (this.playlist.playlistError && this.playlist.playlistError.response) {
       if (this.playlist.playlistError.response.data.error.code == 404) {
         this.$router.push("/not-found");
         return;
