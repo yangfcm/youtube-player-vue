@@ -1,5 +1,16 @@
 export const keyword = "google dev";
 
+export const searchResultEmptyResponse = {
+  kind: "youtube#searchListResponse",
+  etag: "IX4R6BvZcahFciPQJhzo7kYJPiU",
+  regionCode: "AU",
+  pageInfo: {
+    totalResults: 0,
+    resultsPerPage: 15,
+  },
+  items: [],
+};
+
 export const searchResultResponse = {
   kind: "youtube#searchListResponse",
   etag: "LNH5OOl5xjwz3xw70eQwX7JXlXo",

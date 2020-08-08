@@ -4,15 +4,14 @@
     <app-blank></app-blank>
     <app-loader v-if="!error && !playlistDetail"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-    <div v-if="!error && playlistDetail">
+    <div v-if="!error && playlistDetail" id="app-playlist-detail">
       <app-video-list :videos="playlistDetail.items"></app-video-list>
       <app-blank></app-blank>
       <app-more-button
         :nextPageToken="playlistDetail.nextPageToken"
         :isLoadingMore="isLoadingMore"
         @onClickMore="handleMore($event)"
-        >More videos</app-more-button
-      >
+      >More videos</app-more-button>
     </div>
   </div>
 </template>
@@ -33,7 +32,7 @@ export default {
     appVideoList: VideoList,
     appMoreButton: MoreButton,
   },
-  data: function() {
+  data: function () {
     return {
       playlistDetail: null,
       error: "",
@@ -71,11 +70,15 @@ export default {
   },
   async created() {
     await this.fetchPlaylistDetail([this.playlistId]);
-    if (this.playlist.playlistError && this.playlist.playlistError.response) {
-      if (this.playlist.playlistError.response.data.error.code == 404) {
-        this.$router.push("/not-found");
-        return;
-      }
+    if (
+      this.playlist.playlistError &&
+      this.playlist.playlistError.response &&
+      this.playlist.playlistError.response.data.error.code == 404
+    ) {
+      this.$router.push("/not-found");
+      return;
+    }
+    if (this.playlist.playlistError) {
       this.error = this.playlistErrorMessage;
       return;
     }

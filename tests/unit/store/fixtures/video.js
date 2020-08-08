@@ -128,6 +128,15 @@ export const videoResponse = {
   items: [videoItem1],
 };
 
+export const videoEmptyResponse = {
+  kind: "youtube#videoListResponse",
+  pageInfo: {
+    totalResults: 0,
+    resultsPerPage: 0,
+  },
+  items: [],
+};
+
 export const videoErrorResponse = {
   response: {
     data: {

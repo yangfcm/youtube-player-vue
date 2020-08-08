@@ -5,7 +5,7 @@
     <app-menu></app-menu>
     <app-loader v-if="!videos && !error"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-    <div v-if="videos && !error">
+    <div v-if="videos && !error" id="app-home">
       <app-page-title>Recommended Videos</app-page-title>
       <app-video-grid :videos="videos.items"></app-video-grid>
       <app-blank></app-blank>
@@ -13,7 +13,8 @@
         :nextPageToken="videos.nextPageToken"
         :isLoadingMore="isLoadingMore"
         @onClickMore="handleMore($event)"
-      >More videos</app-more-button>
+        >More videos</app-more-button
+      >
     </div>
   </div>
 </template>
@@ -40,7 +41,7 @@ export default {
     appMoreButton: MoreButton,
     appBlank: Blank,
   },
-  data: function () {
+  data: function() {
     return {
       videos: null,
       error: "",

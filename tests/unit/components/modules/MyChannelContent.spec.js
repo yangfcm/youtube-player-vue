@@ -47,7 +47,7 @@ describe("Test MyChannelContent component when component is initially rendered",
   });
 });
 
-describe("Test MyChannelContent component when error occurs", () => {
+describe("Test ErrorMessage component when error occurs", () => {
   const errorMessage = "error occurs";
   const store = new Vuex.Store({
     state: {

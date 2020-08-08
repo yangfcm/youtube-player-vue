@@ -2,7 +2,7 @@
   <div>
     <app-loader v-if="!error && !videoDetail"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-    <div v-if="videoDetail" class="ui grid stackable">
+    <div v-if="videoDetail" class="ui grid stackable" id="app-video">
       <div class="sixteen wide tablet ten wide computer column">
         <app-video-player :videoId="videoId"></app-video-player>
         <app-video-info :videoDetail="videoDetail"></app-video-info>

@@ -3,7 +3,7 @@
     <app-blank></app-blank>
     <app-loader v-if="!error && !searchResults"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-    <div v-if="!error&&searchResults" class="app-container">
+    <div v-if="!error&&searchResults" class="app-container" id="app-search-result">
       <h2 class="ui header">
         Search result with keyword:
         <span class="ui header red">{{keyword}}</span>
