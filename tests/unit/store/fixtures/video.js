@@ -11,6 +11,7 @@ export const videoItem1 = {
     channelTitle: "Ford Motor Company",
     description: "Mock channel description item1",
     publishedAt: "2020-07-14T00:13:02Z",
+    playlistId: "PLl7_ylo4cHARoGbUCZ_bIr50iOvigVW3T",
     thumbnails: {
       default: {
         height: 90,

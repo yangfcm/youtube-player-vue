@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test VideoListItem component should match snapshot 1`] = `
+<div class="ui card app-list-card"><a class="app-card-image-container"><img src="https://i.ytimg.com/vi/SqrbIlUwR0U/mqdefault.jpg" alt="Go / Golang Crash Course" class="app-list-card-image"></a>
+  <div class="content app-list-card-content"><a class="header app-list-card-title">Go / Golang Crash Course</a> <a class="app-channel-link">
+      Fan Yang
+    </a>
+    <div class="meta"><i class="calendar icon"></i>
+      21 Sep, 2018
+    </div>
+  </div>
+</div>
+`;

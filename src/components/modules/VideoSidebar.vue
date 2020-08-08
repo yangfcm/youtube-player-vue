@@ -2,17 +2,12 @@
   <div>
     <app-loader v-if="!sidebarVideos && !error"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
-    <app-video-list
-      v-if="sidebarVideos && !error"
-      :videos="sidebarVideos.items"
-    >
-    </app-video-list>
+    <app-video-list v-if="sidebarVideos && !error" :videos="sidebarVideos.items"></app-video-list>
     <app-more-button
       :nextPageToken="sidebarVideos && sidebarVideos.nextPageToken"
       :isLoadingMore="isLoadingMore"
       @onClickMore="handleMore($event)"
-      >More videos</app-more-button
-    >
+    >More videos</app-more-button>
   </div>
 </template>
 
@@ -20,7 +15,6 @@
 import { mapState, mapGetters, mapActions } from "vuex";
 import Loader from "../common/Loader";
 import ErrorMessage from "../common/ErrorMessage";
-import InfoMessage from "../common/InfoMessage";
 import VideoList from "./VideoList";
 import MoreButton from "./MoreButton";
 
@@ -28,11 +22,10 @@ export default {
   components: {
     appLoader: Loader,
     appErrorMessage: ErrorMessage,
-    appInfoMessage: InfoMessage,
     appVideoList: VideoList,
     appMoreButton: MoreButton,
   },
-  data: function() {
+  data: function () {
     return {
       sidebarVideos: null,
       error: "",

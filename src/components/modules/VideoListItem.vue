@@ -23,7 +23,7 @@
         "
         class="header app-list-card-title"
       >{{ video.snippet.title }}</router-link>
-      <router-link :to="`/channel/${video.snippet.channelId}`">
+      <router-link :to="`/channel/${video.snippet.channelId}`" class="app-channel-link">
         {{
         video.snippet.channelTitle
         }}

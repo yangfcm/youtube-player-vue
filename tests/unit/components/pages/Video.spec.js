@@ -22,7 +22,7 @@ const actions = {
 };
 
 describe("Test Video page", () => {
-  describe("Test Video pge when page is initially rendered", () => {
+  describe("Test Video page when page is initially rendered", () => {
     const store = new Vuex.Store({
       state: {
         video: {
