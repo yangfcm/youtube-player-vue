@@ -39,7 +39,6 @@ export default {
     ...mapActions(["addComment"]),
     async handleSubmit() {
       this.isPublishing = true;
-      console.log(this.commentText);
       await this.addComment([this.channelId, this.videoId, this.commentText]);
       if (this.comment.commentError) {
         this.error = this.comment.commentError;

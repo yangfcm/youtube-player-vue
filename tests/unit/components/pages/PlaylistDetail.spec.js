@@ -87,7 +87,6 @@ describe("Test PlaylistDetail page", () => {
   });
 
   describe("Test PlaylistDetail page when data is successfully fetched", () => {
-    const errorMessage = "mock error message";
     const store = new Vuex.Store({
       state: {
         playlist: {

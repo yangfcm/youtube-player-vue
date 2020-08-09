@@ -3,7 +3,7 @@
     <app-loader v-if="!error && !comments && !comment.commentsDisabled"></app-loader>
     <app-error-message v-if="error">{{ error }}</app-error-message>
     <app-info-message v-if="comment.commentsDisabled && !error">Comment is disabled</app-info-message>
-    <div v-if="comments && !error">
+    <div v-if="comments && !error" id="app-comments">
       <h3 class="ui header">
         <i class="comments icon"></i>
         <div class="content">Comments</div>

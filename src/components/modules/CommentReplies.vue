@@ -1,15 +1,15 @@
 <template>
-  <div v-if="commentItem.snippet.totalReplyCount > 0">
+  <div v-if="commentItem.snippet.totalReplyCount > 0" id="app-comment-replies">
     <a @click="handleToggleShowReplies" style="cursor: pointer;">
       {{ showReplies ? 'Hide' : 'Show'}}
       {{ commentItem.snippet.totalReplyCount }}
       {{ commentItem.snippet.totalReplyCount === 1 ? 'Reply' : 'Replies'}}
     </a>
     <div style="margin-bottom: 8px;"></div>
-    <div v-if="showReplies">
+    <div v-if="showReplies" id="app-replies-list">
       <app-loader v-if="!error && !replies"></app-loader>
       <app-error-message v-if="error">{{ error }}</app-error-message>
-      <div v-if="replies && !error">
+      <div v-if="replies && !error" id="app-replies-list-items">
         <app-comment-item v-for="(reply, index) in replies.items" :key="index" :reply="reply"></app-comment-item>
       </div>
       <app-blank></app-blank>
