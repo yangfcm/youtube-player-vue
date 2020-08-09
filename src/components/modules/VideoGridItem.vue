@@ -49,7 +49,7 @@ export default {
 .app-video-card {
   width: 100%;
   height: 100%;
-  margin: 0;
+  margin: 0 !important;
 }
 .app-video-title {
   line-height: 23px;

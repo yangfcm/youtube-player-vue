@@ -18,13 +18,17 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-service": "~4.4.0",
     "@vue/cli-plugin-unit-jest": "^4.4.6",
+    "@vue/cli-service": "~4.4.0",
     "@vue/test-utils": "^1.0.3",
     "jest": "^26.1.0",
+    "jest-css-modules": "^2.1.0",
     "vue-template-compiler": "^2.6.11"
   },
   "jest": {
-    "preset": "@vue/cli-plugin-unit-jest"
+    "preset": "@vue/cli-plugin-unit-jest",
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+    }
   }
 }

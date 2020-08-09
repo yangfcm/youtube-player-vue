@@ -15,7 +15,7 @@
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Blank from "./components/common/Blank.vue";
-// import "semantic-ui-css/semantic.min.css";
+import "semantic-ui-css/semantic.min.css";
 
 export default {
   name: "App",
