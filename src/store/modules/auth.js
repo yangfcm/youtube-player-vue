@@ -37,7 +37,8 @@ const mutations = {
 const actions = {
   signIn: async (context, googleUser) => {
     try {
-      const accessToken = `${googleUser.wc.token_type} ${googleUser.wc.access_token}`;
+      const authResponse = googleUser.getAuthResponse();
+      const accessToken = `${authResponse.token_type} ${authResponse.access_token}`;
       localStorage.setItem("access_token", accessToken);
       const response = await axios.get(
         "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",

@@ -11,6 +11,12 @@ export const userResponse = {
 };
 
 export const mockGoogleUser = {
+  getAuthResponse() {
+    return {
+      token_type: "Bearer",
+      access_token: "test_access_token",
+    };
+  },
   wc: {
     token_type: "Bearer",
     access_token: "test_access_token",

@@ -47,7 +47,9 @@ describe("Test store for auth module", () => {
       data: userResponse,
     });
     await actions.signIn(context, mockGoogleUser);
-    const mockAccessToken = `${mockGoogleUser.wc.token_type} ${mockGoogleUser.wc.access_token}`;
+    const mockAccessToken = `${mockGoogleUser.getAuthResponse().token_type} ${
+      mockGoogleUser.getAuthResponse().access_token
+    }`;
     expect(axios.get).toHaveBeenCalledWith(
       "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
       {
