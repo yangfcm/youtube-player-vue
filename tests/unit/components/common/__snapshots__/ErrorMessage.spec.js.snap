@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ErrorMessage component can render correctly 1`] = `
-<div>
-  <app-blank-stub></app-blank-stub>
-  <h3 class="ui red header center aligned"><i class="exclamation triangle icon"></i>Error occurs!</h3>
-  <app-blank-stub></app-blank-stub>
-</div>
-`;

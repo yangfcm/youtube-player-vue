@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Loader component can render correctly 1`] = `
-<div>
-  <app-blank-stub></app-blank-stub>
-  <div class="ui active centered inline loader"></div>
-  <app-blank-stub></app-blank-stub>
-</div>
-`;

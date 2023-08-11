@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Test ChannelGridItem component should match snapshot 1`] = `
-<div class="ui card centered" style="margin: 0px;"><a class="image"><img src="https://yt3.ggpht.com/-poJuOARXlRM/AAAAAAAAAAI/AAAAAAAAAAA/x83kAYqNPmA/s240-c-k-no-mo-rj-c0xffffff/photo.jpg" alt="Aussie English"></a>
-  <div class="content" style="overflow: hidden; min-height: 72px;"><a class="header ui aligned center">Aussie English</a></div>
-</div>
-`;
