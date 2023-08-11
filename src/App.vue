@@ -1,17 +1,28 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+
+const drawer = ref(true)
 </script>
 
 <template>
   <v-app>
-    <v-navigation-drawer>sidebar</v-navigation-drawer>
-    <v-app-bar>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      <v-app-bar-title>Application</v-app-bar-title>
+    <v-app-bar color="primary">
+      <v-app-bar-nav-icon @click="drawer = !drawer">
+      </v-app-bar-nav-icon>
+      <RouterLink to="/">
+        <v-app-bar-title>
+          <v-icon icon="mdi-youtube"></v-icon>
+          LiteTube
+        </v-app-bar-title>
+      </RouterLink>
     </v-app-bar>
+    <v-navigation-drawer v-model="drawer">
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+    </v-navigation-drawer>
     <v-main>
-      main
+      <RouterView />
     </v-main>
   </v-app>
 </template>
