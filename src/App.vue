@@ -8,16 +8,20 @@ const drawer = ref(true)
 <template>
   <v-app>
     <v-app-bar color="primary">
-      <v-app-bar-nav-icon @click="drawer = !drawer">
+      <v-app-bar-nav-icon @click="drawer = !drawer" class="d-flex d-md-none">
       </v-app-bar-nav-icon>
-      <RouterLink to="/">
-        <v-app-bar-title>
+      <v-app-bar-title>
+        <RouterLink to="/">
           <v-icon icon="mdi-youtube"></v-icon>
           LiteTube
-        </v-app-bar-title>
-      </RouterLink>
+        </RouterLink>
+      </v-app-bar-title>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer">
+    <v-navigation-drawer :disable-resize-watcher="true" :permanent="true" class="d-none d-md-flex">
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+    </v-navigation-drawer>
+    <v-navigation-drawer v-model="drawer" class="d-flex d-md-none" :style="{left: 0}">
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
     </v-navigation-drawer>
