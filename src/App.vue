@@ -8,7 +8,7 @@ const drawer = ref(true)
 <template>
   <v-app>
     <v-app-bar color="primary">
-      <v-app-bar-nav-icon @click="drawer = !drawer" class="d-flex d-md-none">
+      <v-app-bar-nav-icon @click="drawer = !drawer">
       </v-app-bar-nav-icon>
       <v-app-bar-title>
         <RouterLink to="/">
@@ -17,11 +17,7 @@ const drawer = ref(true)
         </RouterLink>
       </v-app-bar-title>
     </v-app-bar>
-    <v-navigation-drawer :disable-resize-watcher="true" :permanent="true" class="d-none d-md-flex">
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-    </v-navigation-drawer>
-    <v-navigation-drawer v-model="drawer" class="d-flex d-md-none" :style="{left: 0}">
+    <v-navigation-drawer v-model="drawer" :permanent="$vuetify.display.mdAndUp">
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
     </v-navigation-drawer>
