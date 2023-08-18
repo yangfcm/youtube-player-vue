@@ -1,23 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+import AppHeader from './components/AppHeader.vue';
+import { useSettingStore } from './stores/setting';
+import { storeToRefs } from 'pinia';
 
-const drawer = ref(true)
+const settingStore = useSettingStore()
+const { setting } = storeToRefs(settingStore);
 </script>
 
 <template>
   <v-app>
-    <v-app-bar color="primary">
-      <v-app-bar-nav-icon @click="drawer = !drawer">
-      </v-app-bar-nav-icon>
-      <v-app-bar-title>
-        <RouterLink to="/">
-          <v-icon icon="mdi-youtube"></v-icon>
-          LiteTube
-        </RouterLink>
-      </v-app-bar-title>
-    </v-app-bar>
-    <v-navigation-drawer v-model="drawer" :permanent="$vuetify.display.mdAndUp">
+    <app-header></app-header>
+    <v-navigation-drawer v-model="setting.openSidebar" :permanent="$vuetify.display.mdAndUp">
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
     </v-navigation-drawer>
