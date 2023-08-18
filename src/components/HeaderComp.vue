@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useSettingStore } from '@/stores/setting';
+import AppGoogleAuth from './GoogleAuthComp.vue';
 
 const settingStore = useSettingStore();
 const { toggleSidebar } = settingStore;
@@ -15,6 +16,7 @@ const { toggleSidebar } = settingStore;
         LiteTube
       </RouterLink>
     </v-app-bar-title>
+    <app-google-auth></app-google-auth>
   </v-app-bar>
 </template>
 
