@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
 import { storeToRefs } from 'pinia';
 import { useSettingStore } from '@/stores/setting';
 
@@ -9,7 +8,22 @@ const { setting } = storeToRefs(settingStore);
 
 <template>
   <v-navigation-drawer v-model="setting.openSidebar" :permanent="$vuetify.display.mdAndUp">
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink to="/about">About</RouterLink>
+    <v-list> 
+      <v-list-item link to="/" color="primary" title="Home">
+        <template v-slot:prepend>
+          <v-icon icon="mdi-home-circle"></v-icon>
+        </template>
+      </v-list-item> 
+      <v-list-item link to="/subscription" color="primary" title="Subscription">
+        <template v-slot:prepend>
+          <v-icon icon="mdi-youtube-subscription"></v-icon>
+        </template>
+      </v-list-item>
+      <v-list-item link to="/playlist" color="primary" title="Play List">
+        <template v-slot:prepend>
+          <v-icon icon="mdi-playlist-play"></v-icon>
+        </template>
+      </v-list-item>
+    </v-list>
   </v-navigation-drawer>
 </template>
