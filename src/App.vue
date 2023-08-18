@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import AppHeader from './components/AppHeader.vue';
-import AppSidebar from './components/AppSidebar.vue';
+import AppHeaderComp from './components/HeaderComp.vue';
+import AppSidebarComp from './components/SidebarComp.vue';
 </script>
 
 <template>
   <v-app>
-    <app-header></app-header>
-    <app-sidebar></app-sidebar>
+    <app-header-comp></app-header-comp>
+    <app-sidebar-comp></app-sidebar-comp>
     <v-main>
       <RouterView />
     </v-main>

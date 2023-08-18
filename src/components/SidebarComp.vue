@@ -11,7 +11,7 @@ const { setting } = storeToRefs(settingStore);
     <v-list> 
       <v-list-item link to="/" color="primary" title="Home">
         <template v-slot:prepend>
-          <v-icon icon="mdi-home-circle"></v-icon>
+          <v-icon icon="mdi-home"></v-icon>
         </template>
       </v-list-item> 
       <v-list-item link to="/subscription" color="primary" title="Subscription">
