@@ -1,9 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-type Auth = {
+export type Auth = {
   email: string
-  email_verified: boolean
   exp: number
   family_name: string
   given_name: string

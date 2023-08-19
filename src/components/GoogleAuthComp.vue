@@ -2,6 +2,10 @@
 import { onMounted, ref, onUnmounted } from 'vue';
 import { type GsiResponse } from '@/settings/types';
 import { decodeJwtResponse } from '@/settings/utils';
+import { useAuthStore } from '@/stores/auth';
+
+const authStore = useAuthStore()
+const { signin, signout } = authStore;
 
 const gsiScriptLoaded = ref(false);
 
@@ -12,11 +16,23 @@ const initializeGsi = () => {
     return;
   };
   gsiScriptLoaded.value = true;
-  console.log('script loaded!', import.meta.env.VITE_CLIENT_ID, google);
   google.accounts.id.initialize({
     client_id: import.meta.env.VITE_CLIENT_ID,
     callback: (response: GsiResponse) => {
-      console.log('google authed!', response, decodeJwtResponse(response.credential));
+      const decoded = decodeJwtResponse(response.credential);
+      if(decoded === null) {
+        signout();
+        return;
+      }
+      signin({
+        email: decoded.email as string,
+        exp: decoded.exp as number,
+        family_name: decoded.family_name as string,
+        given_name: decoded.given_name as string,
+        locale: decoded.locale as string,
+        name: decoded.name as string,
+        picture: decoded.picture as string,
+      })
     }
   });
   google.accounts.id.renderButton(
