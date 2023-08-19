@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useSettingStore } from '@/stores/setting';
-import AppGoogleAuth from './GoogleAuthComp.vue';
 import { useAuthStore } from '@/stores/auth';
+import AppGoogleAuth from './GoogleAuthComp.vue';
+import AppHeaderMenu from './HeaderMenuComp.vue';
 
 const settingStore = useSettingStore();
 const authStore = useAuthStore();
@@ -21,8 +22,10 @@ const { isSignedIn } = storeToRefs(authStore);
         LiteTube
       </RouterLink>
     </v-app-bar-title>
-    <app-google-auth v-if="!isSignedIn"></app-google-auth>
-    <div v-if="isSignedIn">user</div>
+    <template v-slot:append>
+      <app-google-auth v-if="!isSignedIn"></app-google-auth>
+      <app-header-menu v-if="isSignedIn">user</app-header-menu>
+    </template>
   </v-app-bar>
 </template>
 
