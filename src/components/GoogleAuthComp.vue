@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, onUnmounted } from 'vue';
+import { type GsiResponse } from '../settings/types';
 
 const gsiScriptLoaded = ref(false);
 
@@ -13,7 +14,7 @@ const initializeGsi = () => {
   console.log('script loaded!', import.meta.env.VITE_CLIENT_ID, google);
   google.accounts.id.initialize({
     client_id: import.meta.env.VITE_CLIENT_ID,
-    callback: (response: any) => { console.log('google authed!', response); }
+    callback: (response: GsiResponse) => { console.log('google authed!', response); }
   });
   google.accounts.id.renderButton(
     document.getElementById('google-auth-button'),
@@ -25,7 +26,6 @@ const initializeGsi = () => {
 };
 
 onMounted(() => {
-
   const script = document.createElement("script")
   script.src = "https://accounts.google.com/gsi/client"
   script.onload = initializeGsi
@@ -33,7 +33,6 @@ onMounted(() => {
   script.id = "google-client-script"
   document.querySelector("body")?.appendChild(script)
   if(!script) return;
-  
 });
 
 onUnmounted(() => {
