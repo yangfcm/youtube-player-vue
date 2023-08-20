@@ -1,53 +1,27 @@
 <script setup lang="ts">
 import { onMounted, ref, onUnmounted } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/auth';
-import { type GsiAuthResponse } from '@/settings/types'
+import { AsyncStatus, type GsiAuthResponse } from '@/settings/types'
 
 const authStore = useAuthStore()
 const { fetchUserByToken } = authStore;
+const { status } = storeToRefs(authStore)
 
 const gsiScriptLoaded = ref(false);
 const client = ref<any>(null);
 
 const initializeGsi = () => {
   const { google } = window as any;
-  if (!google || gsiScriptLoaded.value) return
+  if (!google || gsiScriptLoaded.value) return;
   gsiScriptLoaded.value = true;
   client.value = google.accounts.oauth2.initTokenClient({
     client_id: import.meta.env.VITE_CLIENT_ID,
     scope: 'https://www.googleapis.com/auth/userinfo.profile',
-    callback: (res: GsiAuthResponse) => {
-      fetchUserByToken(res.access_token);
-      // @TODO: Fetch user info via: https://www.googleapis.com/oauth2/v3/userinfo?access_token=... and proceed with login.
+    callback: async (res: GsiAuthResponse) => {
+      await fetchUserByToken(res.access_token);
     }
-  })
-  // google.accounts.id.initialize({
-  //   client_id: import.meta.env.VITE_CLIENT_ID,
-  //   callback: (response: GsiResponse) => {
-  //     const decoded = decodeJwtResponse(response.credential);
-  //     console.log(response.credential, decoded);
-  //     if(decoded === null) {
-  //       signout();
-  //       return;
-  //     }
-  //     signin({
-  //       email: decoded.email as string,
-  //       exp: decoded.exp as number,
-  //       family_name: decoded.family_name as string,
-  //       given_name: decoded.given_name as string,
-  //       locale: decoded.locale as string,
-  //       name: decoded.name as string,
-  //       picture: decoded.picture as string,
-  //     });
-  //   }
-  // });
-  // google.accounts.id.renderButton(
-  //   document.getElementById('google-auth-button'),
-  //   {
-  //     theme: 'filled_blue',
-  //     text: 'continue_with'
-  //   }
-  // )
+  });
 };
 
 const logingWithGoogle = () => {
@@ -71,7 +45,12 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <v-btn @click="logingWithGoogle" variant="outlined" prepend-icon="mdi-google">
+  <v-btn
+    variant="outlined"
+    prepend-icon="mdi-google"
+    @click="logingWithGoogle"
+    :loading="status === AsyncStatus.LOADING"
+  >
     Sign In
   </v-btn>
 </template>
