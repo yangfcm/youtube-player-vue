@@ -73,5 +73,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <button @click="logingWithGoogle">Login with google</button>
+  <v-btn @click="logingWithGoogle" variant="outlined" prepend-icon="mdi-google">
+    Login
+  </v-btn>
 </template>
