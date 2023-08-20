@@ -9,7 +9,6 @@ const settingStore = useSettingStore();
 const authStore = useAuthStore();
 const { toggleSidebar } = settingStore;
 const { isSignedIn } = storeToRefs(authStore);
-
 </script>
 
 <template>

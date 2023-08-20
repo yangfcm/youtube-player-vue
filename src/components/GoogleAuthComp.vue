@@ -1,25 +1,23 @@
 <script setup lang="ts">
 import { onMounted, ref, onUnmounted } from 'vue';
 import { useAuthStore } from '@/stores/auth';
+import { type GsiAuthResponse } from '@/settings/types'
 
 const authStore = useAuthStore()
-const { signin, signout } = authStore;
+const { fetchUserByToken } = authStore;
 
 const gsiScriptLoaded = ref(false);
 const client = ref<any>(null);
 
 const initializeGsi = () => {
   const { google } = window as any;
-  if (!google || gsiScriptLoaded.value) {
-    console.log("loaded!");
-    return;
-  };
+  if (!google || gsiScriptLoaded.value) return
   gsiScriptLoaded.value = true;
   client.value = google.accounts.oauth2.initTokenClient({
     client_id: import.meta.env.VITE_CLIENT_ID,
     scope: 'https://www.googleapis.com/auth/userinfo.profile',
-    callback: (res: any) => {
-      console.log(res); // get token.
+    callback: (res: GsiAuthResponse) => {
+      fetchUserByToken(res.access_token);
       // @TODO: Fetch user info via: https://www.googleapis.com/oauth2/v3/userinfo?access_token=... and proceed with login.
     }
   })
@@ -74,6 +72,6 @@ onUnmounted(() => {
 
 <template>
   <v-btn @click="logingWithGoogle" variant="outlined" prepend-icon="mdi-google">
-    Login
+    Sign In
   </v-btn>
 </template>
