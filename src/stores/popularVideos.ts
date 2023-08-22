@@ -32,7 +32,11 @@ export const usePopularVideosStore = defineStore('popularVideos', () => {
       if (pageToken) options.pageToken = pageToken
       const response: AxiosResponse<VideosResponse> = await fetchVideosAPI(options)
 
-      popularVideos.value.videos = response.data
+      const currentItems = popularVideos.value.videos?.items || []
+      popularVideos.value.videos = {
+        ...response.data,
+        items: [...currentItems, ...response.data.items],
+      }
       popularVideos.value.status = AsyncStatus.SUCCESS
     } catch (err: any) {
       popularVideos.value.status = AsyncStatus.FAIL
