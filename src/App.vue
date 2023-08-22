@@ -17,7 +17,9 @@ onMounted(() => {
     <app-header-comp></app-header-comp>
     <app-sidebar-comp></app-sidebar-comp>
     <v-main>
+      <div class="pa-3">
       <RouterView />
+      </div>
     </v-main>
   </v-app>
 </template>
