@@ -12,7 +12,9 @@ const { fetchPopularVideos } = popularVideosStore;
 const { status, error, videos, hasMore } = storeToRefs(popularVideosStore)
 
 onMounted(() => {
-  fetchPopularVideos()
+  if(!videos.value || videos.value.items.length === 0) {
+    fetchPopularVideos()
+  }
 });
 
 </script>
