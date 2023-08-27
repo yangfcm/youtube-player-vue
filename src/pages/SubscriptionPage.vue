@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/auth';
 import AppGoogleAuth from '@/components/GoogleAuthComp.vue';
- 
+
 const { isSignedIn } = storeToRefs(useAuthStore());
 
 </script>
