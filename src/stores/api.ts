@@ -6,7 +6,12 @@ import {
   PART_SNIPPET_CONTENT_STATUS,
   PART_SNIPPET_STATS,
 } from '@/settings/constants'
-import { type VideoResponse, type VideosResponse } from './types'
+import {
+  type PlayListsRespone,
+  type SubscriptionsResponse,
+  type VideoResponse,
+  type VideosResponse,
+} from './types'
 
 export const fetchVideosAPI = async (
   options: Record<string, string>,
@@ -29,7 +34,10 @@ export const fetchVideoAPI = async (videoId: string): Promise<AxiosResponse<Vide
   })
 }
 
-export const fetchSubscriptionsAPI = async (token: string, options?: Record<string, string>) => {
+export const fetchSubscriptionsAPI = async (
+  token: string,
+  options?: Record<string, string>,
+): Promise<AxiosResponse<SubscriptionsResponse>> => {
   return await appAxios.get('/subscriptions', {
     params: {
       part: PART_SNIPPET,
@@ -44,7 +52,10 @@ export const fetchSubscriptionsAPI = async (token: string, options?: Record<stri
   })
 }
 
-export const fetchPlayListsAPI = async (token: string, options?: Record<string, string>) => {
+export const fetchPlayListsAPI = async (
+  token: string,
+  options?: Record<string, string>,
+): Promise<AxiosResponse<PlayListsRespone>> => {
   return await appAxios.get('/playlists', {
     params: {
       part: PART_SNIPPET_CONTENT_STATUS,
