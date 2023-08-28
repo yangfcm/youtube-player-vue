@@ -4,11 +4,13 @@ import AppVideoCard from './VideoCard.vue';
 import AppChannelCard from './ChannelCard.vue';
 import AppPlayListCard from './PlayListCard.vue';
 
-defineProps<{
+const props = defineProps<{
   videos?: VideoMetaSnippetStats[],
   playlists?: PlayListMetaSnippetDetails[],
   subscriptions?: SubscriptionSnippet[],
 }>()
+
+const minWidth = props.playlists ? '17rem' : props.subscriptions ? '10rem' : '16rem';
 </script>
 
 <template>
@@ -28,7 +30,7 @@ defineProps<{
 <style scoped>
   .app-items-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(v-bind('minWidth'), 1fr));
     gap: 1.2rem;
   }
 </style>
