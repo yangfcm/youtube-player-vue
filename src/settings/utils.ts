@@ -76,3 +76,5 @@ export const getSearchString = (search: string, key: string) => {
   }
   return value
 }
+
+export const bearify = (token: string) => 'Bearer ' + token
