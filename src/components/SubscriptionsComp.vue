@@ -3,8 +3,8 @@ import { onMounted, inject, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/auth';
 import AppLoader from '@/components/LoaderComp.vue';
-import AppErrorMessage from '@/components/ErrorMessageComp.vue'
-import AppMoreButton from '@/components/MoreButton.vue'
+import AppErrorMessage from '@/components/ErrorMessageComp.vue';
+import AppMoreButton from '@/components/MoreButton.vue';
 import { bearify } from '@/settings/utils';
 import { AsyncStatus } from '@/settings/types';
 

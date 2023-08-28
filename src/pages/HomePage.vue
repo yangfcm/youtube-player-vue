@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia';
 import { usePopularVideosStore } from '@/stores/popularVideos'
 import AppLoader from '@/components/LoaderComp.vue'
 import AppErrorMessage from '@/components/ErrorMessageComp.vue'
-import AppVideoGrid from '@/components/VideoGrid.vue';
+import AppItemsGrid from '@/components/ItemsGrid.vue';
 import AppMoreButton from '@/components/MoreButton.vue';
 import { AsyncStatus } from '@/settings/types';
 
@@ -23,7 +23,7 @@ onMounted(() => {
 <template>
   <app-loader v-if="status===AsyncStatus.LOADING && !videos?.items.length"></app-loader>
   <app-error-message v-if="status===AsyncStatus.FAIL" :message="error" class="mb-3"></app-error-message>
-  <app-video-grid :videos="videos?.items || []"></app-video-grid>
+  <app-items-grid :videos="videos?.items || []"></app-items-grid>
   <app-more-button
     v-if="hasMore"
     :loading="status===AsyncStatus.LOADING"
