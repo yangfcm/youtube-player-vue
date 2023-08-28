@@ -8,9 +8,10 @@ const props = defineProps<{
   videos?: VideoMetaSnippetStats[],
   playlists?: PlayListMetaSnippetDetails[],
   subscriptions?: SubscriptionSnippet[],
+  minWidth?: string
 }>()
 
-const minWidth = props.playlists ? '17rem' : props.subscriptions ? '10rem' : '16rem';
+const minWidth = props.minWidth || '18rem';
 </script>
 
 <template>

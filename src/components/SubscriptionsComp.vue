@@ -36,7 +36,7 @@ const handleLoadMore = () => {
     :message="subscriptions.error"
     class="mb-3"
   ></app-error-message>
-  <app-items-grid :subscriptions="subscriptions.data?.items"></app-items-grid>
+  <app-items-grid :subscriptions="subscriptions.data?.items" :minWidth="'10rem'"></app-items-grid>
   <app-more-button
     v-if="hasMore" 
     :loading="subscriptions.status === AsyncStatus.LOADING"
