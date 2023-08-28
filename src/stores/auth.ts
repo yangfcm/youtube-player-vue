@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { type AxiosResponse } from 'axios'
 import { AsyncStatus } from '@/settings/types'
 import { gAuthAxios } from '@/settings/api'
+import type { PlayListsRespone, SubscriptionsResponse } from './types'
 
 type UserInfoResponse = {
   email: string
@@ -18,12 +19,32 @@ type UserInfoResponse = {
 type Auth = {
   user: UserInfoResponse | null
   status: AsyncStatus
+  subscriptions: {
+    status: AsyncStatus
+    error: string
+    data?: SubscriptionsResponse
+    subscriptionIds: Record<string, string>
+  }
+  playlists: {
+    status: AsyncStatus
+    error: string
+    data?: PlayListsRespone
+  }
 }
 
 export const useAuthStore = defineStore('auth', () => {
   const auth = ref<Auth>({
     user: null,
     status: AsyncStatus.IDLE,
+    subscriptions: {
+      status: AsyncStatus.IDLE,
+      error: '',
+      subscriptionIds: {},
+    },
+    playlists: {
+      status: AsyncStatus.IDLE,
+      error: '',
+    },
   })
 
   // function signin(authData: Auth) {
@@ -33,6 +54,15 @@ export const useAuthStore = defineStore('auth', () => {
   function signout() {
     auth.value.user = null
     auth.value.status = AsyncStatus.IDLE
+    auth.value.subscriptions = {
+      status: AsyncStatus.IDLE,
+      error: '',
+      subscriptionIds: {},
+    }
+    auth.value.playlists = {
+      status: AsyncStatus.IDLE,
+      error: '',
+    }
   }
 
   const status = computed(() => {
