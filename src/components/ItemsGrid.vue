@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { type PlayListMetaSnippetDetails, type SubscriptionSnippet, type VideoMetaSnippetStats } from '@/stores/types';
 import AppVideoCard from './VideoCard.vue';
+import AppChannelCard from './ChannelCard.vue';
+import AppPlayListCard from './PlayListCard.vue';
 
 defineProps<{
   videos?: VideoMetaSnippetStats[],
@@ -14,8 +16,12 @@ defineProps<{
     <template v-if="videos">
       <app-video-card v-for="video in videos" :key="(video.id as string)" :video="video"></app-video-card>
     </template>
-    <template v-if="subscriptions">subscriptions grid</template>
-    <template v-if="playlists">playlists grid</template>
+    <template v-if="subscriptions">
+      <app-channel-card v-for="subscription in subscriptions" :key="subscription.id" :subscription="subscription"></app-channel-card>
+    </template>
+    <template v-if="playlists">
+      <app-play-list-card v-for="playlist in playlists" :key="(playlist.id as string)" :playlist="playlist"></app-play-list-card>
+    </template>
   </div>
 </template>
 
