@@ -10,15 +10,17 @@ defineProps<{
 </script>
 
 <template>
-  <div class="app-video-grid">
+  <div class="app-items-grid">
     <template v-if="videos">
       <app-video-card v-for="video in videos" :key="(video.id as string)" :video="video"></app-video-card>
     </template>
+    <template v-if="subscriptions">subscriptions grid</template>
+    <template v-if="playlists">playlists grid</template>
   </div>
 </template>
 
 <style scoped>
-  .app-video-grid {
+  .app-items-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
     gap: 1.2rem;

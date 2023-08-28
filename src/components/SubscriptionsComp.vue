@@ -5,6 +5,7 @@ import { useAuthStore } from '@/stores/auth';
 import AppLoader from '@/components/LoaderComp.vue';
 import AppErrorMessage from '@/components/ErrorMessageComp.vue';
 import AppMoreButton from '@/components/MoreButton.vue';
+import AppItemsGrid from '@/components/ItemsGrid.vue';
 import { bearify } from '@/settings/utils';
 import { AsyncStatus } from '@/settings/types';
 
@@ -30,9 +31,12 @@ const handleLoadMore = () => {
 
 <template>
   <app-loader v-if="subscriptions.status === AsyncStatus.LOADING && !subscriptions.data"></app-loader>
-  <app-error-message v-if="subscriptions.status === AsyncStatus.FAIL" :message="subscriptions.error"
-    class="mb-3"></app-error-message>
-  <div>subscriptions{{ subscriptions.data?.items.length }}</div>
+  <app-error-message
+    v-if="subscriptions.status === AsyncStatus.FAIL"
+    :message="subscriptions.error"
+    class="mb-3"
+  ></app-error-message>
+  <app-items-grid :subscriptions="subscriptions.data?.items"></app-items-grid>
   <app-more-button
     v-if="hasMore" 
     :loading="subscriptions.status === AsyncStatus.LOADING"

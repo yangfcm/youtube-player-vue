@@ -5,6 +5,7 @@ import { useAuthStore } from '@/stores/auth';
 import AppLoader from '@/components/LoaderComp.vue';
 import AppErrorMessage from '@/components/ErrorMessageComp.vue';
 import AppMoreButton from '@/components/MoreButton.vue';
+import AppItemsGrid from '@/components/ItemsGrid.vue';
 import { bearify } from '@/settings/utils';
 import { AsyncStatus } from '@/settings/types';
 
@@ -35,7 +36,7 @@ const handleLoadMore = () => {
     :message="playlists.error"
     class="mb-3">
   </app-error-message>
-  <div>playlists {{ playlists.data?.items.length }}</div>
+  <app-items-grid :playlists="playlists.data?.items"></app-items-grid>
   <app-more-button
       v-if="hasMore" 
       :loading="playlists.status === AsyncStatus.LOADING"
