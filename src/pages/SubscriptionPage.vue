@@ -4,8 +4,7 @@ import { useAuthStore } from '@/stores/auth';
 import AppGoogleAuth from '@/components/GoogleAuthComp.vue';
 import AppSubscriptionsComp from '@/components/SubscriptionsComp.vue'
 
-const auth = useAuthStore();
-const { isSignedIn } = storeToRefs(auth);
+const { isSignedIn } = storeToRefs(useAuthStore());
 
 </script>
 <template>

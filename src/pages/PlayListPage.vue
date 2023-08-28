@@ -2,11 +2,12 @@
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/auth';
 import AppGoogleAuth from '@/components/GoogleAuthComp.vue';
+import AppPlayListComp from '@/components/PlayListComp.vue';
 
 const { isSignedIn } = storeToRefs(useAuthStore());
 
 </script>
 <template>
   <app-google-auth v-if="!isSignedIn"></app-google-auth>
-  <div v-if="isSignedIn">playlist page.</div>
+  <app-play-list-comp v-if="isSignedIn"></app-play-list-comp>
 </template>
