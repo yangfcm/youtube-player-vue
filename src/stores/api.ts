@@ -12,6 +12,7 @@ import {
   type VideoResponse,
   type VideosResponse,
 } from './types'
+import { bearify } from '@/settings/utils'
 
 export const fetchVideosAPI = async (
   options: Record<string, string>,
@@ -35,9 +36,10 @@ export const fetchVideoAPI = async (videoId: string): Promise<AxiosResponse<Vide
 }
 
 export const fetchSubscriptionsAPI = async (
-  token: string,
   options?: Record<string, string>,
 ): Promise<AxiosResponse<SubscriptionsResponse>> => {
+  const token = localStorage.getItem('token')
+  if (!token) throw new Error('User is not logged in')
   return await appAxios.get('/subscriptions', {
     params: {
       part: PART_SNIPPET,
@@ -47,15 +49,16 @@ export const fetchSubscriptionsAPI = async (
       ...options,
     },
     headers: {
-      Authorization: token,
+      Authorization: bearify(token),
     },
   })
 }
 
 export const fetchPlayListsAPI = async (
-  token: string,
   options?: Record<string, string>,
 ): Promise<AxiosResponse<PlayListsRespone>> => {
+  const token = localStorage.getItem('token')
+  if (!token) throw new Error('User is not logged in')
   return await appAxios.get('/playlists', {
     params: {
       part: PART_SNIPPET_CONTENT_STATUS,
@@ -64,7 +67,7 @@ export const fetchPlayListsAPI = async (
       ...options,
     },
     headers: {
-      Authorization: token,
+      Authorization: bearify(token),
     },
   })
 }

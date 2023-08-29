@@ -77,4 +77,5 @@ export const getSearchString = (search: string, key: string) => {
   return value
 }
 
-export const bearify = (token: string) => 'Bearer ' + token
+export const bearify = (token: string) =>
+  token.substring(0, 6) === 'Bearer' ? token : 'Bearer ' + token

@@ -1,30 +1,28 @@
 <script setup lang="ts">
-import { onMounted, inject, computed } from 'vue';
+import { onMounted, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/auth';
 import AppLoader from '@/components/LoaderComp.vue';
 import AppErrorMessage from '@/components/ErrorMessageComp.vue';
 import AppMoreButton from '@/components/MoreButton.vue';
 import AppItemsGrid from '@/components/ItemsGrid.vue';
-import { bearify } from '@/settings/utils';
 import { AsyncStatus } from '@/settings/types';
 
 const auth = useAuthStore();
 const { subscriptions } = storeToRefs(auth);
 const { fetchSubscriptions } = auth;
 const hasMore = computed(() => !!subscriptions.value.data?.nextPageToken)
-const token = inject<string>('token')
 
 onMounted(() => {
-  if (token && (!subscriptions.value.data || subscriptions.value.data.items.length === 0)) {
-    fetchSubscriptions(bearify(token));
+  if (!subscriptions.value.data || subscriptions.value.data.items.length === 0) {
+    fetchSubscriptions();
   }
 });
 
 const handleLoadMore = () => {
   const pageToken = subscriptions.value.data?.nextPageToken
-  if (pageToken && token) {
-    fetchSubscriptions(bearify(token), pageToken);
+  if (pageToken) {
+    fetchSubscriptions(pageToken);
   }
 }
 </script>
@@ -38,7 +36,7 @@ const handleLoadMore = () => {
   ></app-error-message>
   <app-items-grid :subscriptions="subscriptions.data?.items" :minWidth="'10rem'"></app-items-grid>
   <app-more-button
-    v-if="hasMore" 
+    v-if="hasMore"
     :loading="subscriptions.status === AsyncStatus.LOADING"
     @onLoadMore="handleLoadMore"
   >

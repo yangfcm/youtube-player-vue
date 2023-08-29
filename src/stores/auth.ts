@@ -102,13 +102,13 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  const fetchSubscriptions = async (token: string, pageToken?: string) => {
+  const fetchSubscriptions = async (pageToken?: string) => {
     try {
       auth.value.subscriptions.status = AsyncStatus.LOADING
       auth.value.subscriptions.error = ''
       const options: Record<string, string> = {}
       if (pageToken) options.pageToken = pageToken
-      const response = await fetchSubscriptionsAPI(token, options)
+      const response = await fetchSubscriptionsAPI(options)
       const currentItems = auth.value.subscriptions.data?.items || []
       auth.value.subscriptions.status = AsyncStatus.SUCCESS
       auth.value.subscriptions.data = {
@@ -125,13 +125,13 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  const fetchPlayLists = async (token: string, pageToken?: string) => {
+  const fetchPlayLists = async (pageToken?: string) => {
     try {
       auth.value.playlists.status = AsyncStatus.LOADING
       auth.value.playlists.error = ''
       const options: Record<string, string> = {}
       if (pageToken) options.pageToken = pageToken
-      const response = await fetchPlayListsAPI(token, options)
+      const response = await fetchPlayListsAPI(options)
       const currentItems = auth.value.playlists.data?.items || []
       auth.value.playlists.status = AsyncStatus.SUCCESS
       auth.value.playlists.data = {
