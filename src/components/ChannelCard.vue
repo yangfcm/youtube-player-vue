@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { type SubscriptionSnippet } from '@/stores/types';
+import { PLACEHOLDER_IMAGE_SQUARE } from '@/settings/constants';
 
 defineProps<{
   subscription: SubscriptionSnippet
@@ -10,7 +11,7 @@ defineProps<{
 <template>
   <v-card>
     <router-link :to="`/chanel/${subscription.snippet.resourceId.channelId}`">
-      <v-img :src="subscription.snippet.thumbnails.medium?.url"></v-img>
+      <v-img :lazy-src="PLACEHOLDER_IMAGE_SQUARE" :src="subscription.snippet.thumbnails.medium?.url"></v-img>
     </router-link>
     <v-tooltip :text="subscription.snippet.title" location="bottom">
       <template v-slot:activator="{ props }">

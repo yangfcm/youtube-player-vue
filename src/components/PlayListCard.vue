@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { type PlayListMetaSnippetDetails } from '@/stores/types';
+import { PLACEHOLDER_IMAGE_RECTANGLE } from '@/settings/constants';
 
 defineProps<{
   playlist: PlayListMetaSnippetDetails
@@ -10,7 +11,7 @@ defineProps<{
 <template>
   <v-card>
     <router-link :to="`/playlist/${playlist.id}`">
-      <v-img :src="playlist.snippet.thumbnails.medium?.url"></v-img>    
+      <v-img :lazy-src="PLACEHOLDER_IMAGE_RECTANGLE" :src="playlist.snippet.thumbnails.medium?.url"></v-img>    
     </router-link>
     <router-link :to="`/playlist/${playlist.id}`">
       <v-card-title>{{ playlist.snippet.title }}</v-card-title>    
