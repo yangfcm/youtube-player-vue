@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useDisplay } from 'vuetify';
 import { useSettingStore } from '@/stores/setting';
@@ -11,6 +12,7 @@ const authStore = useAuthStore();
 const { toggleSidebar } = settingStore;
 const { isSignedIn } = storeToRefs(authStore);
 const { name } = useDisplay();
+const keyword = ref('');
 
 </script>
 
@@ -31,7 +33,8 @@ const { name } = useDisplay();
         append-inner-icon="mdi-magnify"
         single-line
         hide-details
-        @click:append-inner="() => { console.log('search!'); }"
+        v-model="keyword"
+        @click:append-inner="() => { $router.push(`/search/${keyword}`) }"
         :style="`width: ${name === 'xs' ? '150px' : '250px'}`"
       ></v-text-field>&nbsp;&nbsp;
       <app-google-auth v-if="!isSignedIn"></app-google-auth>
