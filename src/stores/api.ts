@@ -12,6 +12,7 @@ import {
   type ChannelDetailsResponse,
   type PlayListItemsResponse,
   type PlayListsRespone,
+  type SearchResultsResponse,
   type SubscriptionsResponse,
   type VideoResponse,
   type VideosResponse,
@@ -123,6 +124,20 @@ export const fetchPlayListItemsAPI = async (
       playlistId,
       part: PART_SNIPPET_CONTENT_STATUS,
       maxResults: MAX_RESULTS_15 * 2,
+      ...options,
+    },
+  })
+}
+
+export const fetchSearchResultsAPI = async (
+  keyword: string,
+  options: Record<string, string>,
+): Promise<AxiosResponse<SearchResultsResponse>> => {
+  return await appAxios.get('/search', {
+    params: {
+      part: PART_SNIPPET,
+      maxResults: MAX_RESULTS_15,
+      q: keyword,
       ...options,
     },
   })
