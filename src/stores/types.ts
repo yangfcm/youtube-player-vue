@@ -159,3 +159,68 @@ export type PlayListsRespone = {
   items: PlayListMetaSnippetDetails[]
   nextPageToken?: string
 }
+
+/** Type definitions for channel */
+export type ChannelSnippet = {
+  channelId: string
+  channelTitle: string
+  description: string
+  publishedAt: Date
+  title: string
+  thumbnails: {
+    default?: Thumbnail
+    high?: Thumbnail
+    maxres?: Thumbnail
+    medium?: Thumbnail
+    standard?: Thumbnail
+  }
+}
+
+export type ChannelMeta = {
+  id: {
+    kind: string
+    channelId: string
+  }
+  etag: string
+  kind: string
+}
+
+export type ChannelMetaSnippet = ChannelMeta & {
+  snippet: ChannelSnippet
+}
+
+export type ChannelDetails = {
+  id: string
+  etag: string
+  kind: string
+  snippet: {
+    title: string
+    description: string
+    publishedAt: Date
+    thumbnails: {
+      default?: Thumbnail
+      high?: Thumbnail
+      medium?: Thumbnail
+    }
+  }
+  statistics: {
+    subscriberCount: string
+    videoCount: string
+    viewCount: string
+  }
+  brandingSettings?: {
+    image?: {
+      bannerExternalUrl?: string
+    }
+  }
+}
+
+export type ChannelDetailsResponse = {
+  etag: string
+  kind: string
+  pageInfo: {
+    totalResults: number
+    resultsPerPage: number
+  }
+  items: ChannelDetails[]
+}

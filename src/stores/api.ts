@@ -5,8 +5,10 @@ import {
   PART_SNIPPET,
   PART_SNIPPET_CONTENT_STATUS,
   PART_SNIPPET_STATS,
+  PART_SNIPPET_STATS_BRANDING,
 } from '@/settings/constants'
 import {
+  type ChannelDetailsResponse,
   type PlayListsRespone,
   type SubscriptionsResponse,
   type VideoResponse,
@@ -68,6 +70,44 @@ export const fetchPlayListsAPI = async (
     },
     headers: {
       Authorization: bearify(token),
+    },
+  })
+}
+
+export const fetchChannelProfileAPI = async (
+  channelId: string,
+): Promise<AxiosResponse<ChannelDetailsResponse>> => {
+  return await appAxios.get('/channels', {
+    params: {
+      id: channelId,
+      part: PART_SNIPPET_STATS_BRANDING,
+    },
+  })
+}
+
+export const fetchChannelVideosAPI = async (channelId: string, options: Record<string, string>) => {
+  return await appAxios.get('/search', {
+    params: {
+      channelId,
+      part: PART_SNIPPET,
+      order: 'date',
+      type: 'video',
+      maxResults: MAX_RESULTS_24,
+      ...options,
+    },
+  })
+}
+
+export const fetchChannelPlayListsAPI = async (
+  channelId: string,
+  options: Record<string, string>,
+) => {
+  return await appAxios.get('/playlists', {
+    params: {
+      channelId,
+      maxResults: MAX_RESULTS_24,
+      part: PART_SNIPPET_CONTENT_STATUS,
+      ...options,
     },
   })
 }
