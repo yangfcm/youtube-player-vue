@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <v-card>
-    <router-link :to="`/chanel/${subscription.snippet.resourceId.channelId}`">
+    <router-link :to="`/channel/${subscription.snippet.resourceId.channelId}`">
       <v-img :lazy-src="PLACEHOLDER_IMAGE_SQUARE" :src="subscription.snippet.thumbnails.medium?.url"></v-img>
     </router-link>
     <v-tooltip :text="subscription.snippet.title" location="bottom">
