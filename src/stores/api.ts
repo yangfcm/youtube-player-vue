@@ -1,6 +1,7 @@
 import { type AxiosResponse } from 'axios'
 import { appAxios } from '@/settings/api'
 import {
+  MAX_RESULTS_15,
   MAX_RESULTS_24,
   PART_SNIPPET,
   PART_SNIPPET_CONTENT_STATUS,
@@ -9,6 +10,7 @@ import {
 } from '@/settings/constants'
 import {
   type ChannelDetailsResponse,
+  type PlayListItemsResponse,
   type PlayListsRespone,
   type SubscriptionsResponse,
   type VideoResponse,
@@ -107,6 +109,20 @@ export const fetchChannelPlayListsAPI = async (
       channelId,
       maxResults: MAX_RESULTS_24,
       part: PART_SNIPPET_CONTENT_STATUS,
+      ...options,
+    },
+  })
+}
+
+export const fetchPlayListItemsAPI = async (
+  playlistId: string,
+  options: Record<string, string>,
+): Promise<AxiosResponse<PlayListItemsResponse>> => {
+  return await appAxios.get('/playlistItems', {
+    params: {
+      playlistId,
+      part: PART_SNIPPET_CONTENT_STATUS,
+      maxResults: MAX_RESULTS_15 * 2,
       ...options,
     },
   })
