@@ -5,6 +5,7 @@ import { storeToRefs } from 'pinia';
 import { useVideoStore } from '@/stores/video';
 import AppLoader from '@/components/LoaderComp.vue';
 import AppErrorMessage from '@/components/ErrorMessageComp.vue';
+import AppVideoPlayer from '@/components/VideoPlayerComp.vue';
 import { AsyncStatus } from '@/settings/types';
 
 const route = useRoute();
@@ -35,6 +36,8 @@ onMounted(() => {
     <template v-if="!video">
       The video isn't available.
     </template>
-    video page, video id: {{  video?.id }}
+    <template v-else>
+      <app-video-player :videoId="videoId"></app-video-player>
+    </template>
   </template>
 </template>
