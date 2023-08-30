@@ -19,7 +19,7 @@ export const useVideoStore = defineStore('video', () => {
 
   const status = computed(() => videoStore.value.status)
   const error = computed(() => videoStore.value.error)
-  const video = computed(() => videoStore.value.video)
+  const video = computed(() => videoStore.value.video || {})
 
   const fetchVideo = async (videoId: string) => {
     try {
