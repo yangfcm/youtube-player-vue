@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { onMounted, ref, onUnmounted } from 'vue';
+import { useDisplay } from 'vuetify';
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '@/stores/auth';
 import { AsyncStatus, type GsiAuthResponse } from '@/settings/types'
 
-const authStore = useAuthStore()
+const { name } = useDisplay();
+const authStore = useAuthStore();
 const { fetchUserByToken } = authStore;
-const { status } = storeToRefs(authStore)
+const { status } = storeToRefs(authStore);
 
 const gsiScriptLoaded = ref(false);
 const client = ref<any>(null);
@@ -46,10 +48,19 @@ onUnmounted(() => {
 
 <template>
   <v-btn
+      variant="outlined"
+      icon="mdi-google"
+      @click="logingWithGoogle"
+      :loading="status === AsyncStatus.LOADING"
+      v-if="name === 'xs'"
+    > 
+    </v-btn>
+  <v-btn
     variant="outlined"
     prepend-icon="mdi-google"
     @click="logingWithGoogle"
     :loading="status === AsyncStatus.LOADING"
+    v-else
   >
     Sign In
   </v-btn>
