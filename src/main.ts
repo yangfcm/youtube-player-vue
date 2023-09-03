@@ -11,8 +11,8 @@ import checkToken from './plugins/checkToken'
 const app = createApp(App)
 
 app.use(checkToken)
-app.use(pinia)
 app.use(vuetify)
 app.use(router)
+app.use(pinia)
 
 app.mount('#app')
