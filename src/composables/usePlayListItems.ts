@@ -17,12 +17,13 @@ export function usePlayListItems(playListId: string) {
 
   const fetchMore = async () => {
     if (!nextPageToken.value) return
-    await fetchPlayListItems(nextPageToken.value)
+    await fetchPlayListItems(playListId, nextPageToken.value)
   }
 
   onMounted(() => {
+    console.log(playListId)
     if (playListId && playListItems.value.length === 0) {
-      fetchPlayListItems()
+      fetchPlayListItems(playListId)
     }
   })
 
