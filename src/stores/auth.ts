@@ -155,5 +155,6 @@ export const useAuthStore = defineStore('auth', () => {
     fetchUserByToken,
     fetchSubscriptions,
     fetchPlayLists,
+    authState: auth,
   }
 })
