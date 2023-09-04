@@ -1,4 +1,4 @@
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 
@@ -17,6 +17,12 @@ export function useSubscriptions() {
     if (!nextPageToken.value) return
     await fetchSubscriptions(nextPageToken.value)
   }
+
+  watch(isSignedIn, (newData, oldData) => {
+    if (newData && !oldData) {
+      fetchSubscriptions()
+    }
+  })
 
   onMounted(() => {
     if (isSignedIn && subscriptions.value.length === 0) {
