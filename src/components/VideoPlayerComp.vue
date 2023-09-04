@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-<div class="app-player-container">
+<div class="app-player-container mb-2">
   <iframe 
     :src="`https://www.youtube.com/embed/${videoId}`" 
     alt="video"
