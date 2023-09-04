@@ -10,17 +10,16 @@ const { name } = useDisplay();
 </script>
 
 <template>
-  <v-card variant="outlined" class="mb-3">
-    <div class="d-flex">
+  <v-card class="mb-3">
+    <div class="d-flex flex-column flex-sm-row">
       <v-avatar 
-        :size="name === 'xs' ? 150 : 230"
         rounded="0"
-        style="height: auto"
+        :style="`height: auto; width: ${name === 'xs' ? '100%' : '230px'}`"
       >
         <v-img :src="video.snippet.thumbnails.high?.url"></v-img>
       </v-avatar>
       <div>
-        <v-card-title>{{ video.snippet.title }}</v-card-title>
+        <v-card-title :title="video.snippet.title">{{ video.snippet.title }}</v-card-title>
       </div>
     </div>
   </v-card>
