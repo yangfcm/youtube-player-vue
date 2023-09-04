@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref, onUnmounted } from 'vue';
 import { useDisplay } from 'vuetify';
-import { storeToRefs } from 'pinia';
-import { useAuthStore } from '@/stores/auth';
+import { useAuth } from '@/composables/useAuth';
 import { AsyncStatus, type GsiAuthResponse } from '@/settings/types'
 
-const { name } = useDisplay();
-const authStore = useAuthStore();
-const { fetchUserByToken } = authStore;
-const { status } = storeToRefs(authStore);
+const { name } = useDisplay(); 
+const auth = useAuth()
+const { status, fetchUserByToken } = auth; 
 
 const gsiScriptLoaded = ref(false);
 const client = ref<any>(null);

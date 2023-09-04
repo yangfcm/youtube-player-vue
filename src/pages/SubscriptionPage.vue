@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useAuthStore } from '@/stores/auth';
+import { useAuth } from '@/composables/useAuth';
 import { useSubscriptions } from '@/composables/useSubscriptions';
 import AppGoogleAuth from '@/components/GoogleAuthComp.vue';
 import AppLoader from '@/components/LoaderComp.vue';
@@ -10,8 +9,7 @@ import AppItemsGrid from '@/components/ItemsGrid.vue';
 import { AsyncStatus } from '@/settings/types';
 
 const { subscriptions, status, error, hasMore, fetchMore } = useSubscriptions()
-
-const { isSignedIn } = storeToRefs(useAuthStore());
+const { isSignedIn } = useAuth();
 
 </script>
 <template>

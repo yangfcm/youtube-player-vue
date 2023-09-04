@@ -2,9 +2,9 @@
 import { onMounted, inject } from 'vue';
 import AppHeaderComp from './components/HeaderComp.vue';
 import AppSidebarComp from './components/SidebarComp.vue';
-import { useAuthStore } from './stores/auth';
+import { useAuth } from './composables/useAuth';
 
-const { fetchUserByToken } = useAuthStore()
+const { fetchUserByToken } = useAuth()
 
 onMounted(() => {
   const token = inject<string>('token')

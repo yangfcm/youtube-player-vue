@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { storeToRefs } from 'pinia';
 import { useDisplay } from 'vuetify';
 import { useSettingStore } from '@/stores/setting';
-import { useAuthStore } from '@/stores/auth';
+import { useAuth } from '@/composables/useAuth';
 import AppGoogleAuth from './GoogleAuthComp.vue';
 import AppHeaderMenu from './HeaderMenuComp.vue';
 
 const settingStore = useSettingStore();
-const authStore = useAuthStore();
 const { toggleSidebar } = settingStore;
-const { isSignedIn } = storeToRefs(authStore);
+const { isSignedIn } = useAuth();
 const { name } = useDisplay();
 const keyword = ref('');
 

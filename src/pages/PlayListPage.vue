@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useAuthStore } from '@/stores/auth';
+import { useAuth } from '@/composables/useAuth';
 import { usePlayLists } from '@/composables/usePlayLists';
 import AppGoogleAuth from '@/components/GoogleAuthComp.vue';
 import AppLoader from '@/components/LoaderComp.vue';
@@ -10,7 +9,7 @@ import AppItemsGrid from '@/components/ItemsGrid.vue';
 import { AsyncStatus } from '@/settings/types';
 
 const { playlists, status, error, hasMore, fetchMore } = usePlayLists();
-const { isSignedIn } = storeToRefs(useAuthStore());
+const { isSignedIn } = useAuth();
 
 </script>
 
