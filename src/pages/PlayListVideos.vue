@@ -19,7 +19,15 @@ const { playListItems, status, error, hasMore , fetchMore } = usePlayListItems(p
   <app-video-list-item
     v-for="item in playListItems"
     :key="(item.id as string)"
-    :video="item"
+    :video="{
+      id: item.contentDetails.videoId,
+      title: item.snippet.title,
+      imageUrl: item.snippet.thumbnails?.high?.url,
+      publishedAt: item.contentDetails.videoPublishedAt,
+      channelTitle: item.snippet.videoOwnerChannelTitle,
+      channelId: item.snippet.videoOwnerChannelId,
+      playListId: playListId,
+    }"
     :playListId="playListId"
   ></app-video-list-item>
   <app-more-button v-if="hasMore" :loading="status === AsyncStatus.LOADING" @onLoadMore="fetchMore">More Videos</app-more-button>
