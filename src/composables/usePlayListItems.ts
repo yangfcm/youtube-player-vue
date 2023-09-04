@@ -21,7 +21,6 @@ export function usePlayListItems(playListId: string) {
   }
 
   onMounted(() => {
-    console.log(playListId)
     if (playListId && playListItems.value.length === 0) {
       fetchPlayListItems(playListId)
     }
