@@ -79,14 +79,6 @@ export const useAuthStore = defineStore('auth', () => {
     return true
   })
 
-  const subscriptions = computed(() => {
-    return auth.value.subscriptions
-  })
-
-  const playlists = computed(() => {
-    return auth.value.playlists
-  })
-
   const fetchUserByToken = async (token: string) => {
     try {
       auth.value.status = AsyncStatus.LOADING
@@ -148,9 +140,6 @@ export const useAuthStore = defineStore('auth', () => {
     status,
     user,
     isSignedIn,
-    subscriptions,
-    playlists,
-    // signin,
     signout,
     fetchUserByToken,
     fetchSubscriptions,
