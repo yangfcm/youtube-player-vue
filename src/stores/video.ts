@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { AsyncStatus } from '@/settings/types'
 import { type VideoMetaSnippetStats, type VideoResponse } from './types'
@@ -17,10 +17,6 @@ export const useVideoStore = defineStore('video', () => {
     status: AsyncStatus.IDLE,
     video: {},
   })
-
-  const status = computed(() => videoStore.value.status)
-  const error = computed(() => videoStore.value.error)
-  const video = computed(() => videoStore.value.video || {})
 
   const fetchVideo = async (videoId: string) => {
     try {
@@ -43,9 +39,6 @@ export const useVideoStore = defineStore('video', () => {
 
   return {
     videoState: videoStore,
-    video,
-    status,
-    error,
     fetchVideo,
   }
 })
