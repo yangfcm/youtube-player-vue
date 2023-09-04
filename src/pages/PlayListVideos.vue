@@ -1,5 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
+import AppLoader from '@/components/LoaderComp.vue'
+import AppErrorMessage from '@/components/ErrorMessageComp.vue'
+import AppItemsGrid from '@/components/ItemsGrid.vue';
+import AppMoreButton from '@/components/MoreButton.vue';
+import { AsyncStatus } from '@/settings/types';
+import { usePlayListItems } from '@/composables/usePlayListItems';
+
+const route = useRoute();
+const playListId = route.params.id.toString();
+const { playListItems, status, error, hasMore , fetchMore } = usePlayListItems(playListId);
+
+</script>
 
 <template>
-  playlist videos page, playlist id: {{ $route.params.id }}
+  <app-loader v-if="status===AsyncStatus.LOADING && playListItems.length === 0"></app-loader>
+  <app-error-message v-if="status===AsyncStatus.FAIL" :message="error" class="mb-3"></app-error-message>
+  <app-more-button v-if="hasMore" :loading="status === AsyncStatus.LOADING" @onLoadMore="fetchMore"></app-more-button>
 </template>

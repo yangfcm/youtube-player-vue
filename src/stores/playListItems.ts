@@ -26,16 +26,17 @@ export const usePlayListItemsStore = defineStore('playListItems', () => {
   const error = computed(() => playListItems.value.error)
   const nextPageToken = computed(() => playListItems.value.playLists[playListId]?.nextPageToken)
   const hasMore = computed(() => !!playListItems.value.playLists[playListId]?.nextPageToken)
-  const videos = computed(() => playListItems.value.playLists[playListId]?.items)
+  const videos = computed(() => playListItems.value.playLists[playListId]?.items || [])
 
-  const fetchPlayListItems = async (playlistId: string, pageToken?: string) => {
+  const fetchPlayListItems = async (pageToken?: string) => {
+    if (!playListId) return
     try {
       playListItems.value.status = AsyncStatus.LOADING
       playListItems.value.error = ''
       const options: Record<string, string> = {}
       if (pageToken) options.pageToken = pageToken
       const response: AxiosResponse<PlayListItemsResponse> = await fetchPlayListItemsAPI(
-        playlistId,
+        playListId,
         options,
       )
 
@@ -52,9 +53,8 @@ export const usePlayListItemsStore = defineStore('playListItems', () => {
   }
 
   const fetchMore = async () => {
-    if (nextPageToken.value) {
-      await fetchPlayListItems(playListId, nextPageToken.value)
-    }
+    if (!nextPageToken.value) return
+    await fetchPlayListItems(nextPageToken.value)
   }
 
   return {
@@ -62,6 +62,7 @@ export const usePlayListItemsStore = defineStore('playListItems', () => {
     status,
     error,
     hasMore,
+    playListItemsState: playListItems.value,
     fetchPlayListItems,
     fetchMore,
   }
