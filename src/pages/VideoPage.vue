@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { storeToRefs } from 'pinia';
-import { useVideoStore } from '@/stores/video';
+import { useVideo } from '@/composables/useVideo';
 import AppLoader from '@/components/LoaderComp.vue';
 import AppErrorMessage from '@/components/ErrorMessageComp.vue';
 import AppVideoPlayer from '@/components/VideoPlayerComp.vue';
@@ -10,19 +8,8 @@ import { AsyncStatus } from '@/settings/types';
 
 const route = useRoute();
 const videoId = route.params.id as string;
-const playlistId = route.query.playlistId;
 
-const videoStore = useVideoStore();
-const { video: videoItems, status, error, } = storeToRefs(videoStore);
-const video = computed(() => videoItems.value[videoId]);
-const { fetchVideo } = videoStore;
-
-onMounted(() => {
-  if(!video.value) {
-    fetchVideo(videoId);
-  }
-})
-
+const { video, status, error } = useVideo(videoId);
 </script>
 
 <template>

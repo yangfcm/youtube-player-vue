@@ -8,13 +8,14 @@ import { type AxiosResponse } from 'axios'
 type VideoStore = {
   error: string
   status: AsyncStatus
-  video?: Record<string, VideoMetaSnippetStats>
+  video: Record<string, VideoMetaSnippetStats>
 }
 
 export const useVideoStore = defineStore('video', () => {
   const videoStore = ref<VideoStore>({
     error: '',
     status: AsyncStatus.IDLE,
+    video: {},
   })
 
   const status = computed(() => videoStore.value.status)
@@ -41,6 +42,7 @@ export const useVideoStore = defineStore('video', () => {
   }
 
   return {
+    videoState: videoStore,
     video,
     status,
     error,
