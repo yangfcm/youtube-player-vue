@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { AsyncStatus } from '@/settings/types'
 import { type VideosResponse } from './types'
@@ -16,11 +16,6 @@ export const usePopularVideosStore = defineStore('popularVideos', () => {
     error: '',
     status: AsyncStatus.IDLE,
   })
-
-  const status = computed(() => popularVideos.value.status)
-  const error = computed(() => popularVideos.value.error)
-  const videos = computed(() => popularVideos.value.videos)
-  const hasMore = computed(() => !!popularVideos.value.videos?.nextPageToken)
 
   const fetchPopularVideos = async (pageToken?: string) => {
     try {
@@ -45,10 +40,7 @@ export const usePopularVideosStore = defineStore('popularVideos', () => {
   }
 
   return {
-    videos,
-    status,
-    error,
-    hasMore,
     fetchPopularVideos,
+    popularVideosState: popularVideos,
   }
 })

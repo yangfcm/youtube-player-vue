@@ -1,37 +1,23 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { storeToRefs } from 'pinia';
-import { usePopularVideosStore } from '@/stores/popularVideos'
+import { usePopularVideos } from '@/composables/usePopularVideos'
 import AppLoader from '@/components/LoaderComp.vue'
 import AppErrorMessage from '@/components/ErrorMessageComp.vue'
 import AppItemsGrid from '@/components/ItemsGrid.vue';
 import AppMoreButton from '@/components/MoreButton.vue';
 import { AsyncStatus } from '@/settings/types';
 
-const popularVideosStore = usePopularVideosStore()
-const { fetchPopularVideos } = popularVideosStore;
-const { status, error, videos, hasMore } = storeToRefs(popularVideosStore)
-
-onMounted(() => {
-  if(!videos.value || videos.value.items.length === 0) {
-    fetchPopularVideos()
-  }
-});
+const { videos, status, error, hasMore, fetchMore } = usePopularVideos();
 
 </script>
 
 <template>
-  <app-loader v-if="status===AsyncStatus.LOADING && !videos?.items.length"></app-loader>
+  <app-loader v-if="status===AsyncStatus.LOADING && !videos.length"></app-loader>
   <app-error-message v-if="status===AsyncStatus.FAIL" :message="error" class="mb-3"></app-error-message>
-  <app-items-grid :videos="videos?.items || []"></app-items-grid>
+  <app-items-grid :videos="videos"></app-items-grid>
   <app-more-button
     v-if="hasMore"
     :loading="status===AsyncStatus.LOADING"
-    @onLoadMore="() => {
-      if(videos?.nextPageToken) {
-        fetchPopularVideos(videos?.nextPageToken);
-      }
-    }"
+    @onLoadMore="fetchMore"
   >
     More Videos
   </app-more-button>
