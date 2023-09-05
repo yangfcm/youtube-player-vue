@@ -21,7 +21,7 @@ const { name } = useDisplay();
 </script>
 
 <template>
-  <v-card class="mb-3">
+  <v-card>
     <div class="d-flex flex-column flex-sm-row">
       <router-link :to="{
         path: `/video/${video.id}`,

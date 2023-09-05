@@ -29,6 +29,7 @@ const { playListItems, status, error, hasMore , fetchMore } = usePlayListItems(p
       playListId: playListId,
     }"
     :playListId="playListId"
+    class="mb-3"
   ></app-video-item>
   <app-more-button v-if="hasMore" :loading="status === AsyncStatus.LOADING" @onLoadMore="fetchMore">More Videos</app-more-button>
 </template>

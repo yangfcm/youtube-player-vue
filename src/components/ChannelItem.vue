@@ -18,7 +18,7 @@ const { name } = useDisplay()
 
 
 <template>
-  <v-card class="mb-3">
+  <v-card>
     <div class="d-flex flex-column flex-sm-row">
       <router-link :to="`/channel/${channel.id}`">
         <v-avatar

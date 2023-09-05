@@ -19,6 +19,7 @@ const { searchResults, status, error, hasMore, fetchMore } = useSearchResults(ke
     v-for="(item, index) in searchResults"
     :key="index"
     :item="item"
+    class="mb-3"
   >
   </app-search-item>
   <app-more-button
