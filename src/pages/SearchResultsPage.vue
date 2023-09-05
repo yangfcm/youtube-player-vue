@@ -10,7 +10,6 @@ import AppSearchItem from '@/components/SearchItem.vue'
 const route = useRoute()
 const keyword = route.params.keyword.toString();
 const { searchResults, status, error, hasMore, fetchMore } = useSearchResults(keyword);
-console.log(searchResults)
 </script>
 
 <template>

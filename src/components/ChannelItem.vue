@@ -3,7 +3,7 @@
 export type ChannelItem = {
   id: string;
   title: string;
-  imageUrl: string;
+  imageUrl?: string;
   description: string;
 }
 

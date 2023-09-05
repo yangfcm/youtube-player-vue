@@ -3,9 +3,10 @@
 export type PlayListItem = {
   id: string;
   title: string;
-  imageUrl: string;
+  imageUrl?: string;
   channelId: string;
   channelTitle: string;
+  publishedAt: Date;
 }
 
 defineProps<{

@@ -219,11 +219,13 @@ export type ChannelSnippet = {
   }
 }
 
+export type ChannelId = {
+  kind: string
+  channelId: string
+}
+
 export type ChannelMeta = {
-  id: {
-    kind: string
-    channelId: string
-  }
+  id: ChannelId
   etag: string
   kind: string
 }
