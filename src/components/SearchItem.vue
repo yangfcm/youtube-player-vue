@@ -2,7 +2,7 @@
 import type { ResultItemMetaSnippet } from '@/stores/types'
 import AppChannelItem from './ChannelItem.vue'
 import AppPlayListItem from './PlayListItem.vue'
-import AppVideoItem from './VideoListItem.vue'
+import AppVideoItem from './VideoItem.vue'
 import type { VideoId, ChannelId, PlayListId } from '@/stores/types'
 
 const props = defineProps<{
