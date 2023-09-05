@@ -14,7 +14,10 @@ const { isSignedIn } = useAuth();
 const { name } = useDisplay();
 const keyword = ref('');
 
-const handleSearch = () => { router.push(`/search/${keyword.value}`) }
+const handleSearch = () => { 
+  if(!keyword.value.trim()) return;
+  router.push(`/search/${keyword.value}`)
+}
 
 </script>
 

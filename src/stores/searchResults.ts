@@ -17,6 +17,13 @@ export const useSearchResultsStore = defineStore('searchResults', () => {
     status: AsyncStatus.IDLE,
   })
 
+  const $reset = () => {
+    searchResults.value = {
+      error: '',
+      status: AsyncStatus.IDLE,
+    }
+  }
+
   const fetchResults = async (keyword: string, pageToken?: string) => {
     try {
       searchResults.value.status = AsyncStatus.LOADING
@@ -42,5 +49,6 @@ export const useSearchResultsStore = defineStore('searchResults', () => {
   return {
     fetchResults,
     searchResultsState: searchResults,
+    $reset,
   }
 })

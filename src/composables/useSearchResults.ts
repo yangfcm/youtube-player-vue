@@ -1,8 +1,8 @@
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, watch, type Ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSearchResultsStore } from '@/stores/searchResults'
 
-export function useSearchResults(keyword: string) {
+export function useSearchResults(keyword: Ref<string>) {
   const searchResultsStore = useSearchResultsStore()
   const { fetchResults } = searchResultsStore
   const { searchResultsState } = storeToRefs(searchResultsStore)
@@ -15,13 +15,19 @@ export function useSearchResults(keyword: string) {
 
   const fetchMore = async () => {
     if (!nextPageToken.value) return
-    await fetchResults(keyword, nextPageToken.value)
+    await fetchResults(keyword.value.trim(), nextPageToken.value)
   }
 
   onMounted(() => {
     if (searchResults.value.length === 0) {
-      fetchResults(keyword)
+      fetchResults(keyword.value.trim())
     }
+  })
+
+  watch(keyword, (newValue, oldValue) => {
+    if (newValue.trim() === oldValue.trim()) return
+    searchResultsStore.$reset()
+    fetchResults(newValue.trim())
   })
 
   return {
