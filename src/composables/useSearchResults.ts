@@ -25,9 +25,10 @@ export function useSearchResults(keyword: Ref<string>) {
   })
 
   watch(keyword, (newValue, oldValue) => {
-    if (newValue.trim() === oldValue.trim()) return
-    searchResultsStore.$reset()
-    fetchResults(newValue.trim())
+    if (newValue && newValue.trim() !== oldValue?.trim()) {
+      searchResultsStore.$reset()
+      fetchResults(newValue?.trim())
+    }
   })
 
   return {

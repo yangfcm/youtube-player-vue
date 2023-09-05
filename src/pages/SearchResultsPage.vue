@@ -9,7 +9,7 @@ import { AsyncStatus } from '@/settings/types';
 import AppSearchItem from '@/components/SearchItem.vue'
 
 const route = useRoute()
-const keyword = computed(() => route.params.keyword.toString());
+const keyword = computed(() => route.params.keyword?.toString());
 const { searchResults, status, error, hasMore, fetchMore } = useSearchResults(keyword);
 </script>
 
