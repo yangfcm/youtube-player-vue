@@ -43,7 +43,10 @@ const { name } = useDisplay();
         path: `/video/${video.id}`,
         query: { playListId: video.playListId }
       }">
-          <v-card-title :title="video.title">{{ video.title }}</v-card-title>
+          <v-card-title :title="video.title">
+            <v-icon icon="mdi-video" color="error"></v-icon>
+            {{ video.title }}
+        </v-card-title>
         </router-link>
         <router-link :to="`/channel/${video.channelId}`">
           <v-card-subtitle>{{ video.channelTitle }}</v-card-subtitle>

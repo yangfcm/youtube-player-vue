@@ -33,7 +33,10 @@ const { name } = useDisplay()
       </router-link>
       <div class="d-flex flex-column">
         <router-link :to="`/channel/${channel.id}`">
-          <v-card-title>{{ channel.title }}</v-card-title>
+          <v-card-title>
+            <v-icon icon="mdi-account-details"></v-icon>
+            {{ channel.title }}
+          </v-card-title>
         </router-link>
         <v-card-text>
           {{ channel.description }}

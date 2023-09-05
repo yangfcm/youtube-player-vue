@@ -37,7 +37,13 @@ const { name } = useDisplay()
       </router-link>
       <div class="d-flex flex-column">
         <router-link :to="`/playList/${playList.id}`">
-          <v-card-title>{{ playList.title }}</v-card-title>
+          <v-card-title>
+            <v-icon icon="mdi-playlist-play" color="info"></v-icon>
+            {{ playList.title }}
+          </v-card-title>
+        </router-link>
+        <router-link :to="`/channel/${playList.channelId}`">
+          <v-card-subtitle>{{ playList.channelTitle }}</v-card-subtitle>
         </router-link>
         <v-card-text class="mt-auto d-flex align-end">
           {{ fromNow(playList.publishedAt) }}
