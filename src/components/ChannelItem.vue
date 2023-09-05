@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify';
-import { PLACEHOLDER_IMAGE_RECTANGLE } from '@/settings/constants';
+import { PLACEHOLDER_IMAGE_SQUARE } from '@/settings/constants';
 
 export type ChannelItem = {
   id: string;
@@ -23,10 +23,10 @@ const { name } = useDisplay()
       <router-link :to="`/channel/${channel.id}`">
         <v-avatar
           rounded="0"
-          :style="`height: auto; width: ${name === 'xs' ? '100%' : '230px'}`"
+          :style="`height: auto; width: ${name === 'xs' ? '100%' : '180px'}`"
         >
           <v-img
-            :lazy-src="PLACEHOLDER_IMAGE_RECTANGLE"
+            :lazy-src="PLACEHOLDER_IMAGE_SQUARE"
             :src="channel.imageUrl"
           ></v-img>
         </v-avatar>
