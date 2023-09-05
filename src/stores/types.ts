@@ -269,13 +269,13 @@ export type ChannelDetailsResponse = {
 }
 
 /** Type definition for search results */
-export type ResultItemSnippet = VideoSnippet | ChannelSnippet | PlayListSnippet
+export type ResultItemMetaSnippet = VideoMetaSnippet | ChannelMetaSnippet | PlayListMetaSnippet
 
 export type SearchResultsResponse = {
   etag: string
   kind: string
   pageInfo: { totalResults: number; resultsPerPage: number }
-  items: ResultItemSnippet[]
+  items: ResultItemMetaSnippet[]
   nextPageToken?: string
   prevPageToken?: string
 }
