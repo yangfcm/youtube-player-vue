@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useDisplay } from 'vuetify';
 import { useSettingStore } from '@/stores/setting';
 import { useAuth } from '@/composables/useAuth';
 import AppGoogleAuth from './GoogleAuthComp.vue';
 import AppHeaderMenu from './HeaderMenuComp.vue';
 
+const router = useRouter();
 const settingStore = useSettingStore();
 const { toggleSidebar } = settingStore;
 const { isSignedIn } = useAuth();
 const { name } = useDisplay();
 const keyword = ref('');
+
+const handleSearch = () => { router.push(`/search/${keyword.value}`) }
 
 </script>
 
@@ -24,17 +28,20 @@ const keyword = ref('');
       </RouterLink>
     </v-app-bar-title>
     <template v-slot:append>
-      <v-text-field 
-        density="compact"
-        variant="solo"
-        label="Search"
-        append-inner-icon="mdi-magnify"
-        single-line
-        hide-details
-        v-model="keyword"
-        @click:append-inner="() => { $router.push(`/search/${keyword}`) }"
-        :style="`width: ${name === 'xs' ? '150px' : '250px'}`"
-      ></v-text-field>&nbsp;&nbsp;
+      <v-form @submit.prevent="handleSearch">
+        <v-text-field 
+          density="compact"
+          variant="solo"
+          label="Search"
+          append-inner-icon="mdi-magnify"
+          single-line
+          hide-details
+          v-model="keyword"
+          @click:append-inner="handleSearch"
+          :style="`width: ${name === 'xs' ? '150px' : '250px'}`"
+        ></v-text-field>
+      </v-form>
+      &nbsp;&nbsp;
       <app-google-auth v-if="!isSignedIn"></app-google-auth>
       <app-header-menu v-if="isSignedIn">user</app-header-menu>
     </template>
