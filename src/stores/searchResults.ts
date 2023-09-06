@@ -2,7 +2,6 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { AsyncStatus } from '@/settings/types'
 import { fetchSearchResultsAPI } from './api'
-import type { AxiosResponse } from 'axios'
 import type { SearchResultsResponse } from './types'
 
 type SearchResultsStore = {
@@ -30,10 +29,7 @@ export const useSearchResultsStore = defineStore('searchResults', () => {
       searchResults.value.error = ''
       const options: Record<string, string> = {}
       if (pageToken) options.pageToken = pageToken
-      const response: AxiosResponse<SearchResultsResponse> = await fetchSearchResultsAPI(
-        keyword,
-        options,
-      )
+      const response = await fetchSearchResultsAPI(keyword, options)
       const currentItems = searchResults.value.results?.items || []
       searchResults.value.results = {
         ...response.data,

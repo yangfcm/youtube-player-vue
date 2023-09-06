@@ -2,7 +2,6 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { AsyncStatus } from '@/settings/types'
 import { fetchChannelProfileAPI, fetchChannelVideosAPI, fetchChannelPlayListsAPI } from './api'
-import type { AxiosResponse } from 'axios'
 import type { ChannelDetails, PlayListsRespone, VideosResponse } from './types'
 
 type ChannelStore = {
