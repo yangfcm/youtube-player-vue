@@ -54,8 +54,42 @@ export const useChannelStore = defineStore('channel', () => {
       channel.value.profile.error = err.message
     }
   }
-  const fetchChannelVideos = async (channelId: string, pageToken?: string) => {}
-  const fetchChannelPlayLists = async (channelId: string, pageToken?: string) => {}
+  const fetchChannelVideos = async (channelId: string, pageToken?: string) => {
+    try {
+      channel.value.playlists.status = AsyncStatus.LOADING
+      channel.value.videos.error = ''
+      const options: Record<string, string> = {}
+      if (pageToken) options.pageToken = pageToken
+      const response = await fetchChannelVideosAPI(channelId, options)
+      const currentItems = channel.value.videos.data[channelId]?.items || []
+      channel.value.videos.data[channelId] = {
+        ...response.data,
+        items: [...currentItems, ...response.data.items],
+      }
+      channel.value.videos.status = AsyncStatus.SUCCESS
+    } catch (err: any) {
+      channel.value.videos.status = AsyncStatus.FAIL
+      channel.value.videos.error = err.message
+    }
+  }
+  const fetchChannelPlayLists = async (channelId: string, pageToken?: string) => {
+    try {
+      channel.value.playlists.status = AsyncStatus.LOADING
+      channel.value.playlists.error = ''
+      const options: Record<string, string> = {}
+      if (pageToken) options.pageToken = pageToken
+      const response = await fetchChannelPlayListsAPI(channelId, options)
+      const currentItems = channel.value.playlists.data[channelId]?.items || []
+      channel.value.playlists.data[channelId] = {
+        ...response.data,
+        items: [...currentItems, ...response.data.items],
+      }
+      channel.value.playlists.status = AsyncStatus.SUCCESS
+    } catch (err: any) {
+      channel.value.playlists.status = AsyncStatus.FAIL
+      channel.value.playlists.error = err.message
+    }
+  }
 
   return {
     channelState: channel,
