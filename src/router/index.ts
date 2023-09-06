@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/pages/HomePage.vue'
 import ChannelVideos from '@/pages/ChannelVideos.vue'
 import ChannelPlayLists from '@/pages/ChannelPlayLists.vue'
+import ChannelProfile from '@/pages/ChannelProfile.vue'
 import NotFound from '@/pages/NotFound.vue'
 
 const router = createRouter({
@@ -58,6 +59,11 @@ const router = createRouter({
           path: 'playlists',
           name: 'channel-playlists',
           component: ChannelPlayLists,
+        },
+        {
+          path: 'profile',
+          name: 'channel-profile',
+          component: ChannelProfile,
         },
       ],
     },
