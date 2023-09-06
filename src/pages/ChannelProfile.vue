@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useChannelProfile } from '@/composables/useChannelProfile';
 import AppLoader from '@/components/LoaderComp.vue'
 import AppErrorMessage from '@/components/ErrorMessageComp.vue'
-import AppChannelBanner from '@/components/ChannelBanner.vue'
-import AppChannelItem from '@/components/ChannelItem.vue'
 import { AsyncStatus } from '@/settings/types';
 import { formatNumber, fromNow } from '@/settings/utils';
 
