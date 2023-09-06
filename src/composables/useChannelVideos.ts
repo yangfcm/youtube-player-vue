@@ -9,7 +9,7 @@ export function useChannelVideos(channelId: string) {
 
   const status = computed(() => channelState.value.videos.status)
   const error = computed(() => channelState.value.videos.error)
-  const channelVideos = computed(() => channelState.value.videos.data[channelId]?.items || [])
+  const videos = computed(() => channelState.value.videos.data[channelId]?.items || [])
   const nextPageToken = computed(() => channelState.value.videos.data[channelId]?.nextPageToken)
   const hasMore = computed(() => !!channelState.value.videos.data[channelId]?.nextPageToken)
 
@@ -19,13 +19,13 @@ export function useChannelVideos(channelId: string) {
   }
 
   onMounted(() => {
-    if (channelVideos.value.length === 0) {
+    if (videos.value.length === 0) {
       fetchChannelVideos(channelId)
     }
   })
 
   return {
-    channelVideos,
+    videos,
     status,
     error,
     hasMore,

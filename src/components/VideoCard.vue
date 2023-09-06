@@ -25,8 +25,10 @@ defineProps<{
       <v-card-subtitle>{{ video.snippet.channelTitle  }}</v-card-subtitle>
     </router-link>
     <v-card-text>
-      {{ formatNumber(parseInt(video.statistics.viewCount)) }} views
-      •
+      <template v-if="video.statistics?.viewCount">
+        {{ formatNumber(parseInt(video.statistics.viewCount)) }} views
+        •
+      </template>
       {{ fromNow(video.snippet.publishedAt) }}
     </v-card-text>
   </v-card>

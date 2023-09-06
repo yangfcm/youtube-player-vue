@@ -55,7 +55,7 @@ export const useChannelStore = defineStore('channel', () => {
   }
   const fetchChannelVideos = async (channelId: string, pageToken?: string) => {
     try {
-      channel.value.playlists.status = AsyncStatus.LOADING
+      channel.value.videos.status = AsyncStatus.LOADING
       channel.value.videos.error = ''
       const options: Record<string, string> = {}
       if (pageToken) options.pageToken = pageToken
