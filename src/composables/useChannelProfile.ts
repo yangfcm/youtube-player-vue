@@ -2,7 +2,7 @@ import { onMounted, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useChannelStore } from '@/stores/channel'
 
-export function useChanneProfile(channelId: string) {
+export function useChannelProfile(channelId: string) {
   const channelStore = useChannelStore()
   const { fetchChannelProfile } = channelStore
   const { channelState } = storeToRefs(channelStore)
