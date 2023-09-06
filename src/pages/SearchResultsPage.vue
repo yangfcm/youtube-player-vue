@@ -14,21 +14,23 @@ const { searchResults, status, error, hasMore, fetchMore } = useSearchResults(ke
 </script>
 
 <template>
-  <h1 class="text-h5 mb-4">Search results for "{{ keyword }}"</h1>
-  <app-loader v-if="status === AsyncStatus.LOADING && searchResults.length === 0"></app-loader>
-  <app-error-message v-if="status === AsyncStatus.FAIL">{{ error }}</app-error-message>
-  <app-search-item
-    v-for="(item, index) in searchResults"
-    :key="index"
-    :item="item"
-    class="mb-3"
-  >
-  </app-search-item>
-  <app-more-button
-    v-if="hasMore"
-    :loading="status === AsyncStatus.LOADING"
-    @onLoadMore="fetchMore"
-  >
-    More results
-  </app-more-button>
+  <div class="pa-3">
+    <h1 class="text-h5 mb-4">Search results for "{{ keyword }}"</h1>
+    <app-loader v-if="status === AsyncStatus.LOADING && searchResults.length === 0"></app-loader>
+    <app-error-message v-if="status === AsyncStatus.FAIL">{{ error }}</app-error-message>
+    <app-search-item
+      v-for="(item, index) in searchResults"
+      :key="index"
+      :item="item"
+      class="mb-3"
+    >
+    </app-search-item>
+    <app-more-button
+      v-if="hasMore"
+      :loading="status === AsyncStatus.LOADING"
+      @onLoadMore="fetchMore"
+    >
+      More results
+    </app-more-button>
+  </div>
 </template>
