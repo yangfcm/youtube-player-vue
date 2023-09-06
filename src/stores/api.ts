@@ -88,7 +88,10 @@ export const fetchChannelProfileAPI = async (
   })
 }
 
-export const fetchChannelVideosAPI = async (channelId: string, options: Record<string, string>) => {
+export const fetchChannelVideosAPI = async (
+  channelId: string,
+  options: Record<string, string>,
+): Promise<AxiosResponse<VideosResponse>> => {
   return await appAxios.get('/search', {
     params: {
       channelId,
@@ -104,7 +107,7 @@ export const fetchChannelVideosAPI = async (channelId: string, options: Record<s
 export const fetchChannelPlayListsAPI = async (
   channelId: string,
   options: Record<string, string>,
-) => {
+): Promise<AxiosResponse<PlayListsRespone>> => {
   return await appAxios.get('/playlists', {
     params: {
       channelId,
