@@ -27,7 +27,7 @@ const { video, status, error } = useVideo(videoId);
       </template>
       <template v-else>
         <app-video-player :videoId="videoId"></app-video-player>
-        <h1 class="pa-0 text-h4 overflow-auto">{{ video.snippet.title }}</h1>
+        <h1 class="pb-3 pt-2 text-h4 overflow-auto text-primary">{{ video.snippet.title }}</h1>
         <router-link :to="`/channel/${video.snippet.channelId}`" class="text-h6">
           {{ video.snippet.channelTitle }}
         </router-link>
