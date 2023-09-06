@@ -36,14 +36,14 @@ const shownChannelDescription = computed(() => {
       }"
       class="pa-3"
       variant="flat"
-    ></app-channel-item>
-  </div>
-  <v-tabs align-tabs="title">
-    <v-tab :to="`/channel/${channelId}/videos`">Videos</v-tab>
-    <v-tab :to="`/channel/${channelId}/playlists`">Playlists</v-tab>
-    <v-tab :to="`/channel/${channelId}/profile`">About</v-tab>
-  </v-tabs>
-  <div class="pa-3">
-    <RouterView></RouterView>
+    ></app-channel-item>    
+    <v-tabs align-tabs="title">
+      <v-tab :to="`/channel/${channelId}/videos`">Videos</v-tab>
+      <v-tab :to="`/channel/${channelId}/playlists`">Playlists</v-tab>
+      <v-tab :to="`/channel/${channelId}/profile`">About</v-tab>
+    </v-tabs>
+    <div class="pa-3">
+      <RouterView></RouterView>
+    </div>
   </div>
 </template>
