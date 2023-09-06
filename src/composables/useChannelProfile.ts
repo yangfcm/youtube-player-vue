@@ -12,7 +12,9 @@ export function useChannelProfile(channelId: string) {
   const channelProfile = computed(() => channelState.value.profile.data[channelId])
 
   onMounted(() => {
-    fetchChannelProfile(channelId)
+    if (!channelProfile.value) {
+      fetchChannelProfile(channelId)
+    }
   })
 
   return {

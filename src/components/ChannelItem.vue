@@ -6,19 +6,19 @@ export type ChannelItem = {
   id: string;
   title: string;
   imageUrl?: string;
-  description: string;
+  description?: string;
 }
 
 defineProps<{
-  channel: ChannelItem
+  channel: ChannelItem,
+  variant?: 'text' | 'flat' | 'elevated' | 'tonal' | 'outlined' | 'plain'
 }>()
 
 const { name } = useDisplay()
 </script>
 
-
 <template>
-  <v-card>
+  <v-card :variant="variant || 'elevated'">
     <div class="d-flex flex-column flex-sm-row">
       <router-link :to="`/channel/${channel.id}`">
         <v-avatar
@@ -38,7 +38,7 @@ const { name } = useDisplay()
             {{ channel.title }}
           </v-card-title>
         </router-link>
-        <v-card-text>
+        <v-card-text v-if="!!channel.description">
           {{ channel.description }}
         </v-card-text>
       </div>
