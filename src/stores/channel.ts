@@ -7,17 +7,17 @@ import type { ChannelDetails, PlayListsRespone, VideosResponse } from './types'
 type ChannelStore = {
   profile: {
     status: AsyncStatus
-    error: ''
+    error: string
     data: Record<string, ChannelDetails>
   }
   videos: {
     status: AsyncStatus
-    error: ''
+    error: string
     data: Record<string, VideosResponse>
   }
   playlists: {
     status: AsyncStatus
-    error: ''
+    error: string
     data: Record<string, PlayListsRespone>
   }
 }
