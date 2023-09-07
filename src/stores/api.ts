@@ -10,10 +10,13 @@ import {
 } from '@/settings/constants'
 import {
   type ChannelDetailsResponse,
+  type CommentResponse,
   type PlayListItemsResponse,
   type PlayListsRespone,
+  type ReplyResponse,
   type SearchResultsResponse,
   type SubscriptionsResponse,
+  type VideoCommentRequestBody,
   type VideoResponse,
   type VideosResponse,
 } from './types'
@@ -142,6 +145,60 @@ export const fetchSearchResultsAPI = async (
       maxResults: MAX_RESULTS_15,
       q: keyword,
       ...options,
+    },
+  })
+}
+
+export const fetchCommentsAPI = async (
+  videoId: string,
+  options: Record<string, string>,
+): Promise<AxiosResponse<CommentResponse>> => {
+  return await appAxios.get('/commentThreads', {
+    params: {
+      part: PART_SNIPPET,
+      maxResults: MAX_RESULTS_15,
+      order: 'relevance',
+      ...options,
+      videoId,
+    },
+  })
+}
+
+export const fetchRepliesAPI = async (
+  commentId: string,
+  options: Record<string, string>,
+): Promise<AxiosResponse<ReplyResponse>> => {
+  return await appAxios.get('/comments', {
+    params: {
+      part: PART_SNIPPET,
+      maxResults: MAX_RESULTS_15,
+      ...options,
+      parentId: commentId,
+    },
+  })
+}
+
+export const postVideoCommentAPI = async (videoId: string, comment: string) => {
+  const token = localStorage.getItem('token')
+  if (!token) throw new Error('User is not logged in')
+
+  const requestBody: VideoCommentRequestBody = {
+    snippet: {
+      videoId,
+      topLevelComment: {
+        snippet: {
+          textOriginal: comment,
+        },
+      },
+    },
+  }
+
+  return await appAxios.post('/commentThreads', requestBody, {
+    params: {
+      part: PART_SNIPPET,
+    },
+    headers: {
+      Authorization: localStorage.getItem('token'),
     },
   })
 }
