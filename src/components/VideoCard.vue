@@ -13,7 +13,11 @@ const videoId = typeof props.video.id === 'string' ? props.video.id : props.vide
 <template>
   <v-card>
     <router-link :to="`/video/${videoId}`">
-      <v-img :lazy-src="PLACEHOLDER_IMAGE_RECTANGLE" :src="video.snippet.thumbnails.high?.url"></v-img>
+      <v-img
+        :lazy-src="PLACEHOLDER_IMAGE_RECTANGLE"
+        :src="video.snippet.thumbnails.high?.url"
+        :cover="true"
+      ></v-img>
     </router-link>
     <v-tooltip :text="video.snippet.title" location="bottom">
       <template v-slot:activator="{props}">
