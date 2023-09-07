@@ -9,7 +9,7 @@ import AppPlayListVideosComp from '@/components/PlayListVideosComp.vue'
 import { AsyncStatus } from '@/settings/types';
 import { formatNumber, fromNow } from '@/settings/utils';
 
-const { name } = useDisplay()
+const { mdAndDown } = useDisplay()
 const route = useRoute();
 const videoId = route.params.id as string;
 const playListId = route.query.playListId as string;
@@ -34,18 +34,17 @@ const { video, status, error } = useVideo(videoId);
         <router-link :to="`/channel/${video.snippet.channelId}`" class="text-h6">
           {{ video.snippet.channelTitle }}
         </router-link>
-        <div>{{ formatNumber(parseInt(video.statistics.viewCount)) }} views
+        <div class="mb-3">{{ formatNumber(parseInt(video.statistics.viewCount)) }} views
         •
         {{ fromNow(video.snippet.publishedAt) }}
         </div>
-        <v-divider class="my-3"></v-divider>
         <div>{{ video.snippet.description }}</div>
         <v-divider class="my-3"></v-divider>
         <v-row>
           <v-col>
             Comments
           </v-col>
-          <v-col :cols="name === 'md' ? 12 : 5 ">
+          <v-col :cols="mdAndDown ? 12 : 5 ">
             <app-play-list-videos-comp :playListId = "playListId"></app-play-list-videos-comp>
           </v-col>
         </v-row>
