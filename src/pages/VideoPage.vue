@@ -1,14 +1,18 @@
 <script setup lang="ts">
+import { useDisplay } from 'vuetify';
 import { useRoute } from 'vue-router';
 import { useVideo } from '@/composables/useVideo';
 import AppLoader from '@/components/LoaderComp.vue';
 import AppErrorMessage from '@/components/ErrorMessageComp.vue';
 import AppVideoPlayer from '@/components/VideoPlayerComp.vue';
+import AppPlayListVideosComp from '@/components/PlayListVideosComp.vue'
 import { AsyncStatus } from '@/settings/types';
 import { formatNumber, fromNow } from '@/settings/utils';
 
+const { name } = useDisplay()
 const route = useRoute();
 const videoId = route.params.id as string;
+const playListId = route.query.playListId as string;
 
 const { video, status, error } = useVideo(videoId);
 </script>
@@ -37,7 +41,17 @@ const { video, status, error } = useVideo(videoId);
         </div>
         <v-divider class="my-3"></v-divider>
         <div>{{ video.snippet.description }}</div>
+        <v-divider class="my-3"></v-divider>
+        <v-row>
+          <v-col>
+            Comments
+          </v-col>
+          <v-col :cols="name === 'md' ? 12 : 6 ">
+            <app-play-list-videos-comp :playListId = "playListId"></app-play-list-videos-comp>
+          </v-col>
+        </v-row>
       </template>
+      
     </template>
   </div>
 </template>
