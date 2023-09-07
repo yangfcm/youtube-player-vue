@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 import { useRoute } from 'vue-router';
 import { useVideo } from '@/composables/useVideo';
@@ -11,7 +12,7 @@ import { formatNumber, fromNow } from '@/settings/utils';
 
 const { mdAndDown } = useDisplay()
 const route = useRoute();
-const videoId = route.params.id as string;
+const videoId = computed(() => route.params.id as string);
 const playListId = route.query.playListId as string;
 
 const { video, status, error } = useVideo(videoId);
