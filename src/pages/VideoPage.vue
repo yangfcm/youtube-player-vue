@@ -26,9 +26,8 @@ const { video, status, error } = useVideo(videoId);
     >
     </app-error-message>
     <template v-if="status === AsyncStatus.SUCCESS">
-      <template v-if="!video">
-        The video isn't available.
-      </template>
+      <app-error-message v-if="!video" message="The video isn't available.">
+      </app-error-message>
       <template v-else>
         <app-video-player :videoId="videoId"></app-video-player>
         <h1 class="pb-3 pt-2 text-h4 overflow-auto text-primary">{{ video.snippet.title }}</h1>
@@ -46,7 +45,7 @@ const { video, status, error } = useVideo(videoId);
           <v-col>
             Comments
           </v-col>
-          <v-col :cols="name === 'md' ? 12 : 6 ">
+          <v-col :cols="name === 'md' ? 12 : 5 ">
             <app-play-list-videos-comp :playListId = "playListId"></app-play-list-videos-comp>
           </v-col>
         </v-row>
