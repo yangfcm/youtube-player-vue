@@ -46,7 +46,7 @@ const { video, status, error } = useVideo(videoId);
           <v-col>
             <app-video-comments :videoId="videoId"></app-video-comments>
           </v-col>
-          <v-col :cols="mdAndDown ? 12 : 5 ">
+          <v-col v-if="!!playListId" :cols="mdAndDown ? 12 : 5">
             <app-play-list-videos-comp :playListId = "playListId"></app-play-list-videos-comp>
           </v-col>
         </v-row>
