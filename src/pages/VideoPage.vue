@@ -7,6 +7,7 @@ import AppLoader from '@/components/LoaderComp.vue';
 import AppErrorMessage from '@/components/ErrorMessageComp.vue';
 import AppVideoPlayer from '@/components/VideoPlayerComp.vue';
 import AppPlayListVideosComp from '@/components/PlayListVideosComp.vue'
+import AppVideoComments from '@/components/VideoComments.vue'
 import { AsyncStatus } from '@/settings/types';
 import { formatNumber, fromNow } from '@/settings/utils';
 
@@ -43,7 +44,7 @@ const { video, status, error } = useVideo(videoId);
         <v-divider class="my-3"></v-divider>
         <v-row>
           <v-col>
-            Comments
+            <app-video-comments :videoId="videoId"></app-video-comments>
           </v-col>
           <v-col :cols="mdAndDown ? 12 : 5 ">
             <app-play-list-videos-comp :playListId = "playListId"></app-play-list-videos-comp>
