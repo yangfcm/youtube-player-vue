@@ -14,7 +14,7 @@ const props = defineProps<{
 }>()
 
 const { isSignedIn } = useAuth()
-const { comments, status, error, hasMore, fetchMore, setOrder } = useComments(props.videoId)
+const { comments, status, error, hasMore, fetchMore, setOrder, order } = useComments(props.videoId)
 
 </script>
 
@@ -22,7 +22,7 @@ const { comments, status, error, hasMore, fetchMore, setOrder } = useComments(pr
   <div class="text-h6 mb-2">
     <v-icon icon="mdi-comment-text-multiple"></v-icon>
     Comments
-    <app-sort-comments @onSetOrder="setOrder"></app-sort-comments>
+    <app-sort-comments @onSetOrder="setOrder" :order="order"></app-sort-comments>
   </div>
   <div v-if="isSignedIn" class="mb-2">
     <app-add-comment :videoId="videoId"></app-add-comment>
