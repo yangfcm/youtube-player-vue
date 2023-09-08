@@ -17,7 +17,7 @@ defineProps<{
       <v-card-title>{{ playlist.snippet.title }}</v-card-title>    
     </router-link>
     <v-chip-group class="px-4">
-      <v-chip>{{  playlist.contentDetails.itemCount }} video{{ playlist.contentDetails.itemCount > 1 && 's' }}</v-chip>
+      <v-chip>{{  playlist.contentDetails.itemCount }} video{{ playlist.contentDetails.itemCount > 1 ? 's' : '' }}</v-chip>
     </v-chip-group>
   </v-card>
 </template>
