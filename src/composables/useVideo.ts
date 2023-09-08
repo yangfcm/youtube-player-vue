@@ -18,7 +18,7 @@ export function useVideo(videoId: Ref<string>) {
   })
 
   watch(videoId, (newValue, oldValue) => {
-    if (!video.value && newValue !== oldValue) {
+    if (!video.value && newValue !== oldValue && newValue) {
       fetchVideo(newValue)
     }
   })
