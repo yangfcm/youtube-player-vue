@@ -5,6 +5,7 @@ import AppAddComment from './AddComment.vue'
 import AppLoader from '@/components/LoaderComp.vue'
 import AppErrorMessage from '@/components/ErrorMessageComp.vue'
 import AppMoreButton from '@/components/MoreButton.vue';
+import AppCommentItem from '@/components/CommentItem.vue'
 import { AsyncStatus } from '@/settings/types';
 
 const props = defineProps<{
@@ -27,7 +28,7 @@ const { comments, order, status, error, hasMore, fetchMore } = useComments(props
   <app-loader v-if="status===AsyncStatus.LOADING && !comments.length"></app-loader>
   <app-error-message v-if="status===AsyncStatus.FAIL" :message="error"></app-error-message>
   <div v-for="comment in comments" :key="comment.id">
-    {{ comment.snippet.topLevelComment.snippet.textOriginal }}
+    <app-comment-item :comment="comment"></app-comment-item>
   </div>
   <app-more-button
     v-if="hasMore"
