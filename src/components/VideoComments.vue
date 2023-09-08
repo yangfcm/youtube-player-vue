@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useComments } from '@/composables/useComments';
 import { useAuth } from '@/composables/useAuth'
 import AppSortComments from './SortComments.vue'
@@ -14,7 +15,8 @@ const props = defineProps<{
 }>()
 
 const { isSignedIn } = useAuth()
-const { comments, status, error, hasMore, fetchMore, setOrder, order } = useComments(props.videoId)
+const videoId = computed(() => props.videoId)
+const { comments, status, error, hasMore, fetchMore, setOrder, order } = useComments(videoId)
 
 </script>
 
