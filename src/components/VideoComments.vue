@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useComments } from '@/composables/useComments';
+import { useAuth } from '@/composables/useAuth'
 import AppSortComments from './SortComments.vue'
 import AppAddComment from './AddComment.vue'
 import AppLoader from '@/components/LoaderComp.vue'
@@ -12,17 +13,18 @@ const props = defineProps<{
   videoId: string,
 }>()
 
+const { isSignedIn } = useAuth()
 const { comments, status, error, hasMore, fetchMore, setOrder } = useComments(props.videoId)
 
 </script>
 
 <template>
-  <div class="text-h6">
+  <div class="text-h6 mb-2">
     <v-icon icon="mdi-comment-text-multiple"></v-icon>
     Comments
     <app-sort-comments @onSetOrder="setOrder"></app-sort-comments>
   </div>
-  <div class="my-2">
+  <div v-if="isSignedIn" class="mb-2">
     <app-add-comment :videoId="videoId"></app-add-comment>
   </div>
   <app-loader v-if="status===AsyncStatus.LOADING && !comments.length"></app-loader>

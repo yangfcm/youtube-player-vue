@@ -198,7 +198,7 @@ export const postVideoCommentAPI = async (videoId: string, comment: string) => {
       part: PART_SNIPPET,
     },
     headers: {
-      Authorization: localStorage.getItem('token'),
+      Authorization: bearify(token),
     },
   })
 }

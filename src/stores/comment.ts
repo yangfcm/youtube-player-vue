@@ -44,6 +44,11 @@ export const useCommentStore = defineStore('comment', () => {
     }
   }
 
+  const resetPostStatus = () => {
+    comment.value.postError = ''
+    comment.value.postStatus = AsyncStatus.IDLE
+  }
+
   const fetchComments = async (
     videoId: string,
     order: CommentOrder = 'relevance',
@@ -89,7 +94,6 @@ export const useCommentStore = defineStore('comment', () => {
     try {
       comment.value.postStatus = AsyncStatus.LOADING
       comment.value.postError = ''
-
       const response = await postVideoCommentAPI(videoId, commentText)
       const order = comment.value.comments[videoId].order || 'relevance'
       const currentItems = comment.value.comments[videoId].data[order]?.items || []
@@ -108,5 +112,6 @@ export const useCommentStore = defineStore('comment', () => {
     setCommentOrder,
     fetchComments,
     postVideoComment,
+    resetPostStatus,
   }
 })
