@@ -21,7 +21,7 @@ const { replies, status, error, hasMore, fetchMore} = useCommentReplies(props.co
 </script>
 
 <template>
-  <v-btn variant="text" density="compact" color="primary" @click="toggleShowReply">
+  <v-btn variant="text" density="compact" color="secondary" @click="toggleShowReply">
     {{ comment.snippet.totalReplyCount }} {{ comment.snippet.totalReplyCount === 1 ? 'reply' : 'replies' }}
   </v-btn>
   <div v-if="showReply">
