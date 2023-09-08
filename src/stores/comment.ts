@@ -38,6 +38,12 @@ export const useCommentStore = defineStore('comment', () => {
     postError: '',
   })
 
+  const setCommentOrder = (videoId: string, order: CommentOrder) => {
+    if (comment.value.comments[videoId]) {
+      comment.value.comments[videoId].order = order
+    }
+  }
+
   const fetchComments = async (
     videoId: string,
     order: CommentOrder = 'relevance',
@@ -83,6 +89,7 @@ export const useCommentStore = defineStore('comment', () => {
 
   return {
     commentState: comment,
+    setCommentOrder,
     fetchComments,
   }
 })
