@@ -29,6 +29,13 @@ const { comments, status, error, hasMore, fetchMore, setOrder, order } = useComm
   </div>
   <app-loader v-if="status===AsyncStatus.LOADING && !comments.length"></app-loader>
   <app-error-message v-if="status===AsyncStatus.FAIL" :message="error"></app-error-message>
+  <v-alert
+    v-if="status===AsyncStatus.SUCCESS && !comments.length"
+    class="text-center"
+    border="bottom"
+  >
+    <v-icon icon="mdi-alert"></v-icon>&nbsp;&nbsp;Nobody has left comment.
+  </v-alert>
   <div v-for="comment in comments" :key="comment.id">
     <app-comment-item :comment="comment"></app-comment-item>
   </div>
