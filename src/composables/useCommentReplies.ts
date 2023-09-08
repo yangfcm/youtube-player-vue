@@ -1,8 +1,8 @@
-import { onMounted, computed } from 'vue'
+import { computed, watch, type Ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useCommentStore } from '@/stores/comment'
 
-export function useCommentReplies(commentId: string) {
+export function useCommentReplies(commentId: string, fetch: Ref<boolean>) {
   const commentStore = useCommentStore()
   const { fetchReplies } = commentStore
   const { commentState } = storeToRefs(commentStore)
@@ -18,8 +18,8 @@ export function useCommentReplies(commentId: string) {
     await fetchReplies(commentId, nextPageToken.value)
   }
 
-  onMounted(() => {
-    if (replies.value.length === 0) {
+  watch(fetch, (value) => {
+    if (value && replies.value.length === 0) {
       fetchReplies(commentId)
     }
   })

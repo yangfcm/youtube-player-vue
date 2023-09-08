@@ -14,7 +14,7 @@ const handleClick = () => {
   <v-container class="px-0">
     <v-row no-gutters justify="center">
       <v-col xs="12" sm="6" lg="4">
-        <v-btn :loading="!!loading" @click="handleClick" block>
+        <v-btn :loading="!!loading" @click="handleClick" block density="compact">
           <slot>More</slot>
         </v-btn>
       </v-col>

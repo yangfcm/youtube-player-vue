@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { fromNow } from '@/settings/utils';
+import AppCommentReplies from '@/components/CommentReplies.vue'
 import type { CommentSnippet, ReplySnippet } from '@/stores/types';
 
 const props = defineProps<{
@@ -28,6 +29,10 @@ const commentItem = isTopComment ? (props.comment as CommentSnippet).snippet.top
         <div>
           {{ commentItem.textOriginal }}
         </div>
+        <app-comment-replies
+          :comment="(comment as CommentSnippet)"
+          v-if="(comment as CommentSnippet).snippet.totalReplyCount > 0"
+        ></app-comment-replies>
       </div>
     </div>
   </v-card>
