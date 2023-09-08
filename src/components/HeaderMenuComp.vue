@@ -7,7 +7,9 @@ const { signout, user } = useAuth()
 <template>
   <v-menu v-if="!!user">
     <template v-slot:activator="{ props }">
-      <v-avatar :image="user.picture" v-bind="props"></v-avatar>
+      <v-avatar :image="user.picture" v-bind="props">
+        <v-icon icon="mdi-account" color="white" size="large"></v-icon>
+      </v-avatar>
     </template>
     <v-list>
       <v-list-item
