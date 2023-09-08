@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { AsyncStatus } from '@/settings/types'
 import type { CommentOrder, CommentResponse, ReplyResponse } from './types'
-import { fetchCommentsAPI, postVideoCommentAPI } from './api'
+import { fetchCommentsAPI, fetchRepliesAPI, postVideoCommentAPI } from './api'
 import { COMMENTS_TURNED_OFF_MESSAGE } from '@/settings/constants'
 
 type CommentStore = {
@@ -56,7 +56,7 @@ export const useCommentStore = defineStore('comment', () => {
   ) => {
     if (!comment.value.comments[videoId]) {
       comment.value.comments[videoId] = {
-        status: AsyncStatus.LOADING,
+        status: AsyncStatus.IDLE,
         error: '',
         data: {
           [order]: undefined,
@@ -88,7 +88,30 @@ export const useCommentStore = defineStore('comment', () => {
     }
   }
 
-  const fetchReplies = async () => {}
+  const fetchReplies = async (commentId: string, pageToken?: string) => {
+    if (!comment.value.replies[commentId]) {
+      comment.value.replies[commentId] = {
+        status: AsyncStatus.IDLE,
+        error: '',
+      }
+    }
+    try {
+      comment.value.replies[commentId].status = AsyncStatus.LOADING
+      comment.value.replies[commentId].error = ''
+      const options: Record<string, string> = {}
+      if (pageToken) options.pageToken = pageToken
+      const response = await fetchRepliesAPI(commentId, options)
+      comment.value.replies[commentId].status = AsyncStatus.SUCCESS
+      const currentItems = comment.value.replies[commentId]?.data?.items || []
+      comment.value.replies[commentId].data = {
+        ...response.data,
+        items: [...currentItems, ...response.data.items],
+      }
+    } catch (err: any) {
+      comment.value.replies[commentId].status = AsyncStatus.FAIL
+      comment.value.replies[commentId].error = err.message
+    }
+  }
 
   const postVideoComment = async (videoId: string, commentText: string) => {
     try {
@@ -111,6 +134,7 @@ export const useCommentStore = defineStore('comment', () => {
     commentState: comment,
     setCommentOrder,
     fetchComments,
+    fetchReplies,
     postVideoComment,
     resetPostStatus,
   }
