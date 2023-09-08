@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import { mergeProps } from 'vue'
+import type { CommentOrder } from '@/stores/types';
+
+const emit = defineEmits(['onSetOrder'])
+const setOrder = (order: CommentOrder) => {
+  emit('onSetOrder', order);
+}
+
 </script>
 
 <template>
@@ -18,8 +25,8 @@ import { mergeProps } from 'vue'
         </v-tooltip>
       </template>
       <v-list>
-        <v-list-item>Top comments</v-list-item>
-        <v-list-item>Newest first</v-list-item>
+        <v-list-item @click="() => setOrder('relevance')">Top comments</v-list-item>
+        <v-list-item @click="() => setOrder('time')">Newest first</v-list-item>
       </v-list>
   </v-menu>
 </template>
