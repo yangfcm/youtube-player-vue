@@ -36,7 +36,7 @@ export function useComments(videoId: string) {
     }
   })
 
-  watch(order, (newValue, oldValue) => {
+  watch(order, (newValue) => {
     if (comments.value.length === 0) {
       fetchComments(videoId, newValue)
     }

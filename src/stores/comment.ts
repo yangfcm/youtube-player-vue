@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { AsyncStatus } from '@/settings/types'
 import type { CommentOrder, CommentResponse, ReplyResponse } from './types'
-import { fetchCommentsAPI } from './api'
+import { fetchCommentsAPI, postVideoCommentAPI } from './api'
 import { COMMENTS_TURNED_OFF_MESSAGE } from '@/settings/constants'
 
 type CommentStore = {
@@ -85,11 +85,28 @@ export const useCommentStore = defineStore('comment', () => {
 
   const fetchReplies = async () => {}
 
-  const postVideoComment = async () => {}
+  const postVideoComment = async (videoId: string, commentText: string) => {
+    try {
+      comment.value.postStatus = AsyncStatus.LOADING
+      comment.value.postError = ''
+
+      const response = await postVideoCommentAPI(videoId, commentText)
+      const order = comment.value.comments[videoId].order || 'relevance'
+      const currentItems = comment.value.comments[videoId].data[order]?.items || []
+      comment.value.postStatus = AsyncStatus.SUCCESS
+      if (comment.value.comments[videoId].data[order]) {
+        comment.value.comments[videoId].data[order]!.items = [response.data, ...currentItems]
+      }
+    } catch (err: any) {
+      comment.value.postStatus = AsyncStatus.FAIL
+      comment.value.postError = err.message
+    }
+  }
 
   return {
     commentState: comment,
     setCommentOrder,
     fetchComments,
+    postVideoComment,
   }
 })
