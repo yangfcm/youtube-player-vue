@@ -15,7 +15,7 @@ const kind = typeof props.item.id === 'string' ? '' : props.item.id.kind.split('
 <template>
   <div>
     <app-video-item
-      v-if="kind==='video'"
+      v-if="kind === 'video'"
       :video="{
         id: (item.id as VideoId).videoId,
         title: item.snippet.title,
@@ -26,7 +26,7 @@ const kind = typeof props.item.id === 'string' ? '' : props.item.id.kind.split('
       }"
     ></app-video-item>
     <app-channel-item
-      v-if="kind==='channel'"
+      v-if="kind === 'channel'"
       :channel="{
         id: (item.id as ChannelId).channelId,
         title: item.snippet.title,
@@ -35,7 +35,7 @@ const kind = typeof props.item.id === 'string' ? '' : props.item.id.kind.split('
       }"
     ></app-channel-item>
     <app-play-list-item
-      v-if="kind==='playlist'"
+      v-if="kind === 'playlist'"
       :playList="{
         id: (item.id as PlayListId).playlistId,
         title: item.snippet.title,

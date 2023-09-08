@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { usePostComment } from '@/composables/usePostComment';
-import { AsyncStatus } from '@/settings/types';
+import { ref } from 'vue'
+import { usePostComment } from '@/composables/usePostComment'
+import { AsyncStatus } from '@/settings/types'
 
 const props = defineProps<{
-  videoId: string,
+  videoId: string
 }>()
 
 const comment = ref('')
@@ -12,10 +12,9 @@ const { postVideoComment, reset, status, error } = usePostComment(props.videoId)
 
 const handleAddComment = () => {
   const commentToAdd = comment.value.trim()
-  if(!commentToAdd) return
+  if (!commentToAdd) return
   postVideoComment(commentToAdd)
 }
-
 </script>
 
 <template>

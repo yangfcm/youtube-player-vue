@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAuth } from '@/composables/useAuth';
+import { useAuth } from '@/composables/useAuth'
 
 const { signout, user } = useAuth()
 </script>
@@ -12,11 +12,7 @@ const { signout, user } = useAuth()
       </v-avatar>
     </template>
     <v-list>
-      <v-list-item
-        :prepend-avatar="user.picture"
-        :title="user.name"
-        :subtitle="user.email"
-      > 
+      <v-list-item :prepend-avatar="user.picture" :title="user.name" :subtitle="user.email">
       </v-list-item>
       <v-divider></v-divider>
       <v-list-item>

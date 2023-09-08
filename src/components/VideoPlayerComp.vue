@@ -5,14 +5,15 @@ defineProps<{
 </script>
 
 <template>
-<div class="app-player-container mb-2">
-  <iframe 
-    :src="`https://www.youtube.com/embed/${videoId}`" 
-    alt="video"
-    title="video player"
-    class="app-player">
-  </iframe>
-</div>
+  <div class="app-player-container mb-2">
+    <iframe
+      :src="`https://www.youtube.com/embed/${videoId}`"
+      alt="video"
+      title="video player"
+      class="app-player"
+    >
+    </iframe>
+  </div>
 </template>
 
 <style scoped>

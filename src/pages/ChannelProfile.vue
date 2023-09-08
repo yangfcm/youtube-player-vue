@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import { useChannelProfile } from '@/composables/useChannelProfile';
+import { useRoute } from 'vue-router'
+import { useChannelProfile } from '@/composables/useChannelProfile'
 import AppLoader from '@/components/LoaderComp.vue'
 import AppErrorMessage from '@/components/ErrorMessageComp.vue'
-import { AsyncStatus } from '@/settings/types';
-import { formatNumber, fromNow } from '@/settings/utils';
+import { AsyncStatus } from '@/settings/types'
+import { formatNumber, fromNow } from '@/settings/utils'
 
 const route = useRoute()
-const channelId = route.params.id as string;
-const { status, error, channelProfile } = useChannelProfile(channelId);
-
+const channelId = route.params.id as string
+const { status, error, channelProfile } = useChannelProfile(channelId)
 </script>
 
 <template>
@@ -19,7 +18,7 @@ const { status, error, channelProfile } = useChannelProfile(channelId);
     <v-card variant="flat">
       <v-card-title>Description</v-card-title>
       <v-card-text>{{ channelProfile.snippet.description }}</v-card-text>
-    </v-card> 
+    </v-card>
     <v-card variant="flat">
       <v-card-title>Stats</v-card-title>
       <v-list density="compact" class="py-0">

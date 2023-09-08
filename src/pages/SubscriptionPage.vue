@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { useAuth } from '@/composables/useAuth';
-import { useSubscriptions } from '@/composables/useSubscriptions';
-import AppGoogleAuth from '@/components/GoogleAuthComp.vue';
-import AppLoader from '@/components/LoaderComp.vue';
-import AppErrorMessage from '@/components/ErrorMessageComp.vue';
-import AppMoreButton from '@/components/MoreButton.vue';
-import AppItemsGrid from '@/components/ItemsGrid.vue';
-import { AsyncStatus } from '@/settings/types';
+import { useAuth } from '@/composables/useAuth'
+import { useSubscriptions } from '@/composables/useSubscriptions'
+import AppGoogleAuth from '@/components/GoogleAuthComp.vue'
+import AppLoader from '@/components/LoaderComp.vue'
+import AppErrorMessage from '@/components/ErrorMessageComp.vue'
+import AppMoreButton from '@/components/MoreButton.vue'
+import AppItemsGrid from '@/components/ItemsGrid.vue'
+import { AsyncStatus } from '@/settings/types'
 
 const { subscriptions, status, error, hasMore, fetchMore } = useSubscriptions()
-const { isSignedIn } = useAuth();
-
+const { isSignedIn } = useAuth()
 </script>
 <template>
   <div class="pa-3">

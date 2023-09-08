@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { onMounted, inject } from 'vue';
-import AppHeaderComp from './components/HeaderComp.vue';
-import AppSidebarComp from './components/SidebarComp.vue';
-import { useAuth } from './composables/useAuth';
+import { onMounted, inject } from 'vue'
+import AppHeaderComp from './components/HeaderComp.vue'
+import AppSidebarComp from './components/SidebarComp.vue'
+import { useAuth } from './composables/useAuth'
 
 const { fetchUserByToken } = useAuth()
 
 onMounted(() => {
   const token = inject<string>('token')
-  if(token) fetchUserByToken(token)
-});
+  if (token) fetchUserByToken(token)
+})
 </script>
 
 <template>
@@ -22,5 +22,4 @@ onMounted(() => {
   </v-app>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

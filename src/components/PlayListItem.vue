@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { useDisplay } from 'vuetify';
-import { PLACEHOLDER_IMAGE_RECTANGLE } from '@/settings/constants';
-import { fromNow } from '@/settings/utils';
+import { useDisplay } from 'vuetify'
+import { PLACEHOLDER_IMAGE_RECTANGLE } from '@/settings/constants'
+import { fromNow } from '@/settings/utils'
 
 export type PlayListItem = {
-  id: string;
-  title: string;
-  imageUrl?: string;
-  channelId: string;
-  channelTitle: string;
-  publishedAt: Date;
+  id: string
+  title: string
+  imageUrl?: string
+  channelId: string
+  channelTitle: string
+  publishedAt: Date
 }
 
 defineProps<{
@@ -19,15 +19,11 @@ defineProps<{
 const { name } = useDisplay()
 </script>
 
-
 <template>
   <v-card>
     <div class="d-flex flex-column flex-sm-row">
       <router-link :to="`/playlist/${playList.id}`">
-        <v-avatar
-          rounded="0"
-          :style="`height: auto; width: ${name === 'xs' ? '100%' : '230px'}`"
-        >
+        <v-avatar rounded="0" :style="`height: auto; width: ${name === 'xs' ? '100%' : '230px'}`">
           <v-img
             :lazy-src="PLACEHOLDER_IMAGE_RECTANGLE"
             :src="playList.imageUrl"

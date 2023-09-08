@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useCommentReplies } from '@/composables/useCommentReplies';
-import type { CommentSnippet } from '@/stores/types';
+import { useCommentReplies } from '@/composables/useCommentReplies'
+import type { CommentSnippet } from '@/stores/types'
 import AppLoader from '@/components/LoaderComp.vue'
 import AppErrorMessage from '@/components/ErrorMessageComp.vue'
-import AppMoreButton from '@/components/MoreButton.vue';
+import AppMoreButton from '@/components/MoreButton.vue'
 import AppCommentItem from '@/components/CommentItem.vue'
-import { AsyncStatus } from '@/settings/types';
+import { AsyncStatus } from '@/settings/types'
 
 const props = defineProps<{
   comment: CommentSnippet
@@ -16,13 +16,16 @@ const showReply = ref(false)
 const toggleShowReply = () => {
   showReply.value = !showReply.value
 }
-const { replies, status, error, hasMore, fetchMore} = useCommentReplies(props.comment.id, showReply)
-
+const { replies, status, error, hasMore, fetchMore } = useCommentReplies(
+  props.comment.id,
+  showReply,
+)
 </script>
 
 <template>
   <v-btn variant="text" density="compact" color="secondary" @click="toggleShowReply">
-    {{ comment.snippet.totalReplyCount }} {{ comment.snippet.totalReplyCount === 1 ? 'reply' : 'replies' }}
+    {{ comment.snippet.totalReplyCount }}
+    {{ comment.snippet.totalReplyCount === 1 ? 'reply' : 'replies' }}
   </v-btn>
   <div v-if="showReply">
     <app-loader v-if="status === AsyncStatus.LOADING && !replies.length"></app-loader>
@@ -34,6 +37,7 @@ const { replies, status, error, hasMore, fetchMore} = useCommentReplies(props.co
       v-if="hasMore"
       :loading="status === AsyncStatus.LOADING"
       @onLoadMore="fetchMore"
-    >More replies</app-more-button>
+      >More replies</app-more-button
+    >
   </div>
 </template>

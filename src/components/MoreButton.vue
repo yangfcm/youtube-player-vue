@@ -1,12 +1,12 @@
-<script setup lang="ts"> 
-const emit = defineEmits(['onLoadMore']);
+<script setup lang="ts">
+const emit = defineEmits(['onLoadMore'])
 
 defineProps<{
-  loading?: boolean,
+  loading?: boolean
 }>()
 
 const handleClick = () => {
-  emit('onLoadMore');
+  emit('onLoadMore')
 }
 </script>
 
