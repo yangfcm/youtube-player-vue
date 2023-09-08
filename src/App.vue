@@ -1,49 +1,25 @@
-<template>
-  <div id="app" class="app-container">
-    <div class="app-body">
-      <app-header></app-header>
-      <div class="ui app-inner-container">
-        <router-view></router-view>
-      </div>
-    </div>
-    <app-blank></app-blank>
-    <app-footer></app-footer>
-  </div>
-</template>
+<script setup lang="ts">
+import { onMounted, inject } from 'vue'
+import AppHeaderComp from './components/HeaderComp.vue'
+import AppSidebarComp from './components/SidebarComp.vue'
+import { useAuth } from './composables/useAuth'
 
-<script>
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
-import Blank from "./components/common/Blank.vue";
-import "semantic-ui-css/semantic.min.css";
+const { fetchUserByToken } = useAuth()
 
-export default {
-  name: "App",
-  components: {
-    appHeader: Header,
-    appFooter: Footer,
-    appBlank: Blank,
-  },
-};
+onMounted(() => {
+  const token = inject<string>('token')
+  if (token) fetchUserByToken(token)
+})
 </script>
 
-<style>
-.app-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.app-inner-container {
-  max-width: 90%;
-  margin: 0 auto;
-  height: 100%;
-}
-.app-body {
-  flex-grow: 1;
-}
-@media only screen and (max-width: 576px) {
-  .app-inner-container {
-    max-width: 95%;
-  }
-}
-</style>
+<template>
+  <v-app>
+    <app-header-comp></app-header-comp>
+    <app-sidebar-comp></app-sidebar-comp>
+    <v-main>
+      <RouterView />
+    </v-main>
+  </v-app>
+</template>
+
+<style scoped></style>

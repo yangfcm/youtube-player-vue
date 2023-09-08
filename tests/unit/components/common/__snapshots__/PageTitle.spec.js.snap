@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`PageTitle component can render correctly 1`] = `<h2 class="ui red header" style="margin-bottom: 10px;">Title</h2>`;
