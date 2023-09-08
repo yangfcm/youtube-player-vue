@@ -1,6 +1,31 @@
-# youtube-player-vue1
+# My Youtube
 
-This template should help get you started developing with Vue 3 in Vite.
+## Intro
+
+A lightweight, ad-free Youtube video watching app built with VUE and Google Youtube Data API.
+
+## Features & Functionality
+
+- Google authorization
+- Display channel lists subscribed by authorized user.
+- Display play list created by authorized user.
+- View channel details and play list.
+- Play video and see video comments.
+- Browse recommended videos.
+- Subscribe/Unsubscribe channels.
+- Two advantages compared to Youtube app: Ad free and playing in the background.
+
+## Development setup
+
+- Install Node.js and NPM.
+- Under project root directory, run `npm install` to install packages.
+- Create `.env.local` file under project root directory as per `.env.template`
+
+- To get API key, you need to sign up on Google cloud platform, create a new project and create a new credential under the project so that you can get API key.
+
+- To get your channel id, you need to first signup as a youtube user and navigate to your channel. You can get your channel id in URL: `https://www.youtube.com/channel/your_channel_id?view_as=subscriber`
+
+- Run `npm start` to run it on local machine.
 
 ## Recommended IDE Setup
 
@@ -13,8 +38,8 @@ TypeScript cannot handle type information for `.vue` imports by default, so we r
 If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
 
 1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
+   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
 ## Customize configuration
