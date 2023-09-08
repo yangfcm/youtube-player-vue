@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useAuth } from '@/composables/useAuth'
 import { usePlayLists } from '@/composables/usePlayLists'
-import AppGoogleAuth from '@/components/GoogleAuthComp.vue'
+import AppGoogleAuth from '@/components/GoogleAuth.vue'
 import AppLoader from '@/components/LoaderComp.vue'
 import AppErrorMessage from '@/components/ErrorMessageComp.vue'
 import AppMoreButton from '@/components/MoreButton.vue'

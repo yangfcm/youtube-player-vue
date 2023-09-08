@@ -4,8 +4,8 @@ import { useRouter } from 'vue-router'
 import { useDisplay } from 'vuetify'
 import { useSettingStore } from '@/stores/setting'
 import { useAuth } from '@/composables/useAuth'
-import AppGoogleAuth from './GoogleAuthComp.vue'
-import AppHeaderMenu from './HeaderMenuComp.vue'
+import AppGoogleAuth from './GoogleAuth.vue'
+import AppHeaderMenu from './HeaderMenu.vue'
 
 const router = useRouter()
 const settingStore = useSettingStore()
