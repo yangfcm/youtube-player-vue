@@ -11,10 +11,12 @@ import {
 import {
   type ChannelDetailsResponse,
   type CommentResponse,
+  type CommentSnippet,
   type PlayListItemsResponse,
   type PlayListsRespone,
   type ReplyResponse,
   type SearchResultsResponse,
+  type SubscriptionSnippet,
   type SubscriptionsResponse,
   type VideoCommentRequestBody,
   type VideoResponse,
@@ -178,7 +180,10 @@ export const fetchRepliesAPI = async (
   })
 }
 
-export const postVideoCommentAPI = async (videoId: string, comment: string) => {
+export const postVideoCommentAPI = async (
+  videoId: string,
+  comment: string,
+): Promise<AxiosResponse<CommentSnippet>> => {
   const token = localStorage.getItem('token')
   if (!token) throw new Error('User is not logged in')
 
@@ -201,4 +206,64 @@ export const postVideoCommentAPI = async (videoId: string, comment: string) => {
       Authorization: bearify(token),
     },
   })
+}
+
+export const subscribeChannelAPI = async (
+  channelId: string,
+): Promise<AxiosResponse<SubscriptionSnippet>> => {
+  const token = localStorage.getItem('token')
+  if (!token) throw new Error('User is not logged in')
+
+  return await appAxios.post(
+    '/subscriptions',
+    {
+      snippet: {
+        resourceId: {
+          kind: 'youtube#channel',
+          channelId,
+        },
+      },
+    },
+    {
+      headers: {
+        Authorization: bearify(token),
+      },
+      params: {
+        part: PART_SNIPPET,
+      },
+    },
+  )
+}
+
+export const fetchSubscriptionIdAPI = async (
+  channelId: string,
+): Promise<AxiosResponse<SubscriptionsResponse>> => {
+  const token = localStorage.getItem('token')
+  if (!token) throw new Error('User is not logged in')
+
+  return await appAxios.get('/subscriptions', {
+    params: {
+      part: PART_SNIPPET,
+      forChannelId: channelId,
+      mine: true,
+    },
+    headers: {
+      Authorization: bearify(token),
+    },
+  })
+}
+
+export const unsubscribeChannelAPI = async (subscriptionId: string): Promise<string> => {
+  const token = localStorage.getItem('token')
+  if (!token) throw new Error('User is not logged in')
+
+  await appAxios.delete('/subscriptions', {
+    params: {
+      id: subscriptionId,
+    },
+    headers: {
+      Authorization: bearify(token),
+    },
+  })
+  return subscriptionId
 }
