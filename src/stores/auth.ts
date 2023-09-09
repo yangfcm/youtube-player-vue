@@ -24,12 +24,16 @@ type Auth = {
     status: AsyncStatus
     error: string
     data?: SubscriptionsResponse
-    subscriptionIds: Record<string, string>
   }
   playlists: {
     status: AsyncStatus
     error: string
     data?: PlayListsRespone
+  }
+  subscriptionIds: {
+    status: AsyncStatus
+    error: string
+    data: Record<string, string>
   }
 }
 
@@ -40,11 +44,15 @@ export const useAuthStore = defineStore('auth', () => {
     subscriptions: {
       status: AsyncStatus.IDLE,
       error: '',
-      subscriptionIds: {},
     },
     playlists: {
       status: AsyncStatus.IDLE,
       error: '',
+    },
+    subscriptionIds: {
+      status: AsyncStatus.IDLE,
+      error: '',
+      data: {},
     },
   })
 
@@ -58,11 +66,15 @@ export const useAuthStore = defineStore('auth', () => {
     auth.value.subscriptions = {
       status: AsyncStatus.IDLE,
       error: '',
-      subscriptionIds: {},
     }
     auth.value.playlists = {
       status: AsyncStatus.IDLE,
       error: '',
+    }
+    auth.value.subscriptionIds = {
+      status: AsyncStatus.IDLE,
+      error: '',
+      data: {},
     }
   }
 
@@ -108,8 +120,8 @@ export const useAuthStore = defineStore('auth', () => {
         items: [...currentItems, ...response.data.items],
       }
       response.data.items.forEach(
-        (item) =>
-          (auth.value.subscriptions.subscriptionIds[item.snippet.resourceId.channelId] = item.id),
+        // Populate subscription ids.
+        (item) => (auth.value.subscriptionIds.data[item.snippet.resourceId.channelId] = item.id),
       )
     } catch (err: any) {
       auth.value.subscriptions.status = AsyncStatus.FAIL
@@ -135,6 +147,10 @@ export const useAuthStore = defineStore('auth', () => {
       auth.value.playlists.error = err.message
     }
   }
+
+  const subscribeChannel = async () => {}
+
+  const unsubscribeChannel = async () => {}
 
   return {
     status,
