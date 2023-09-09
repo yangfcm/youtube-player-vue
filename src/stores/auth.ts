@@ -10,6 +10,7 @@ import {
   fetchPlayListsAPI,
   subscribeChannelAPI,
   unsubscribeChannelAPI,
+  fetchSubscriptionIdAPI,
 } from './api'
 
 type UserInfoResponse = {
@@ -200,6 +201,27 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  const fetchChannelSubscription = async (channelId: string) => {
+    if (!auth.value.subscriptionIds[channelId]) {
+      auth.value.subscriptionIds[channelId] = {
+        status: AsyncStatus.IDLE,
+        error: '',
+        data: UNSUBSCRIBED,
+      }
+    }
+    try {
+      auth.value.subscriptionIds[channelId].status = AsyncStatus.LOADING
+      auth.value.subscriptionIds[channelId].error = ''
+      const response = await fetchSubscriptionIdAPI(channelId)
+      const subscriptionId = response.data.items[0]?.id || UNSUBSCRIBED
+      auth.value.subscriptionIds[channelId].status = AsyncStatus.SUCCESS
+      auth.value.subscriptionIds[channelId].data = subscriptionId
+    } catch (err: any) {
+      auth.value.subscriptionIds[channelId].status = AsyncStatus.FAIL
+      auth.value.subscriptionIds[channelId].error = err.message
+    }
+  }
+
   return {
     status,
     user,
@@ -210,6 +232,7 @@ export const useAuthStore = defineStore('auth', () => {
     fetchPlayLists,
     subscribeChannel,
     unsubscribeChannel,
+    fetchChannelSubscription,
     authState: auth,
   }
 })
