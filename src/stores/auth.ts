@@ -3,8 +3,14 @@ import { defineStore } from 'pinia'
 import { type AxiosResponse } from 'axios'
 import { AsyncStatus } from '@/settings/types'
 import { gAuthAxios } from '@/settings/api'
+import { UNSUBSCRIBED } from '@/settings/constants'
 import type { PlayListsRespone, SubscriptionsResponse } from './types'
-import { fetchSubscriptionsAPI, fetchPlayListsAPI } from './api'
+import {
+  fetchSubscriptionsAPI,
+  fetchPlayListsAPI,
+  subscribeChannelAPI,
+  unsubscribeChannelAPI,
+} from './api'
 
 type UserInfoResponse = {
   email: string
@@ -30,11 +36,14 @@ type Auth = {
     error: string
     data?: PlayListsRespone
   }
-  subscriptionIds: {
-    status: AsyncStatus
-    error: string
-    data: Record<string, string>
-  }
+  subscriptionIds: Record<
+    string, // Channel id stirng
+    {
+      status: AsyncStatus
+      error: string
+      data: string // The subscription id for the channel id.
+    }
+  >
 }
 
 export const useAuthStore = defineStore('auth', () => {
@@ -49,11 +58,7 @@ export const useAuthStore = defineStore('auth', () => {
       status: AsyncStatus.IDLE,
       error: '',
     },
-    subscriptionIds: {
-      status: AsyncStatus.IDLE,
-      error: '',
-      data: {},
-    },
+    subscriptionIds: {},
   })
 
   // function signin(authData: Auth) {
@@ -71,11 +76,7 @@ export const useAuthStore = defineStore('auth', () => {
       status: AsyncStatus.IDLE,
       error: '',
     }
-    auth.value.subscriptionIds = {
-      status: AsyncStatus.IDLE,
-      error: '',
-      data: {},
-    }
+    auth.value.subscriptionIds = {}
   }
 
   const status = computed(() => {
@@ -121,7 +122,12 @@ export const useAuthStore = defineStore('auth', () => {
       }
       response.data.items.forEach(
         // Populate subscription ids.
-        (item) => (auth.value.subscriptionIds.data[item.snippet.resourceId.channelId] = item.id),
+        (item) =>
+          (auth.value.subscriptionIds[item.snippet.resourceId.channelId] = {
+            status: AsyncStatus.IDLE,
+            error: '',
+            data: item.id,
+          }),
       )
     } catch (err: any) {
       auth.value.subscriptions.status = AsyncStatus.FAIL
@@ -148,9 +154,51 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  const subscribeChannel = async () => {}
+  const subscribeChannel = async (channelId: string) => {
+    if (!auth.value.subscriptionIds[channelId]) {
+      auth.value.subscriptionIds[channelId] = {
+        status: AsyncStatus.IDLE,
+        error: '',
+        data: UNSUBSCRIBED,
+      }
+    }
+    try {
+      auth.value.subscriptionIds[channelId].status = AsyncStatus.LOADING
+      auth.value.subscriptionIds[channelId].error = ''
+      const response = await subscribeChannelAPI(channelId)
 
-  const unsubscribeChannel = async () => {}
+      auth.value.subscriptionIds[channelId].status = AsyncStatus.SUCCESS
+      auth.value.subscriptionIds[channelId].data = response.data.id
+      const currentItems = auth.value.subscriptions.data?.items
+      if (currentItems && auth.value.subscriptions.data) {
+        auth.value.subscriptions.data.items = [response.data, ...currentItems]
+      }
+    } catch (err: any) {
+      auth.value.subscriptionIds[channelId].status = AsyncStatus.FAIL
+      auth.value.subscriptionIds[channelId].error = err.message
+    }
+  }
+
+  const unsubscribeChannel = async (channelId: string) => {
+    try {
+      const subscriptionId = auth.value.subscriptionIds[channelId]?.data
+      if (!subscriptionId) throw new Error("You haven't subscribed the channel.")
+      auth.value.subscriptionIds[channelId].status = AsyncStatus.LOADING
+      auth.value.subscriptionIds[channelId].error = ''
+      await unsubscribeChannelAPI(subscriptionId)
+
+      auth.value.subscriptionIds[channelId].data = UNSUBSCRIBED
+      auth.value.subscriptionIds[channelId].status = AsyncStatus.SUCCESS
+      if (auth.value.subscriptions.data) {
+        auth.value.subscriptions.data.items = auth.value.subscriptions.data.items.filter(
+          (item) => item.snippet.resourceId.channelId !== channelId,
+        )
+      }
+    } catch (err: any) {
+      auth.value.subscriptionIds[channelId].status = AsyncStatus.FAIL
+      auth.value.subscriptionIds[channelId].error = err.message
+    }
+  }
 
   return {
     status,
@@ -160,6 +208,8 @@ export const useAuthStore = defineStore('auth', () => {
     fetchUserByToken,
     fetchSubscriptions,
     fetchPlayLists,
+    subscribeChannel,
+    unsubscribeChannel,
     authState: auth,
   }
 })
