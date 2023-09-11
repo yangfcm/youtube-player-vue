@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useAuth } from '@/composables/useAuth'
+import AppAppearanceSwitch from './AppearanceSwitch.vue';
 
 const { signout, user } = useAuth()
 </script>
@@ -13,6 +14,9 @@ const { signout, user } = useAuth()
     </template>
     <v-list>
       <v-list-item :prepend-avatar="user.picture" :title="user.name" :subtitle="user.email">
+      </v-list-item>
+      <v-list-item>
+        <app-appearance-switch></app-appearance-switch>
       </v-list-item>
       <v-divider></v-divider>
       <v-list-item>
