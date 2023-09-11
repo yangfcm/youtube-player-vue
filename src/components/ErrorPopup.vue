@@ -3,11 +3,11 @@ import { computed } from 'vue';
 import { ref, watch } from 'vue';
 
 const props = defineProps<{
-  message: string
+  message?: string
 }>()
 
 const showError = ref(false)
-const message = computed(() => props.message)
+const message = computed(() => props.message || '')
 
 watch(message, (newValue) => {
   if(newValue) {
