@@ -19,5 +19,5 @@ export const useSettingStore = defineStore('setting', () => {
     setting.value.darkTheme = dark
   }
 
-  return { setting, toggleSidebar, setDarkTheme }
+  return { settingState: setting, toggleSidebar, setDarkTheme }
 })
