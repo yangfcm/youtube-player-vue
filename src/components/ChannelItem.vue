@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify'
 import { PLACEHOLDER_IMAGE_SQUARE } from '@/settings/constants'
+import AppSubscribeButton from '@/components/SubscribeButton.vue'
 
 export type ChannelItem = {
   id: string
@@ -26,12 +27,15 @@ const { name } = useDisplay()
         </v-avatar>
       </router-link>
       <div class="d-flex flex-column">
-        <router-link :to="`/channel/${channel.id}`">
-          <v-card-title>
-            <v-icon icon="mdi-account-details"></v-icon>
-            {{ channel.title }}
-          </v-card-title>
-        </router-link>
+        <div class="d-flex align-center">
+          <router-link :to="`/channel/${channel.id}`">
+            <v-card-title>
+              <v-icon icon="mdi-account-details"></v-icon>
+              {{ channel.title }}
+            </v-card-title>
+          </router-link>
+          <app-subscribe-button :channelId="channel.id"></app-subscribe-button>
+        </div>
         <v-card-text v-if="!!channel.description">
           {{ channel.description }}
         </v-card-text>
