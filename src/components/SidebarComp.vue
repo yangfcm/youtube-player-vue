@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useSettingStore } from '@/stores/setting'
 
 const settingStore = useSettingStore()
-const { setting } = storeToRefs(settingStore)
+const { settingState: setting } = storeToRefs(settingStore)
 </script>
 
 <template>
