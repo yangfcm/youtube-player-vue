@@ -6,6 +6,7 @@ const theme = useTheme()
 const model = ref(theme.global.name.value === 'dark' ? true : false)
 watch(model, (newValue) => {
   theme.global.name.value = newValue ? 'dark' : 'light'
+  localStorage.setItem('darkTheme', newValue ? '1' : '0')
 })
 
 </script>
@@ -15,7 +16,7 @@ watch(model, (newValue) => {
     @click.stop="() => {}">
     <v-switch
       v-model="model"
-      :label="`${model ? 'Dark' : 'Light'}`"
+      :label="`Appearance: ${model ? 'Dark' : 'Light'}`"
       color="primary"
       hide-details
       inset
