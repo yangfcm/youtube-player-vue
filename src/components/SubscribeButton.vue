@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useSubscribe } from '@/composables/useSubscribe';
 import { useAuth } from '@/composables/useAuth';
 import { AsyncStatus } from '@/settings/types';
+import AppErrorPopup from '@/components/ErrorPopup.vue'
 
 const props = defineProps<{
   channelId: string
@@ -10,11 +11,12 @@ const props = defineProps<{
 
 const hovered = ref(false)
 const { isSignedIn } = useAuth()
-const { status, subscribed, subscribeChannel, unsubscribeChannel } = useSubscribe(props.channelId)
+const { status, error, subscribed, subscribeChannel, unsubscribeChannel } = useSubscribe(props.channelId)
 
 </script>
 
 <template>
+  <app-error-popup :message="error"></app-error-popup>
   <v-btn
     v-if="isSignedIn && subscribed !== undefined"
     :color="subscribed ? 'secondary' : ''"
