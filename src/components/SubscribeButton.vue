@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useSubscribe } from '@/composables/useSubscribe';
 import { useAuth } from '@/composables/useAuth';
+import { AsyncStatus } from '@/settings/types';
 
 const props = defineProps<{
   channelId: string
@@ -9,8 +10,7 @@ const props = defineProps<{
 
 const hovered = ref(false)
 const { isSignedIn } = useAuth()
-const { status, error, subscribed, subscribeChannel, unsubscribeChannel } = useSubscribe(props.channelId)
-
+const { status, subscribed, subscribeChannel, unsubscribeChannel } = useSubscribe(props.channelId)
 
 </script>
 
@@ -18,9 +18,18 @@ const { status, error, subscribed, subscribeChannel, unsubscribeChannel } = useS
   <v-btn
     v-if="isSignedIn && subscribed !== undefined"
     :color="subscribed ? 'secondary' : ''"
+    :loading="status === AsyncStatus.LOADING"
     width="150"
     @mouseenter="() => hovered = true"
     @mouseleave="() => hovered = false"
+    @click="() => {
+      if(subscribed === true) {
+        unsubscribeChannel()
+      }
+      if(subscribed === false) {
+        subscribeChannel()
+      }
+    }"
   >
     {{ subscribed ? 
       (hovered ? 'Unsubscribe' : 'Subscribed') : 
