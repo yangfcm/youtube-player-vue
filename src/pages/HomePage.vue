@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePopularVideos } from '@/composables/usePopularVideos'
 import AppLoader from '@/components/LoaderComp.vue'
-import AppErrorMessage from '@/components/ErrorMessageComp.vue'
+import AppErrorMessage from '@/components/ErrorMessage.vue'
 import AppItemsGrid from '@/components/ItemsGrid.vue'
 import AppMoreButton from '@/components/MoreButton.vue'
 import { AsyncStatus } from '@/settings/types'

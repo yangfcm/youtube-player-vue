@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppLoader from '@/components/LoaderComp.vue'
-import AppErrorMessage from '@/components/ErrorMessageComp.vue'
+import AppErrorMessage from '@/components/ErrorMessage.vue'
 import AppVideoItem from '@/components/VideoItem.vue'
 import AppMoreButton from '@/components/MoreButton.vue'
 import { AsyncStatus } from '@/settings/types'
