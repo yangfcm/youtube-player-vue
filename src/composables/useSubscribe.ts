@@ -1,4 +1,4 @@
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 import { UNSUBSCRIBED } from '@/settings/constants'
@@ -41,6 +41,12 @@ export function useSubscribe(channelId: string) {
 
   onMounted(() => {
     if (!subscriptionId.value && isSignedIn) {
+      fetchChannelSubscription()
+    }
+  })
+
+  watch(isSignedIn, (newValue) => {
+    if (newValue) {
       fetchChannelSubscription()
     }
   })
