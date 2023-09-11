@@ -15,10 +15,11 @@ watch(model, (newValue) => {
     @click.stop="() => {}">
     <v-switch
       v-model="model"
-      :label="`Appearance: ${model ? 'On' : 'Off'}`"
+      :label="`${model ? 'Dark' : 'Light'}`"
       color="primary"
       hide-details
       inset
+      :append-icon="model ? 'mdi-weather-night' : 'mdi-weather-sunny'" 
     ></v-switch>
   </div>
 </template>
