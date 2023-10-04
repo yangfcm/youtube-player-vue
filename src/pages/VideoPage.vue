@@ -51,12 +51,12 @@ onBeforeUnmount(() => {
           </router-link>
           <div>
             <v-btn
-              :href="`https://www.youtube.com/watch?v=${videoId}`"
+              :href="`https://www.youtubepi.com/watch?v=${videoId}`"
               target="_blank"
               variant="tonal"
-              >View in Youtube</v-btn
+              >Download Video</v-btn
             >&nbsp;
-            <v-btn @click.stop="copyLink" variant="tonal">Copy Link</v-btn>
+            <!-- <v-btn @click.stop="copyLink" variant="tonal">Copy Link</v-btn> -->
             <v-tooltip v-model="show" location="top">
               <template v-slot:activator="{ props }">
                 <span v-bind="props"></span>
